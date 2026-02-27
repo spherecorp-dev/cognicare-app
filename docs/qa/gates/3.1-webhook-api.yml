@@ -1,0 +1,46 @@
+schema: 1
+story: '3.1'
+story_title: 'Webhook API — Trigger Externo via n8n'
+gate: PASS
+status_reason: 'All 7 ACs fully implemented and tested. 188 tests passing with 0 regressions. Security hardening verified: HMAC-SHA256 auth, IPv6 SSRF prevention, HTTPS-only callbacks in production. Clean code architecture following established patterns.'
+reviewer: 'Quinn (Test Architect)'
+updated: '2026-02-21T15:46:00.000Z'
+
+top_issues: []
+waiver: { active: false }
+
+quality_score: 100
+expires: '2026-03-07T15:46:00.000Z'
+
+evidence:
+  tests_reviewed: 188
+  tests_new: 65
+  test_files_new: 7
+  risks_identified: 0
+  trace:
+    ac_covered: [1, 2, 3, 4, 5, 6, 7]
+    ac_gaps: []
+
+nfr_validation:
+  security:
+    status: PASS
+    notes: 'HMAC-SHA256 with constant-time comparison, comprehensive SSRF prevention (IPv4+IPv6), HTTPS enforcement in production, auth layering (HMAC→Bearer fallback). Minor observation: custom timingSafeCompare could use crypto.timingSafeEqual for defense-in-depth.'
+  performance:
+    status: PASS
+    notes: 'Non-blocking async lifecycle via setImmediate(), in-memory rate limiter with periodic cleanup, JSONL log adequate for MVP. Full log loading for history/stats may need pagination at scale.'
+  reliability:
+    status: PASS
+    notes: 'Fire-and-forget error handling for logging/lifecycle. Retry handler (from Story 2.4) used for callback retries (3x). Graceful error handling in all route handlers.'
+  maintainability:
+    status: PASS
+    notes: 'Clean modular architecture: webhook-signature, webhook-event-registry, webhook-lifecycle, webhook-validator. Extensible registry pattern. Well-documented with JSDoc. Follows established dashboard/src/lib/webhook-*.ts convention.'
+
+recommendations:
+  immediate: []
+  future:
+    - action: 'Replace custom timingSafeCompare with crypto.timingSafeEqual for defense-in-depth'
+      refs: ['dashboard/src/lib/webhook-signature.ts:27-33']
+    - action: 'Add try/catch for date parsing in history endpoint to return 400 on invalid dates'
+      refs: ['dashboard/src/app/api/webhooks/history/route.ts:51-57']
+    - action: 'Consider log file size management (rotation/archival) for JSONL webhook logs at scale'
+      refs: ['dashboard/src/app/api/webhooks/history/route.ts', 'dashboard/src/app/api/webhooks/stats/route.ts']

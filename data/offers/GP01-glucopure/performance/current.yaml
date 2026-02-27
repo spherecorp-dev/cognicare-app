@@ -1,0 +1,24 @@
+# Performance Atual — GlucoPure (GP01)
+# Oferta em teste — sem dados de performance ainda
+
+offer_id: GP01
+updated_at: "2026-02-20"
+
+metricas:
+  roas: null
+  cpa: null
+  ctr: null
+  cvr: null
+  spend_total: null
+  spend_diario_medio: null
+  receita_total: null
+  conversoes_total: null
+
+targets:
+  roas_target: null
+  cpa_target: null
+  spend_diario_target: null
+
+por_geo: {}
+
+por_plataforma: {}

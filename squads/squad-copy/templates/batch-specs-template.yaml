@@ -1,0 +1,168 @@
+# Batch Specifications Template
+# Use este template para gerar batch-specs.yaml durante package-image-creative task
+
+batch:
+  id: "{{TIMESTAMP}}-batch-{{NUM}}"                # Ex: 2026-02-20-batch-001
+  offer: "{{OFFER_ID}}"                            # Ex: MEMFR02
+  offer_name: "{{OFFER_NAME}}"                     # Ex: Método do Mel
+  geo: "{{GEO}}"                                   # fr | es | en
+  platform: "{{PLATFORM}}"                         # meta | tiktok | youtube | native
+  created_at: "{{ISO_TIMESTAMP}}"                  # 2026-02-20T15:30:00Z
+  pipeline_version: "4.0.1"                        # Squad-copy version
+  created_by: "squad-copy (autonomous)"
+  status: "ready_for_traffic"                      # draft | in_review | ready_for_traffic
+
+creatives:
+  - id: "{{OFFER}}-A1-V1"                          # Creative ID (pattern: {OFFER}-{ANGLE}-{VARIATION})
+    angle: "{{ANGLE_NAME}}"                        # Ex: Dor nos Joelhos
+    angle_id: "A1"                                 # Ângulo identifier
+    method: "{{METHOD}}"                           # modelagem | do-zero | variacao
+    variation: "base"                              # base | visual_style | headline | etc
+    variation_tested: "{{VARIABLE}}"               # O que está sendo testado nesta variação
+    hypothesis: "{{HYPOTHESIS}}"                   # Hipótese do teste (opcional)
+
+    images:
+      - "{{OFFER}}-A1-V1-feed-1080x1350.png"
+      - "{{OFFER}}-A1-V1-stories-1080x1920.png"
+
+    copy_combos: 3                                 # Número de combos A/B recomendados
+    copy_formats: 5                                # Número de formatos de escrita (story, list, question, testimonial, news)
+
+    compliance:
+      status: "approved"                           # approved | pending | non-compliant
+      geo_rules: "{{GEO_COMPLIANCE_REFERENCE}}"    # FR-DGCCRF, ES-AEPD, EN-FTC
+      platform_rules: "{{PLATFORM_COMPLIANCE}}"    # meta-health, tiktok-wellness
+      issues_found: 0                              # Número de issues críticos
+      warnings: []                                 # Lista de warnings não-críticos
+
+    review:
+      rounds: 1                                    # Número de review rounds (max 2)
+      reviewer: "@copy-chief"
+      quality_score: 4.5                           # Score médio 1-5
+      verdict: "APPROVED"                          # APPROVED | APPROVED_WITH_OBSERVATIONS | REVISION_NEEDED | REJECTED
+
+    generation:
+      image_api: "{{API_NAME}}"                    # nanobanana | midjourney | dalle | flux
+      prompt_id: "{{PROMPT_ID}}"                   # ID do prompt usado
+      generation_params:                           # Params específicos da API (opcional)
+        model: "{{MODEL}}"
+        seed: {{SEED}}
+        steps: {{STEPS}}
+
+    metadata:
+      created_at: "{{ISO_TIMESTAMP}}"
+      creative_profile: "{{CREATIVE_PROFILE}}"     # blackhat-dr | whitehat | hybrid
+      source_reference: "{{REFERENCE_ID}}"         # Se modelagem, referência usada (opcional)
+
+  - id: "{{OFFER}}-A1-V2"
+    angle: "{{ANGLE_NAME}}"
+    angle_id: "A1"
+    method: "{{METHOD}}"
+    variation: "visual_style"
+    variation_tested: "Visual composition (vertical vs horizontal focus)"
+    hypothesis: "Vertical composition performs better for mobile"
+
+    images:
+      - "{{OFFER}}-A1-V2-feed-1080x1350.png"
+      - "{{OFFER}}-A1-V2-stories-1080x1920.png"
+
+    copy_combos: 3
+    copy_formats: 5
+
+    compliance:
+      status: "approved"
+      geo_rules: "{{GEO_COMPLIANCE_REFERENCE}}"
+      platform_rules: "{{PLATFORM_COMPLIANCE}}"
+      issues_found: 0
+      warnings: []
+
+    review:
+      rounds: 1
+      reviewer: "@copy-chief"
+      quality_score: 4.2
+      verdict: "APPROVED"
+
+    generation:
+      image_api: "{{API_NAME}}"
+      prompt_id: "{{PROMPT_ID}}"
+      generation_params:
+        model: "{{MODEL}}"
+        seed: {{SEED}}
+
+    metadata:
+      created_at: "{{ISO_TIMESTAMP}}"
+      creative_profile: "{{CREATIVE_PROFILE}}"
+
+  # ... adicionar mais criativos conforme necessário ...
+
+stats:
+  total_creatives: {{TOTAL_COUNT}}                 # Contagem total de criativos no batch
+  total_images: {{IMAGE_COUNT}}                    # Contagem total de imagens geradas
+  total_angles: {{ANGLE_COUNT}}                    # Número de ângulos únicos testados
+
+  angles:
+    - id: "A1"
+      name: "{{ANGLE_1_NAME}}"
+      creatives_count: {{COUNT}}
+      confidence: "alta | media | baixa"
+    - id: "A2"
+      name: "{{ANGLE_2_NAME}}"
+      creatives_count: {{COUNT}}
+      confidence: "alta | media | baixa"
+
+  methods:
+    modelagem: {{COUNT}}                           # Número de criativos por método
+    do_zero: {{COUNT}}
+    variacao: {{COUNT}}
+
+  platforms:
+    meta: {{COUNT}}                                # Número de criativos por plataforma
+    tiktok: {{COUNT}}
+    youtube: {{COUNT}}
+    native: {{COUNT}}
+
+  compliance:
+    approved: {{COUNT}}
+    pending: {{COUNT}}
+    non_compliant: {{COUNT}}
+
+  quality:
+    average_score: {{SCORE}}                       # Score médio 1-5
+    average_review_rounds: {{ROUNDS}}              # Média de rounds de review
+
+pipeline_metrics:
+  intelligence:
+    spy_references_downloaded: {{COUNT}}
+    spy_references_transcribed: {{COUNT}}
+    patterns_extracted: {{COUNT}}
+    winners_analyzed: {{COUNT}}
+
+  strategy:
+    angles_suggested: {{COUNT}}
+    angles_approved: {{COUNT}}
+    method_distribution_planned: "modelagem {{%}}%, do-zero {{%}}%, variação {{%}}%"
+
+  production:
+    image_concepts_generated: {{COUNT}}
+    concepts_approved: {{COUNT}}
+    image_generation_success_rate: {{PERCENTAGE}}
+
+  review:
+    total_review_rounds: {{COUNT}}
+    compliance_issues_caught: {{COUNT}}
+    quality_score_average: {{SCORE}}
+
+  delivery:
+    pipeline_time_minutes: {{TIME}}                # Tempo total do pipeline (min)
+    coderabbit_runs: {{COUNT}}                     # Número de CodeRabbit self-healing runs
+
+handoff:
+  target: "squad-criativos"                        # squad-criativos | squad-ofertas | gestor-trafego
+  type: "visual_production"                        # visual_production | funnel_deployment | direct_upload
+  ready: true                                      # true | false
+  notes: "{{HANDOFF_NOTES}}"                       # Notas específicas para o receptor
+
+metadata:
+  schema_version: "1.0.0"                          # Versão do schema batch-specs
+  generated_by: "package-image-creative task"
+  template_source: "squads/squad-copy/templates/batch-specs-template.yaml"

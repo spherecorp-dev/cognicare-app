@@ -1,0 +1,142 @@
+# Tracking Setup Workflow
+#
+# Setup completo de infraestrutura de tracking: RedTrack + Pixel + Postback + Dominio
+# Executado pelo media-engineer com verificacao end-to-end
+#
+# Created: 2026-02-21
+# Squad: media-squad
+
+name: tracking-setup
+version: 1.0.0
+description: "Setup completo de infraestrutura de tracking RedTrack + Meta Pixel com verificacao end-to-end"
+squad: media-squad
+
+metadata:
+  created: "2026-02-21"
+  author: squad-creator
+  tags:
+    - workflow
+    - media-squad
+    - tracking
+    - redtrack
+    - infrastructure
+
+triggers:
+  - type: manual
+    command: "*setup-tracking"
+
+inputs:
+  - name: offer_id
+    type: string
+    required: true
+    description: "ID da oferta para configurar tracking"
+  - name: domain
+    type: string
+    required: true
+    description: "Dominio a ser configurado para ads"
+  - name: pixel_id
+    type: string
+    required: false
+    description: "Meta Pixel ID (se ja existente)"
+
+steps:
+  - id: setup-redtrack
+    name: "Step 1: Integrar RedTrack"
+    description: "Cria campanha no RedTrack e configura offer"
+    action: task
+    agent: media-engineer
+    task: setup-redtrack-integration
+    inputs:
+      offer_id: "{{inputs.offer_id}}"
+    on_error: abort
+
+  - id: setup-pixel
+    name: "Step 2: Instalar Pixel"
+    description: "Instala e verifica Meta pixel na LP"
+    action: task
+    agent: media-engineer
+    task: setup-tracking-pixel
+    depends_on:
+      - setup-redtrack
+    inputs:
+      pixel_id: "{{inputs.pixel_id}}"
+    on_error: abort
+
+  - id: configure-postback
+    name: "Step 3: Configurar Postback"
+    description: "Configura RedTrack → Meta postback para conversoes"
+    action: task
+    agent: media-engineer
+    task: configure-redtrack-postback
+    depends_on:
+      - setup-pixel
+    on_error: abort
+
+  - id: setup-domain
+    name: "Step 4: Configurar Dominio"
+    description: "Configura dominio para ads e verifica DNS"
+    action: task
+    agent: media-engineer
+    task: setup-ad-domain
+    depends_on:
+      - setup-redtrack
+    inputs:
+      domain: "{{inputs.domain}}"
+    on_error: retry
+    retry:
+      max_attempts: 3
+      delay: 10000
+
+  - id: test-flow
+    name: "Step 5: Testar Fluxo Completo"
+    description: "Testa click → LP → conversao → postback"
+    action: task
+    agent: media-engineer
+    task: test-redtrack-flow
+    depends_on:
+      - configure-postback
+      - setup-domain
+    on_error: retry
+    retry:
+      max_attempts: 2
+      delay: 5000
+
+  - id: verify-attribution
+    name: "Step 6: Verificar Atribuicao"
+    description: "Confirma que vendas sao atribuidas corretamente"
+    action: task
+    agent: media-engineer
+    task: verify-sales-attribution
+    depends_on:
+      - test-flow
+    on_error: abort
+
+outputs:
+  - name: tracking_url
+    from: "{{steps.setup-redtrack.output.tracking_url}}"
+    description: "URL de tracking RedTrack"
+  - name: pixel_verified
+    from: "{{steps.setup-pixel.output.verified}}"
+    description: "Pixel instalado e verificado"
+  - name: attribution_ok
+    from: "{{steps.verify-attribution.output.status}}"
+    description: "Atribuicao funcionando corretamente"
+
+completion:
+  on_success:
+    message: "Tracking configurado e verificado. Pronto para lancamento."
+    notify: true
+  on_failure:
+    message: "Falha na configuracao de tracking. Verificar logs."
+    notify: true
+    rollback: false
+
+validation:
+  pre_run:
+    - "Verificar acesso ao RedTrack"
+    - "Verificar acesso ao Meta Business Manager"
+    - "Verificar dominio disponivel"
+  post_run:
+    - "Tracking URL retorna 200"
+    - "Pixel dispara no page load"
+    - "Postback entrega conversao ao Meta"

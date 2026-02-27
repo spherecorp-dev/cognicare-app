@@ -1,0 +1,571 @@
+# Creative Pipeline v4.0 — Main Workflow
+# Squad: squad-copy (Persuasion Engine)
+# Architecture: task-first (2 agentes + 10 tasks puras), 100% autonomo
+# Trigger: Autonomo ou manual. Zero pontos humanos obrigatorios.
+
+name: creative-pipeline
+description: "Pipeline autonomo da squad-copy v4.0 (Persuasion Engine). 5 fases, 0 pontos humanos obrigatorios, branching por formato (imagem vs video). Geo e compliance centralizados na oferta. Futuro: VSL, LP, Email."
+version: 4.0.0
+squad: squad-copy
+
+# Fontes de dados
+sources:
+  offers: "data/offers/"                              # Raiz do projeto (compartilhado)
+  creative_direction: "config/creative-direction.md"  # Perfis criativos (squad)
+  # Compliance vem da oferta: data/offers/{ID}/compliance/rules.md (FONTE DE VERDADE)
+
+# Contexto obrigatorio — carregar ANTES de executar qualquer fase
+context:
+  load_on_start:
+    - "config/creative-direction.md"
+    - "data/offers/{{trigger.offer}}/offer.yaml"
+    - "data/offers/{{trigger.offer}}/compliance/rules.md"  # Compliance completo (geo + plataforma)
+  load_on_production:
+    - "data/offers/{{trigger.offer}}/assets/"
+
+trigger:
+  type: "manual | autonomous"
+  description: "Iniciar pipeline para uma oferta. Pode ser manual ou autonomo."
+  input:
+    offer:
+      type: string
+      description: "ID da oferta (ex: MEMFR02). Pasta em data/offers/{ID}/. Geo e compliance vem da oferta."
+      required: true
+    platforms:
+      type: array
+      description: "Plataformas target (meta, tiktok, youtube, native). Opcional — @copy-chief decide se nao informado."
+      required: false
+      default: null
+    quantity:
+      type: number
+      description: "Quantidade de conceitos/criativos a gerar. Padrao: 3 se nao informado."
+      required: false
+      default: 3
+    variations_per_concept:
+      type: number
+      description: "Variacoes por conceito. 0 = sem variacoes. Padrao: 3."
+      required: false
+      default: 3
+
+phases:
+
+  # ═══════════════════════════════════════════════════
+  # FASE 1: INTELLIGENCE (Pesquisa e Analise)
+  # ═══════════════════════════════════════════════════
+  - id: intelligence
+    name: "1-Intelligence"
+    description: "Coleta de dados, spy automatizado e desconstrucao de referencias"
+    steps:
+
+      # --- Dados da oferta ---
+      - id: fetch_data
+        type: task_pura
+        task: fetch-offer-data
+        description: "Puxar dados completos da oferta"
+        input:
+          offer_id: "{{trigger.offer}}"
+          source: "data/offers/{{trigger.offer}}/"
+        output:
+          offer_context: "Contexto da oferta"
+          performance: "Metricas atuais + winners"
+          compliance: "Regras especificas"
+          assets_inventory: "Assets disponiveis"
+        on_success: interpret_data
+
+      - id: interpret_data
+        type: agent_task
+        agent: copy-chief
+        task: interpret-offer-data
+        description: "Interpretar dados com contexto e nuance"
+        input:
+          raw_data: "{{fetch_data.output}}"
+        output:
+          analysis: "Analise contextualizada"
+          recommendation: "Recomendacao acionavel"
+        on_success: direct_spy
+
+      # --- Spy automatizado (substitui human_spy) ---
+      - id: direct_spy
+        type: agent_task
+        agent: copy-chief
+        task: direct-spy
+        description: "Definir estrategia de spy (o que buscar, onde, cross-niche?)"
+        input:
+          offer_context: "{{fetch_data.output.offer_context}}"
+          performance_analysis: "{{interpret_data.output.analysis}}"
+
+          platforms: "{{trigger.platforms}}"
+        output:
+          spy_brief: "Brief com queries, plataformas, criterios"
+        on_success: spy_scrape
+
+      - id: spy_scrape
+        type: task_pura
+        task: spy-scrape
+        description: "Baixar videos e imagens das plataformas target"
+        input:
+          spy_brief: "{{direct_spy.output.spy_brief}}"
+        output:
+          raw_media: "Videos e imagens baixados"
+          spy_manifest: "Indice do que foi baixado"
+        on_success: spy_transcribe
+        integration_note: "@dev implementa conexao com APIs"
+
+      - id: spy_transcribe
+        type: task_pura
+        task: spy-transcribe
+        description: "Transcrever videos com Whisper"
+        input:
+          raw_media: "{{spy_scrape.output.raw_media}}"
+          spy_manifest: "{{spy_scrape.output.spy_manifest}}"
+        output:
+          raw_transcripts: "Transcricoes brutas com timestamps"
+        on_success: spy_reconstruct
+        integration_note: "@dev implementa conexao com Whisper API"
+
+      - id: spy_reconstruct
+        type: agent_task
+        agent: copy-chief
+        task: spy-reconstruct-copy
+        description: "Reconstruir copy estruturado a partir de transcricoes e imagens"
+        input:
+          raw_transcripts: "{{spy_transcribe.output.raw_transcripts}}"
+          raw_media: "{{spy_scrape.output.raw_media}}"
+          spy_manifest: "{{spy_scrape.output.spy_manifest}}"
+        output:
+          reconstructed_references: "Copy estruturado (Hook/Problema/Mecanismo/Prova/CTA)"
+          cross_niche_insights: "Insights adaptaveis"
+        on_success: catalog
+
+      # --- Catalogar e desconstruir (mantidos) ---
+      - id: catalog
+        type: task_pura
+        task: catalog-references
+        description: "Estruturar e categorizar referencias com metadata"
+        input:
+          references: "{{spy_reconstruct.output.reconstructed_references}}"
+        output:
+          cataloged: "Referencias com metadata"
+        on_success: deconstruct
+
+      - id: deconstruct
+        type: task_pura
+        task: deconstruct-references
+        description: "Extrair Hook/Mechanism/Proof/CTA + consolidar patterns"
+        input:
+          cataloged_references: "{{catalog.output.cataloged}}"
+        output:
+          deconstructions: "Elementos extraidos"
+          patterns: "Patterns dominantes"
+        on_success: suggest_angles
+
+  # ═══════════════════════════════════════════════════
+  # FASE 2: STRATEGY (Definicao Criativa)
+  # ═══════════════════════════════════════════════════
+  - id: strategy
+    name: "2-Strategy"
+    description: "Angulos, metodo de producao e formato — tudo autonomo"
+    steps:
+
+      - id: suggest_angles
+        type: agent_task
+        agent: stefan-georgi
+        task: suggest-angles
+        description: "Sugerir angulos baseados em patterns, winners e dados"
+        input:
+          patterns: "{{deconstruct.output.patterns}}"
+          winners: "{{interpret_data.output.analysis}}"
+          offer_data: "{{fetch_data.output}}"
+
+        output:
+          angles: "Angulos rankeados por confianca"
+        on_success: select_method
+
+      # Substitui human_choose_method
+      - id: select_method
+        type: agent_task
+        agent: copy-chief
+        task: select-method
+        description: "Decidir mix modelagem/variacao/do-zero baseado em dados"
+        input:
+          angles: "{{suggest_angles.output.angles}}"
+          winners_library: "{{fetch_data.output.performance}}"
+          offer_context: "{{fetch_data.output.offer_context}}"
+        output:
+          method_decision: "Distribuicao por metodo + assignments por angulo"
+        on_success: decide_format
+
+      - id: decide_format
+        type: agent_task
+        agent: copy-chief
+        task: decide-format
+        description: "Decidir imagem ou video por angulo ANTES da producao"
+        input:
+          method_decision: "{{select_method.output.method_decision}}"
+          angles: "{{suggest_angles.output.angles}}"
+          offer_context: "{{fetch_data.output.offer_context}}"
+
+          platforms: "{{trigger.platforms}}"
+        output:
+          format_assignments: "Mapa angulo → formato + plataforma"
+        on_success: route_production
+
+  # ═══════════════════════════════════════════════════
+  # FASE 3: PRODUCTION (Criacao — branch por formato)
+  # ═══════════════════════════════════════════════════
+  - id: production
+    name: "3-Production"
+    description: "Geracao de criativos — branch por formato (imagem vs video)"
+    steps:
+
+      - id: route_production
+        type: router
+        description: "Direcionar por formato definido no decide-format"
+        conditions:
+          - if: "format == imagem"
+            goto: generate_image_concepts
+          - if: "format == video"
+            goto: generate_scripts
+          - if: "method == variacao_de_winner"
+            goto: build_variation
+
+      # --- Branch IMAGEM ---
+      - id: generate_image_concepts
+        type: agent_task
+        agent: stefan-georgi
+        task: generate-image-concepts
+        description: "Gerar conceitos visuais + ad copy (5 formatos de escrita)"
+        llm_options:
+          maxTokens: 16384
+          timeout: 600000  # 10 min — output JSON pesado com multiplos conceitos + ad copy
+        input:
+          angles: "{{decide_format.output.format_assignments}}"
+          offer_context: "{{fetch_data.output.offer_context}}"
+          quantity: "{{trigger.quantity}}"
+          variations_per_concept: "{{trigger.variations_per_concept}}"
+          platforms: "{{trigger.platforms}}"
+          method: "{{select_method.output.method_decision}}"
+        output:
+          image_concepts: "Conceitos visuais + texto overlay + ad copy robusto"
+        on_success: review_image_concept
+
+      # --- Branch VIDEO ---
+      - id: generate_scripts
+        type: agent_task
+        agent: stefan-georgi
+        task: generate-scripts
+        description: "Gerar 5-10 variacoes de script por angulo"
+        input:
+          angles: "{{decide_format.output.format_assignments}}"
+          offer: "{{trigger.offer}}"
+
+          method: "{{select_method.output.method_decision}}"
+        output:
+          scripts: "Variacoes de script"
+        on_success: review_creative
+
+  # ═══════════════════════════════════════════════════
+  # FASE 4: REVIEW (Aprovacao — branch por formato)
+  # ═══════════════════════════════════════════════════
+  - id: review
+    name: "4-Review"
+    description: "Revisao de qualidade — diferenciada por formato"
+    steps:
+
+      # --- Branch IMAGEM: Review conceito ---
+      - id: review_image_concept
+        type: agent_task
+        agent: copy-chief
+        task: review-image-concept
+        description: "Revisar conceito visual + ad copy ANTES de gerar imagem"
+        input:
+          image_concepts: "{{generate_image_concepts.output.image_concepts}}"
+          offer_context: "{{fetch_data.output.offer_context}}"
+
+          platforms: "{{trigger.platforms}}"
+        output:
+          approved_concepts: "Conceitos APPROVED"
+          revision_needed: "Conceitos REVISION_NEEDED"
+          rejected: "Conceitos REJECTED"
+        on_verdict:
+          APPROVED: generate_image_prompts
+          REVISION_NEEDED: image_revision_loop
+          REJECTED: discard
+        max_rounds: 2
+
+      - id: image_revision_loop
+        type: agent_task
+        agent: stefan-georgi
+        task: generate-image-concepts
+        description: "Corrigir conceitos conforme instrucoes do @copy-chief"
+        llm_options:
+          maxTokens: 16384
+          timeout: 600000  # 10 min — output pesado
+        input:
+          revision_instructions: "{{review_image_concept.output.feedback}}"
+          angles: "{{decide_format.output.format_assignments}}"
+          offer_context: "{{fetch_data.output.offer_context}}"
+          quantity: "{{trigger.quantity}}"
+          variations_per_concept: "{{trigger.variations_per_concept}}"
+          platforms: "{{trigger.platforms}}"
+          method: "{{select_method.output.method_decision}}"
+        on_success: review_image_concept
+        note: "Re-review — max 2 rodadas"
+
+      # --- Branch IMAGEM: Gerar prompts e imagens ---
+      - id: generate_image_prompts
+        type: task_pura
+        task: generate-image-prompts
+        description: "Transformar conceitos em prompts otimizados para APIs"
+        input:
+          image_concepts: "{{generate_image_concepts.output.image_concepts}}"
+          approved_concepts: "{{review_image_concept.output.approved_concepts}}"
+          offer_context: "{{fetch_data.output.offer_context}}"
+          platforms: "{{trigger.platforms}}"
+        output:
+          api_ready_prompts: "Prompts formatados para APIs"
+        on_success: generate_images_api
+
+      - id: generate_images_api
+        type: task_pura
+        task: generate-images-api
+        description: "Chamar API de geracao de imagem"
+        input:
+          prompts: "{{generate_image_prompts.output.prompts}}"
+          offerId: "{{trigger.offer}}"
+        output:
+          generated: "Imagens geradas com metadata"
+        on_success: review_generated_image
+        integration_note: "@dev implementa conexao com APIs (NanoBanana, etc)"
+
+      - id: review_generated_image
+        type: agent_task
+        agent: copy-chief
+        task: review-generated-image
+        description: "Revisar imagem GERADA (qualidade visual, texto overlay, compliance)"
+        input:
+          generated_images: "{{generate_images_api.output.generated}}"
+          image_concepts: "{{generate_image_concepts.output.image_concepts}}"
+          approved_concepts: "{{review_image_concept.output.approved_concepts}}"
+          platforms: "{{trigger.platforms}}"
+
+        output:
+          approved_images: "Imagens APPROVED"
+          regenerate: "Imagens REGENERATE"
+          rejected: "Imagens REJECTED"
+        on_verdict:
+          APPROVED: package_image
+          REGENERATE: regenerate_loop
+          REJECTED: discard
+        max_rounds: 2
+
+      - id: regenerate_loop
+        type: task_pura
+        task: generate-images-api
+        description: "Re-gerar imagens com prompt ajustado"
+        input:
+          prompts: "{{review_generated_image.output.adjusted_prompts}}"
+          offerId: "{{trigger.offer}}"
+        on_success: review_generated_image
+        note: "Re-geracao — max 2 tentativas"
+
+      # --- Branch VIDEO: Review (mantido) ---
+      - id: review_creative
+        type: agent_task
+        agent: copy-chief
+        task: review-creative
+        description: "Avaliar scripts de video + compliance por plataforma"
+        input:
+          scripts: "{{generate_scripts.output.scripts}}"
+          offer_context: "{{fetch_data.output.offer_context}}"
+
+          platforms: "{{trigger.platforms}}"
+        output:
+          approved: "Scripts APPROVED"
+          needs_revision: "Scripts REVISION_NEEDED"
+          rejected: "Scripts REJECTED"
+        on_verdict:
+          APPROVED: generate_ad_copy
+          REVISION_NEEDED: request_revision
+          REJECTED: discard
+        max_rounds: 2
+
+      - id: request_revision
+        type: agent_task
+        agent: copy-chief
+        task: request-revision
+        description: "Detalhar instrucoes de revisao"
+        input:
+          creative: "{{review_creative.output.needs_revision}}"
+          feedback: "{{review_creative.output.feedback}}"
+        output:
+          instructions: "Instrucoes especificas"
+        on_success: dr_copywriter_fix
+
+      - id: dr_copywriter_fix
+        type: agent_task
+        agent: stefan-georgi
+        task: generate-scripts
+        description: "Corrigir scripts conforme instrucoes"
+        input:
+          revision_instructions: "{{request_revision.output.instructions}}"
+          angles: "{{decide_format.output.format_assignments}}"
+          offer: "{{trigger.offer}}"
+          method: "{{select_method.output.method_decision}}"
+        on_success: review_creative
+        note: "Re-review — max 2 rodadas"
+
+      - id: generate_ad_copy
+        type: agent_task
+        agent: stefan-georgi
+        task: generate-ad-copy
+        description: "Gerar headlines, descriptions, captions por plataforma"
+        input:
+          scripts: "{{review_creative.output.approved}}"
+          platforms: "{{trigger.platforms}}"
+
+        output:
+          ad_copy: "Headlines, descriptions, captions"
+        on_success: build_brief
+
+  # ═══════════════════════════════════════════════════
+  # FASE 5: DELIVERY (Entrega)
+  # ═══════════════════════════════════════════════════
+  - id: delivery
+    name: "5-Delivery"
+    description: "Empacotamento e handoff — 100% autonomo"
+    steps:
+
+      # --- Branch IMAGEM ---
+      - id: package_image
+        type: task_pura
+        task: package-image-creative
+        description: "Empacotar imagem + ad copy + specs para handoff (formato profissional)"
+        input:
+          approved_images: "{{review_generated_image.output.approved_images}}"
+          generated_images: "{{generate_images_api.output.generated}}"
+          ad_copy: "{{generate_image_concepts.output.image_concepts}}"
+          platform_specs: "{{decide_format.output.format_assignments}}"
+          offerId: "{{trigger.offer}}"
+          angles: "{{suggest_angles.output.angles}}"
+          method_decisions: "{{select_method.output.method_decision}}"
+          platforms: "{{trigger.platforms}}"
+        output:
+          creative_packages: "Pacotes prontos para upload"
+        on_success: handoff
+
+      # --- Branch VIDEO ---
+      - id: build_brief
+        type: task_pura
+        task: build-video-brief
+        description: "Montar brief simples pro editor"
+        input:
+          script: "{{review_creative.output.approved}}"
+          ad_copy: "{{generate_ad_copy.output.ad_copy}}"
+          format_assignment: "{{decide_format.output.format_assignments}}"
+        output:
+          video_brief: "Brief para editor"
+        on_success: handoff
+
+      # --- Branch VARIACAO ---
+      - id: build_variation
+        type: task_pura
+        task: build-variation-brief
+        description: "Brief de variacao de winner"
+        input:
+          winners: "{{select_method.output.method_decision.assignments.variacao}}"
+        output:
+          variation_brief: "Brief de variacao"
+        on_success: handoff
+
+      # --- Saida compartilhada ---
+      - id: handoff
+        type: output
+        description: "Handoff pro gestor de trafego"
+        destination: "Saida do squad — entra no processo de trafego pago"
+        output:
+          creative_packages: "Pacotes completos (imagem ou video brief)"
+          platform_target: "Plataformas para upload"
+          offer_id: "{{trigger.offer}}"
+
+
+# Guardrails
+guardrails:
+  max_scripts_per_run: 50
+  max_revision_rounds: 2
+  max_regeneration_rounds: 2
+  max_spy_references: 50
+  compliance_mode: advisory
+  human_intervention_points: 0      # Zero obrigatorios
+  human_optional_points: 4          # 4 pontos opcionais
+
+# Pontos humanos opcionais (futuro)
+human_optional:
+  - id: optional_spy
+    phase: intelligence
+    after: direct_spy
+    description: "Humano pode adicionar referencias manuais antes do catalog"
+  - id: optional_method_override
+    phase: strategy
+    after: select_method
+    description: "Humano pode overridar decisao de metodo do @copy-chief"
+  - id: optional_review_override
+    phase: review
+    after: review_image_concept
+    description: "Copy Chief humano pode double-check review do agente"
+  - id: optional_final_review
+    phase: delivery
+    before: handoff
+    description: "Humano pode revisar pacote final antes do handoff"
+
+# Metricas
+metrics:
+  track:
+    # Intelligence
+    - spy_references_downloaded
+    - spy_references_transcribed
+    - spy_references_reconstructed
+    - total_references_cataloged
+    - total_references_deconstructed
+    # Strategy
+    - total_angles_suggested
+    - method_distribution_actual
+    - format_distribution_actual
+    # Production
+    - total_image_concepts_generated
+    - total_scripts_generated
+    - total_ad_copy_variations
+    # Review
+    - image_concept_approval_rate
+    - image_generation_success_rate
+    - image_review_approval_rate
+    - video_review_approval_rate
+    - review_revision_rate
+    # Delivery
+    - total_creative_packages
+    - total_briefs_sent
+    - average_pipeline_time
+    # Compliance
+    - compliance_issues_caught
+    - compliance_issues_by_platform
+
+metadata:
+  created_at: "2026-02-15"
+  updated_at: "2026-02-20"
+  created_by: "@squad-creator (Craft)"
+  version_history:
+    - version: "1.0.0"
+      date: "2026-02-15"
+      changes: "v1 — 5 agentes lineares"
+    - version: "2.0.0"
+      date: "2026-02-17"
+      changes: "v2 — task-first, 5 fases, 4 pontos humanos, branching por metodo"
+    - version: "2.2.0"
+      date: "2026-02-20"
+      changes: "v2.2 — offers compartilhado (data/offers/), context loading, creative-direction ref"
+    - version: "3.0.0"
+      date: "2026-02-20"
+      changes: "v3.0 — Pipeline autonomo: spy automatizado, branching imagem/video, compliance por plataforma, 0 human points obrigatorios"
+    - version: "3.1.0"
+      date: "2026-02-20"
+      changes: "v3.1 — Geo e compliance centralizados na oferta. Removido geo como input do trigger. Compliance vem de data/offers/{ID}/compliance/rules.md (fonte de verdade). Removidos arquivos de compliance do squad."

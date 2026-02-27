@@ -1,0 +1,61 @@
+schema: 1
+story: '2.5'
+story_title: 'External API Integrations — DALL-E, Whisper, Spy Scraping'
+gate: CONCERNS
+status_reason: 'All 10 ACs implemented and tested (81/81 passing). Two MEDIUM test gaps: (1) AC3 content policy sanitize+retry flow untested at client level, (2) AC5 timeout escalation multipliers unverified. Code quality is high with clean architecture. Does not block merge.'
+reviewer: 'Quinn (Test Architect)'
+updated: '2026-02-21T23:45:00Z'
+
+top_issues:
+  - severity: medium
+    category: tests
+    description: 'AC3 content policy sanitize+retry flow not tested at ImageGeneratorClient level. Code at client.js:90-95 handles 400 content_policy_violation by sanitizing prompt and retrying 1x, but no test exercises this path end-to-end.'
+    recommendation: 'Add test: mock fetchFn to return 400 content_policy_violation on first call, success on second. Verify sanitizePrompt was called and retried.'
+    suggested_owner: dev
+  - severity: medium
+    category: tests
+    description: 'AC5 WhisperClient timeout escalation multipliers [1, 1.5, 2] not verified in tests. Timeout test only checks AbortError handling, not that timeout increases across retry attempts (60s -> 90s -> 120s).'
+    recommendation: 'Add test: verify that fetchFn receives increasing timeout values across retries via AbortController signal.'
+    suggested_owner: dev
+  - severity: low
+    category: code
+    description: 'ConfigError class defined in dall-e.js but imported by all modules (midjourney, nanobanana, flux, whisper, meta, tiktok). Creates coupling to DALL-E provider module.'
+    recommendation: 'Extract ConfigError to shared module (e.g., integrations/errors.js). Low priority tech debt.'
+    suggested_owner: dev
+
+waiver:
+  active: false
+
+quality_score: 90
+expires: '2026-03-07T23:45:00Z'
+
+evidence:
+  tests_reviewed: 81
+  risks_identified: 0
+  trace:
+    ac_covered: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    ac_gaps: []
+
+nfr_validation:
+  security:
+    status: PASS
+    notes: 'API keys via constructor injection, ConfigError validation, no hardcoded secrets, content policy sanitization, safe path construction.'
+  performance:
+    status: PASS
+    notes: 'Semaphore concurrency control, circuit breaker, retry backoff, fire-and-forget logging. Minor: sync fs writes in spy scraping (acceptable for batch).'
+  reliability:
+    status: PASS
+    notes: 'Graceful degradation with skip markers, error logging survives logger failure, circuit breaker recovery, proper semaphore release in finally blocks.'
+  maintainability:
+    status: PASS
+    notes: 'Clean provider abstraction, JSDoc on all public methods, consistent patterns, barrel export. Minor: ConfigError coupling to dall-e.js.'
+
+recommendations:
+  immediate: []
+  future:
+    - action: 'Add test for AC3 content policy sanitize+retry flow'
+      refs: ['.aios-core/core/integrations/__tests__/image-generators.test.js']
+    - action: 'Add test for AC5 timeout escalation multipliers'
+      refs: ['.aios-core/core/integrations/__tests__/whisper-client.test.js']
+    - action: 'Extract ConfigError to shared module'
+      refs: ['.aios-core/core/integrations/image-generators/providers/dall-e.js']

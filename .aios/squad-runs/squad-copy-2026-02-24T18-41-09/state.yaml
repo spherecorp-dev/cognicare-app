@@ -1,0 +1,322 @@
+runId: squad-copy-2026-02-24T18-41-09
+squadId: squad-copy
+pipelineName: creative-pipeline
+status: failed
+current_phase: 3-Production
+current_step: generate_image_concepts
+context:
+  trigger:
+    type: jarvis-chat
+    caller: jarvis
+    data:
+      offerId: MEMFR02
+    offer: MEMFR02
+    platforms:
+      - facebook
+    skip_phases:
+      - 1-Intelligence
+    quantity: 30
+    variations_per_concept: 3
+  creative-direction: |
+    # Creative Direction — B2G Capital
+
+    ## Perfil Criativo Default
+
+    ### Tom de Voz
+    - Direto e conversacional
+    - Urgencia sem desespero
+    - Autoridade sem arrogancia
+    - Emocional quando relevante
+
+    ### Abordagem
+    - Copy-first: o texto lidera, o visual suporta
+    - Hook nos primeiros 3 segundos (video) ou primeira linha (imagem)
+    - CTA claro e especifico
+    - Social proof quando disponivel
+
+    ### Formatos Prioritarios
+    1. **Imagem estatica** — Feed (1080x1350), Stories (1080x1920)
+    2. **Video curto** — Reels/TikTok (9:16, 15-60s)
+    3. **Video longo** — YouTube/Feed (16:9, 1-3min)
+
+    ### Plataformas
+    - **Meta (Facebook/Instagram):** Maior volume, tom emocional permitido
+    - **TikTok:** Nativo, casual, trend-aware
+    - **Google/YouTube:** Mais restrito, tom informativo
+    - **Native (Taboola/Outbrain):** Estilo editorial/advertorial
+
+    ### Regras Gerais
+    - Nunca prometer cura ou resultado garantido em ads
+    - Compliance da oferta (compliance/rules.md) SEMPRE prevalece
+    - Cada criativo deve ter variacao de hook
+    - Testar pelo menos 3 angulos por batch
+  offer:
+    id: MEMFR02
+    name: La Méthode Ancestrale au Miel
+    name_pt: Método Ancestral com Mel
+    slug: metodo-mel
+    vertical: infoproduto/saude/memoria
+    status: ativo
+    geos:
+      - fr
+    idioma: fr
+    launched_at: ''
+    creative_profile: blackhat-dr
+    produto:
+      descricao: >-
+        Guia digital (webapp) ensinando receita ancestral de mel + Bacopa
+        monnieri para saude cerebral e memoria. Inclui receita completa, videos
+        passo-a-passo, instrucoes escritas, suporte por email 24h.
+      formato: digital
+      entregaveis:
+        - Receita tradicional completa
+        - Videos de preparacao passo-a-passo
+        - Instrucoes escritas
+        - Assistencia por email 24h/24
+        - Consulta privada com Dr. Cymes
+      preco:
+        front_end: 37€
+        upsells: ''
+        aov_medio: ''
+      garantia: 180 dias — reembolso integral
+      bonus:
+        - Livro digital 'Le code super intestin' (Dr. Cymes)
+        - Guia '101 remèdes par les plantes' (co-escrito com Barbara O'Neill)
+        - Guia de demarrage express
+    promessa: >-
+      Eliminar toxinas cerebrais, restaurar acetilcolina e reverter perda de
+      memoria/sintomas de Alzheimer naturalmente, sem medicamentos e sem efeitos
+      colaterais
+    mecanismo: >-
+      Ritual do mel de 8 segundos (l'éveil du miel) — preparacao ancestral que
+      ativa compostos dormentes do mel. 2 ingredientes: mel sideral (quelante
+      natural que elimina cloreto de cadmio do cerebro) + Bacopa monnieri
+      (estimula neurogenese e reconstroi conexoes neurais). Combinados na
+      tecnica tradicional, restauram a producao de acetilcolina.
+    diferencial: >-
+      Nao e suplemento — e um metodo/receita que a pessoa faz em casa. Abordagem
+      ancestral (Himalaia + India) validada por ciencia moderna. 2 ingredientes
+      simples, sem efeitos colaterais, sem dependencia de farmacos.
+    publico_alvo:
+      demografico: >-
+        Adultos 45-90, ambos generos, francofono (Franca, Belgica, Suica, Italia
+        francofona)
+      psicografico: >-
+        Pessoas com perda de memoria, bruma cerebral, esquecimentos frequentes.
+        Familiares de pacientes com Alzheimer/demencia. Cansados de tratamentos
+        caros e ineficazes. Medo de perder autonomia e identidade. Frustrados
+        com medicina convencional.
+      awareness_level: problem_aware
+    angulos:
+      validados: []
+      saturados: []
+      em_teste:
+        - >-
+          Fear/Loss — medo de perder ente querido para Alzheimer, perder
+          identidade
+        - >-
+          Authority — Dr. Michel Cymes (France 2), universidades (Harvard,
+          Oxford, Emory)
+        - >-
+          Conspiracy — pharma tentando suprimir cura natural (oferta de 30M€
+          para enterrar)
+        - >-
+          Ancient Wisdom — mel do Himalaia + planta sagrada indiana
+          (Ganesha/Bacopa)
+        - Emotional Story — historia pessoal do pai perdendo memoria
+        - >-
+          Social Proof — 16.000+ pessoas, estudo com 200 voluntarios,
+          testemunhos
+    narrativa_vsl:
+      formato: VSL longa, estilo documentario/reportagem
+      personagem_autoridade: Dr. Michel Cymes (neurochirurgien, France 2)
+      estrutura:
+        - 'Hook: descoberta revolucionaria para Alzheimer, nao e medicamento'
+        - Testemunhos emocionais (Bruce Willis, familia)
+        - 'Credibilidade: Dr. Cymes, universidades, estatisticas'
+        - 'Historia pessoal: pai do Dr. Cymes com Alzheimer'
+        - 'Problema: cloreto de cadmio acumula no cerebro, destrói acetilcolina'
+        - 'Jornada: investigacao mundial, zonas azuis, Himalaia'
+        - 'Solucao 1: mel sideral (quelante natural)'
+        - 'Solucao 2: Bacopa monnieri (neurogenese)'
+        - 'Resultados: pai recupera, estudo clinico 200 voluntarios'
+        - 'Vilao: pharma oferece 30M€ para enterrar pesquisa'
+        - 'Missao: compartilhar com o mundo'
+        - 'Oferta: 37€ + bonus + garantia 180 dias'
+        - 'Urgencia: ''nao sei quanto tempo a difusao ficara online'''
+    claims_estatisticos:
+      - 97% dos participantes com melhora cognitiva significativa
+      - 9 em 10 pacientes Alzheimer com sinais de regressao
+      - 96% tiveram progressao da doenca completamente parada
+      - 87% recuperaram capacidades cognitivas perdidas
+      - 98% tiveram producao de acetilcolina restaurada
+      - Ate 10x mais eficaz que tratamentos atuais
+      - 16.000+ pessoas com regressao espetacular
+      - >-
+        99% dos ensaios de medicamentos Alzheimer falharam (este claim e real —
+        Alzheimer's Association)
+    competidores:
+      - nome: Tratamentos farmaceuticos (Namenda, Exelon, Aricept)
+        diferencial: Natural vs quimico, sem efeitos colaterais, ataca causa raiz
+      - nome: Omega-3 / Nootropicos
+        diferencial: Metodo completo vs suplemento isolado
+      - nome: Terapias alternativas (meditacao, estimulacao cognitiva, luz/som)
+        diferencial: Receita simples de 2 ingredientes vs protocolos complexos
+    funnel:
+      tipo: VSL
+      url_principal: ''
+      observacoes: >-
+        VSL longa estilo documentario → checkout 37€ → webapp de entrega
+        (receita + calculadora)
+    notas: >-
+      Oferta ativa no geo FR. VSL em frances, narrativa de autoridade medica +
+      historia pessoal + conspiração pharma. Formato de entrega e webapp (nao
+      produto fisico).
+  rules: >
+    # Compliance — La Méthode Ancestrale au Miel (MEMFR02)
+
+
+    > Regras especificas desta oferta. ATENCAO: oferta de saude cerebral/memoria
+    com claims agressivos.
+
+    > Geo FR tem gateway rigoroso — compliance e CRITICO para sobrevivencia dos
+    ads.
+
+
+    ## Nivel de Risco: ALTO
+
+
+    Esta oferta usa claims medicos fortes na VSL. Os criativos (ads) devem ter
+    um certo cuidado, mas nao precisam ser tao cuidadosos quanto a VSL.
+
+
+
+    ---
+
+
+    ## Palavras Proibidas (nos criativos/ads)
+
+
+    sem palavras proibidas
+
+
+    ## Termos Sensiveis (usar com muito cuidado)
+
+
+    -
+
+
+    ## Claims Permitidos (com linguagem suave)
+
+
+    - "Soutient la santé cognitive naturellement" (apoia a saude cognitiva)
+
+    - "Aide à maintenir une mémoire vive" (ajuda a manter memoria viva)
+
+    - "Méthode traditionnelle à base de miel" (metodo tradicional com mel)
+
+    - "Recette ancestrale" (receita ancestral)
+
+    - "Bien-être mental" (bem-estar mental)
+
+    - "Clarté mentale" (clareza mental)
+
+    - "Soutien naturel pour le cerveau" (suporte natural para o cerebro)
+
+    - "Découvrez cette méthode simple" (descubra este metodo simples)
+
+
+    ## Claims Proibidos (nos criativos/ads)
+
+
+
+    ## Gateway / Plataforma
+
+
+    ### Meta (Facebook/Instagram)
+
+    liberado agressivar
+
+
+    ### TikTok
+
+    liberado agressivar
+
+
+    ### Google/YouTube
+
+    - Health claims ainda mais restritos que Meta
+
+    - Ads de saude precisam de certificacao em alguns casos
+
+    - Pre-roll YouTube: evitar mencionar doencas
+
+
+    ### Native (Taboola/Outbrain)
+
+    - Mais permissivo que Google
+
+    - Ainda assim: evitar claims diretos de cura
+
+    - Formato recomendado: advertorial/editorial
+
+
+    ## Estrategia de Compliance para Criativos
+
+
+    O gap entre a VSL (agressiva) e os ads (compliant) e INTENCIONAL:
+
+    - **VSL:** pode ser mais direta porque o usuario ja clicou, esta em ambiente
+    controlado
+
+    - **Ads:** precisam passar no gateway, tom mais suave, curiosidade >
+    promessa
+
+
+
+    ---
+
+
+    *Atualizado em 2026-02-20*
+
+    *Fonte: analise do script VSL versao 1*
+phases_completed:
+  - 1-Intelligence
+  - 2-Strategy
+steps_completed:
+  - suggest_angles
+  - select_method
+  - decide_format
+  - route_production
+started_at: '2026-02-24T18:41:09.574Z'
+updated_at: '2026-02-24T18:55:04.093Z'
+trigger:
+  type: jarvis-chat
+  source: api
+  data:
+    offerId: MEMFR02
+  overrides:
+    skip_phases:
+      - 1-Intelligence
+    quantity: 30
+    format: image
+error: >-
+  Step "generate_image_concepts" falhou: O passo "Gerar conceitos de imagem"
+  encontrou um problema: Agent invocation failed (@stefan-georgi, task:
+  generate-image-concepts): Task execution timed out
+error_details:
+  step_id: generate_image_concepts
+  step_description: Gerar conceitos visuais + ad copy (5 formatos de escrita)
+  agent: stefan-georgi
+  phase: 3-Production
+  technical_error: >-
+    Agent invocation failed (@stefan-georgi, task: generate-image-concepts):
+    Task execution timed out
+  human_message: >-
+    O passo "Gerar conceitos de imagem" encontrou um problema: Agent invocation
+    failed (@stefan-georgi, task: generate-image-concepts): Task execution timed
+    out
+  timestamp: '2026-02-24T18:55:04.088Z'
+completed_at: '2026-02-24T18:55:04.093Z'
+failed_step: generate_image_concepts
+duration_ms: 834476

@@ -1,0 +1,88 @@
+offer: MEMFR02
+offer_name: La Methode Ancestrale au Miel
+geo: fr
+next_concept: 1
+batches:
+  - id: 2026-02-23-002
+    count: 5
+    createdAt: '2026-02-23T22:43:30.477Z'
+    files:
+      - STE-IMG-MEMFR02-01H00.png
+      - STE-IMG-MEMFR02-02H00.png
+      - STE-IMG-MEMFR02-03H00.png
+      - STE-IMG-MEMFR02-04H00.png
+      - STE-IMG-MEMFR02-05H00.png
+  - id: 2026-02-24-002
+    count: 15
+    createdAt: '2026-02-24T01:41:23.847Z'
+    files:
+      - STE-IMG-MEMFR02-01H00.png
+      - STE-IMG-MEMFR02-02H00.png
+      - STE-IMG-MEMFR02-03H00.png
+      - STE-IMG-MEMFR02-04H00.png
+      - STE-IMG-MEMFR02-05H00.png
+      - STE-IMG-MEMFR02-06H00.png
+      - STE-IMG-MEMFR02-07H00.png
+      - STE-IMG-MEMFR02-08H00.png
+      - STE-IMG-MEMFR02-09H00.png
+      - STE-IMG-MEMFR02-10H00.png
+      - STE-IMG-MEMFR02-11H00.png
+      - STE-IMG-MEMFR02-12H00.png
+      - STE-IMG-MEMFR02-13H00.png
+      - STE-IMG-MEMFR02-14H00.png
+      - STE-IMG-MEMFR02-15H00.png
+  - id: 2026-02-24-003
+    count: 15
+    createdAt: '2026-02-24T01:47:49.250Z'
+    files:
+      - STE-IMG-MEMFR02-01H00.png
+      - STE-IMG-MEMFR02-02H00.png
+      - STE-IMG-MEMFR02-03H00.png
+      - STE-IMG-MEMFR02-04H00.png
+      - STE-IMG-MEMFR02-05H00.png
+      - STE-IMG-MEMFR02-06H00.png
+      - STE-IMG-MEMFR02-07H00.png
+      - STE-IMG-MEMFR02-08H00.png
+      - STE-IMG-MEMFR02-09H00.png
+      - STE-IMG-MEMFR02-10H00.png
+      - STE-IMG-MEMFR02-11H00.png
+      - STE-IMG-MEMFR02-12H00.png
+      - STE-IMG-MEMFR02-13H00.png
+      - STE-IMG-MEMFR02-14H00.png
+      - STE-IMG-MEMFR02-15H00.png
+  - id: 2026-02-24-002
+    count: 10
+    createdAt: '2026-02-24T02:02:26.443Z'
+    files:
+      - STE-IMG-MEMFR02-01H00.png
+      - STE-IMG-MEMFR02-02H00.png
+      - STE-IMG-MEMFR02-03H00.png
+      - STE-IMG-MEMFR02-04H00.png
+      - STE-IMG-MEMFR02-05H00.png
+      - STE-IMG-MEMFR02-06H00.png
+      - STE-IMG-MEMFR02-07H00.png
+      - STE-IMG-MEMFR02-08H00.png
+      - STE-IMG-MEMFR02-09H00.png
+      - STE-IMG-MEMFR02-10H00.png
+  - id: 2026-02-24-003
+    count: 15
+    createdAt: '2026-02-24T20:14:11.329Z'
+    files:
+      - STE-IMG-MEMFR02-01H00.png
+      - STE-IMG-MEMFR02-02H00.png
+      - STE-IMG-MEMFR02-03H00.png
+      - STE-IMG-MEMFR02-04H00.png
+      - STE-IMG-MEMFR02-05H00.png
+      - STE-IMG-MEMFR02-06H00.png
+      - STE-IMG-MEMFR02-07H00.png
+      - STE-IMG-MEMFR02-08H00.png
+      - STE-IMG-MEMFR02-09H00.png
+      - STE-IMG-MEMFR02-10H00.png
+      - STE-IMG-MEMFR02-11H00.png
+      - STE-IMG-MEMFR02-12H00.png
+      - STE-IMG-MEMFR02-13H00.png
+      - STE-IMG-MEMFR02-14H00.png
+      - STE-IMG-MEMFR02-15H00.png
+used_ids: []
+total_creatives: 60
+last_updated: '2026-02-24T20:14:11.329Z'

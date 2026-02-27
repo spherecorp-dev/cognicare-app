@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WAGGO — Fase 1: Product Strategy</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="../Design sem nome (8).png" type="image/png">
+  <style>
+    .detail-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(8, 5, 16, 0.9);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .detail-header img { width: 32px; height: 32px; border-radius: 8px; }
+    .detail-header h1 { font-size: 16px; font-weight: 800; background: var(--gradient-brand); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin: 0; }
+    .back-link { color: var(--text-secondary); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+    .back-link:hover { color: var(--text-primary); }
+    .detail-body { max-width: 900px; margin: 0 auto; padding: 48px 24px; }
+    .detail-body .section { margin-left: 0; }
+  </style>
+</head>
+<body>
+  <div class="scroll-progress"><div class="scroll-progress-bar"></div></div>
+  <div class="detail-header">
+    <a href="index.html" class="back-link">&larr; Executive Deck</a>
+    <img src="../Design sem nome (8).png" alt="WAGGO">
+    <h1>WAGGO</h1>
+  </div>
+  <div class="detail-body">
+
+    <!-- HEADER -->
+    <div class="section">
+      <div class="section-header">
+        <h1 class="section-title">Fase 1: Product Strategy &amp; Monetiza&ccedil;&atilde;o</h1>
+        <div class="section-subtitle">
+          <strong>Autor:</strong> Russell Brunson (Funnel Architect) |
+          <strong>Tasks:</strong> <code>*map-value-ladder</code> + <code>*build-stack</code><br>
+          <strong>Offer:</strong> WAGGO &mdash; Nutri&ccedil;&atilde;o Inteligente para Pets |
+          <strong>Data:</strong> 2026-02-26 |
+          <strong>Status:</strong> Completo
+        </div>
+      </div>
+    </div>
+
+    <!-- INTRO -->
+    <div class="section">
+      <div class="card">
+        <p>Okay, escuta...</p>
+        <p>Eu acabei de hackear 5 funis do mercado pet nutrition. Sei EXATAMENTE o que funciona e o que n&atilde;o funciona.</p>
+        <p>Agora &eacute; hora de construir a <strong>Value Ladder</strong> do WAGGO.</p>
+        <p>Porque... um funil sem Value Ladder &eacute; como uma escada sem degraus. Voc&ecirc; pode ter o melhor hook do mundo... o melhor quiz... o email mais persuasivo...</p>
+        <p>Mas se n&atilde;o tem pra ONDE levar o cliente...</p>
+        <p>...voc&ecirc; est&aacute; deixando dinheiro na mesa.</p>
+        <p><strong>Muito dinheiro.</strong></p>
+      </div>
+    </div>
+
+    <!-- VALUE LADDER -->
+    <div class="section">
+      <div class="section-header">
+        <h2 class="section-title">A Value Ladder do WAGGO</h2>
+      </div>
+
+      <!-- Linchpin Framework -->
+      <div class="card highlight" style="margin-bottom: var(--space-lg);">
+        <h3>O Linchpin Framework</h3>
+        <p>Antes de tudo, preciso te explicar uma coisa que mudou TUDO na minha forma de pensar sobre neg&oacute;cios...</p>
+        <p>Eu chamo de <strong>Linchpin</strong>.</p>
+        <p>O Linchpin &eacute; a oferta de <strong>continuidade</strong> que fica no CENTRO de tudo. A receita recorrente. O SaaS. A assinatura.</p>
+        <p>Tudo que voc&ecirc; faz na frente (aquisi&ccedil;&atilde;o) <strong>alimenta</strong> o Linchpin.</p>
+        <p>Tudo que voc&ecirc; faz atr&aacute;s (ascens&atilde;o) <strong>sai</strong> do Linchpin.</p>
+        <p>E a receita recorrente do Linchpin... <strong>financia TODA a opera&ccedil;&atilde;o de ads</strong>.</p>
+        <p>Pro WAGGO? O Linchpin &eacute; <strong>a assinatura Essential</strong>. $9.99/m&ecirc;s. &Eacute; o centro de gravidade.</p>
+        <p>Agora vamos mapear cada degrau.</p>
+      </div>
+
+      <!-- Value Ladder Visual -->
+      <div class="ladder-visual">
+        <div class="ladder-step">
+          <div class="ladder-bar" style="height: 60px;"><span class="price">FREE</span></div>
+          <span class="ladder-label">Bait (Quiz)</span>
+        </div>
+        <div class="ladder-step">
+          <div class="ladder-bar" style="height: 100px;"><span class="price">$0/7d</span></div>
+          <span class="ladder-label">Trial 7 Dias</span>
+        </div>
+        <div class="ladder-step linchpin">
+          <div class="ladder-bar" style="height: 160px;"><span class="price">$9.99/m</span></div>
+          <span class="ladder-label">Essential (Linchpin)</span>
+        </div>
+        <div class="ladder-step">
+          <div class="ladder-bar" style="height: 220px;"><span class="price">$19.99/m</span></div>
+          <span class="ladder-label">Pro</span>
+        </div>
+        <div class="ladder-step">
+          <div class="ladder-bar" style="height: 280px;"><span class="price">$199</span></div>
+          <span class="ladder-label">VetConnect</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- DEGRAU 1: BAIT -->
+    <div class="section">
+      <div class="section-header">
+        <h2 class="section-title">Degrau 1: BAIT (Gratuito)</h2>
+        <div class="section-subtitle">"WAGGO Pet Nutrition Quiz"</div>
+      </div>
+
+      <div class="card">
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>Par&acirc;metro</th><th>Detalhe</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Pre&ccedil;o</td><td><strong>GR&Aacute;TIS</strong></td></tr>
+              <tr><td>Formato</td><td>Quiz funnel (7 perguntas + resultado personalizado)</td></tr>
+              <tr><td>Entreg&aacute;vel</td><td>Perfil nutricional do pet + mini-plano com 1 receita</td></tr>
+              <tr><td>Prop&oacute;sito</td><td>Capturar email, qualificar lead, criar micro-commitment</td></tr>
+              <tr><td>Funil</td><td>Quiz Funnel</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>Esse &eacute; o primeiro degrau da escada.</p>
+        <p>O tutor n&atilde;o paga nada. Faz o quiz. Descobre seu <strong>perfil</strong> (identidade aspiracional). Recebe um <strong>mini-plano com uma receita</strong> gratuita.</p>
+        <p>E pensa: <em>"Se isso &eacute; o que d&atilde;o de GR&Aacute;TIS... imagina o que tem no pago?"</em></p>
+        <p><strong>&Eacute; exatamente essa a rea&ccedil;&atilde;o que queremos.</strong></p>
+        <p>O bait precisa dar valor REAL &mdash; n&atilde;o um PDF gen&eacute;rico. Um plano personalizado baseado nas respostas do quiz + uma receita real que o tutor pode usar HOJE.</p>
+        <p><strong>Convers&atilde;o esperada:</strong> 40%+ do tr&aacute;fego inicia o quiz. 60-80% das pessoas que chegam na pergunta 5 deixam o email.</p>
+      </div>
+    </div>
+
+    <!-- DEGRAU 2: FRONTEND / TRIAL -->
+    <div class="section">
+      <div class="section-header">
+        <h2 class="section-title">Degrau 2: FRONTEND / TRIAL (Gr&aacute;tis &rarr; $0 por 7 dias)</h2>
+        <div class="section-subtitle">"WAGGO Essential &mdash; Trial Gratuito de 7 Dias"</div>
+      </div>
+
+      <div class="card">
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>Par&acirc;metro</th><th>Detalhe</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Pre&ccedil;o</td><td><strong>$0 por 7 dias</strong> (depois $9.99/m&ecirc;s)</td></tr>
+              <tr><td>Formato</td><td>PWA com acesso total por 7 dias</td></tr>
+              <tr><td>Entreg&aacute;vel</td><td>Tudo que o Essential oferece, sem restri&ccedil;&atilde;o</td></tr>
+              <tr><td>Prop&oacute;sito</td><td>Converter lead em trial user &rarr; engenheirar o Aha Moment &rarr; converter em pagante</td></tr>
+              <tr><td>Funil</td><td>Resultado do Quiz &rarr; Trial Signup &rarr; Onboarding</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>Aqui &eacute; onde a m&aacute;gica acontece.</p>
+        <p>O tutor fez o quiz. Viu seu perfil. Quer MAIS.</p>
+        <p>O CTA leva direto pro trial de 7 dias. <strong>Acesso total. Sem cart&atilde;o na primeira vers&atilde;o.</strong></p>
+
+        <blockquote><em>"Mas Russell, trial sem cart&atilde;o n&atilde;o converte menos?"</em></blockquote>
+
+        <p>Sim e n&atilde;o. Deixa eu explicar...</p>
+
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>Modelo</th><th>Convers&atilde;o</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Trial com cart&atilde;o</strong></td><td>48.8% de convers&atilde;o p&oacute;s-trial. Menos signups, mais convers&atilde;o.</td></tr>
+              <tr><td><strong>Trial sem cart&atilde;o</strong></td><td>18.2% de convers&atilde;o. Mais signups, menos convers&atilde;o.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p><strong>Minha recomenda&ccedil;&atilde;o:</strong> Come&ccedil;ar <strong>SEM cart&atilde;o</strong>. Por qu&ecirc;?</p>
+        <ol>
+          <li>WAGGO &eacute; novo. Precisa de <strong>volume</strong> para gerar dados.</li>
+          <li>O Aha Moment do WAGGO &eacute; R&Aacute;PIDO (&lt; 2 minutos &mdash; ver primeiro plano gerado).</li>
+          <li>Volume maior = mais dados = otimiza&ccedil;&atilde;o mais r&aacute;pida.</li>
+          <li><strong>Depois de 1000+ trials</strong>, A/B testar com cart&atilde;o.</li>
+        </ol>
+
+        <p>O trial &eacute; o FRONTEND da value ladder. O objetivo n&atilde;o &eacute; fazer dinheiro aqui. &Eacute; <strong>provar valor</strong>.</p>
+        <p><strong>Meta:</strong> 30%+ dos trial users chegam ao Aha Moment nas primeiras 24h.</p>
+      </div>
+    </div>
+
+    <!-- DEGRAU 3: LINCHPIN -->
+    <div class="section">
+      <div class="section-header">
+        <h2 class="section-title">Degrau 3: LINCHPIN ($9.99/m&ecirc;s)</h2>
+        <div class="section-subtitle">"WAGGO Essential"</div>
+      </div>
+
+      <div class="card highlight">
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>Par&acirc;metro</th><th>Detalhe</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Pre&ccedil;o</td><td><strong>$9.99/m&ecirc;s</strong> (ou $79/ano &mdash; 34% desconto)</td></tr>
+              <tr><td>Formato</td><td>PWA - assinatura recorrente</td></tr>
+              <tr><td>Prop&oacute;sito</td><td>CENTRO DE GRAVIDADE &mdash; receita recorrente que financia tudo</td></tr>
+              <tr><td>Funil</td><td>Onboarding (Dia 7) &rarr; Upgrade CTA &rarr; Soap Opera Email 5</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p><strong>O Linchpin. O centro de tudo.</strong></p>
+        <p>$9.99/m&ecirc;s.</p>
+        <p>Vamos contextualizar esse pre&ccedil;o...</p>
+
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>Alternativa</th><th>Custo</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Consulta com nutricionista vet</td><td><strong>$295-$750</strong> (por pet, por consulta)</td></tr>
+              <tr><td>Animal Diet Formulator app</td><td><strong>$299/ano</strong></td></tr>
+              <tr><td>Grupo de Facebook</td><td><strong>Gr&aacute;tis</strong> (mas info contradit&oacute;ria, sem personaliza&ccedil;&atilde;o)</td></tr>
+              <tr><td>Planilha manual</td><td><strong>Gr&aacute;tis</strong> (mas 3h de trabalho + medo de errar)</td></tr>
+              <tr><td><strong>WAGGO Essential</strong></td><td><strong>$9.99/m&ecirc;s</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>$9.99/m&ecirc;s &eacute; uma <strong>fra&ccedil;&atilde;o absurda</strong> do custo de um nutricionista. E funciona 24/7. E se ajusta automaticamente. E n&atilde;o te julga por n&atilde;o saber a propor&ccedil;&atilde;o de ossos carnudos.</p>
+        <p>Esse &eacute; o Linchpin. A receita recorrente. O motor do neg&oacute;cio.</p>
+      </div>
+
+      <div class="card" style="margin-top: var(--space-lg);">
+        <h3>O que inclui</h3>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>Feature</th><th>Incluso</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Plano nutricional personalizado por IA</td><td><span class="tag green">SIM</span></td></tr>
+              <tr><td>Receitas com ingredientes naturais (ilimitadas)</td><td><span class="tag green">SIM</span></td></tr>
+              <tr><td>Por&ccedil;&otilde;es calculadas automaticamente</td><td><span class="tag green">SIM</span></td></tr>
+              <tr><td>Lista de compras autom&aacute;tica</td><td><span class="tag green">SIM</span></td></tr>
+              <tr><td>Acompanhamento de peso com gr&aacute;ficos</td><td><span class="tag green">SIM</span></td></tr>
+              <tr><td>Ajuste autom&aacute;tico do plano</td><td><span class="tag green">SIM</span></td></tr>
+              <tr><td>M&oacute;dulo Dieta Personalizada</td><td><span class="tag green">SIM</span></td></tr>
+              <tr><td>M&oacute;dulo Mix Feeding</td><td><span class="tag green">SIM</span></td></tr>
+              <tr><td>M&oacute;dulo Prepara&ccedil;&atilde;o</td><td><span class="tag green">SIM</span></td></tr>
+              <tr><td>M&oacute;dulo Primeiros Passos</td><td><span class="tag green">SIM</span></td></tr>
+              <tr><td>M&oacute;dulo Controle de Peso</td><td><span class="tag green">SIM</span></td></tr>
+              <tr><td>M&oacute;dulo Petiscos</td><td><span class="tag green">SIM</span></td></tr>
+              <tr><td>Suporte por email</td><td><span class="tag green">SIM</span></td></tr>
+              <tr><td>1 pet</td><td><span class="tag green">SIM</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p><strong>Convers&atilde;o esperada trial &rarr; pago:</strong> 20-30% (sem cart&atilde;o). Target: 25%.</p>
+      </div>
+    </div>
+
+    <!-- DEGRAU 4: ASCENS&Atilde;O -->
+    <div class="section">
+      <div class="section-header">
+        <h2 class="section-title">Degrau 4: ASCENS&Atilde;O ($19.99/m&ecirc;s)</h2>
+        <div class="section-subtitle">"WAGGO Pro"</div>
+      </div>
+
+      <div class="card">
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>Par&acirc;metro</th><th>Detalhe</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Pre&ccedil;o</td><td><strong>$19.99/m&ecirc;s</strong> (ou $159/ano &mdash; 34% desconto)</td></tr>
+              <tr><td>Formato</td><td>PWA - upgrade in-app</td></tr>
+              <tr><td>Prop&oacute;sito</td><td>Capturar mais valor dos power users + features premium</td></tr>
+              <tr><td>Funil</td><td>In-app upgrade prompts &rarr; Email upsell sequence &rarr; Feature teaser</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>Os power users v&atilde;o querer mais. <strong>Sempre querem mais.</strong></p>
+        <p>E a&iacute; &eacute; onde o Pro entra.</p>
+
+        <h3>O que o Pro adiciona (sobre o Essential)</h3>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>Feature Pro</th><th>Valor</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Multi-pet (at&eacute; 5 pets)</td><td>Para fam&iacute;lias com m&uacute;ltiplos animais</td></tr>
+              <tr><td>M&oacute;dulo Sa&uacute;de Digestiva</td><td>Para pets com desconforto</td></tr>
+              <tr><td>M&oacute;dulo Hipersensibilidade</td><td>Para pets com alergias</td></tr>
+              <tr><td>M&oacute;dulo Modula&ccedil;&atilde;o Intestinal</td><td>Microbiota e imunidade</td></tr>
+              <tr><td>Relat&oacute;rio veterin&aacute;rio export&aacute;vel</td><td>PDF profissional para levar ao vet</td></tr>
+              <tr><td>Hist&oacute;rico nutricional completo</td><td>Prontu&aacute;rio do pet</td></tr>
+              <tr><td>Receitas sazonais exclusivas</td><td>Varia&ccedil;&atilde;o e novidade</td></tr>
+              <tr><td>Suporte priorit&aacute;rio (chat)</td><td>Resposta em at&eacute; 24h</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>O upgrade de Essential &rarr; Pro &eacute; <strong>natural</strong>. O tutor usa o Essential, ama, tem um segundo pet... ou o pet desenvolve alergia... ou quer levar o relat&oacute;rio pro veterin&aacute;rio.</p>
+        <p><strong>N&atilde;o precisa for&ccedil;ar.</strong> A necessidade emerge organicamente.</p>
+
+        <h3>Timing de upsell</h3>
+        <ul>
+          <li><strong>Dia 30:</strong> Email com teaser dos m&oacute;dulos especiais</li>
+          <li><strong>Dia 45:</strong> "Seu pet parece estar [sinal de necessidade Pro]" (baseado em uso)</li>
+          <li><strong>Dia 60:</strong> Oferta Pro com 30% off no primeiro m&ecirc;s</li>
+        </ul>
+        <p><strong>Convers&atilde;o esperada Essential &rarr; Pro:</strong> 15-20%</p>
+      </div>
+    </div>
+
+    <!-- DEGRAU 5: BACKEND -->
+    <div class="section">
+      <div class="section-header">
+        <h2 class="section-title">Degrau 5: BACKEND ($199 one-time)</h2>
+        <div class="section-subtitle">"WAGGO VetConnect"</div>
+      </div>
+
+      <div class="card">
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>Par&acirc;metro</th><th>Detalhe</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Pre&ccedil;o</td><td><strong>$199</strong> (one-time, por pet)</td></tr>
+              <tr><td>Formato</td><td>Consulta + plano revisado por nutricionista veterin&aacute;rio real</td></tr>
+              <tr><td>Prop&oacute;sito</td><td>Capturar high-ticket. Resolver casos complexos. M&aacute;xima credibilidade.</td></tr>
+              <tr><td>Funil</td><td>Application-style (dentro do app) &rarr; Agendamento &rarr; Consulta &rarr; Plano revisado</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>O backend. O topo da escada.</p>
+        <p>Pra quem quer o <strong>M&Aacute;XIMO</strong>. Pet com condi&ccedil;&atilde;o m&eacute;dica s&eacute;ria. Tutor que quer valida&ccedil;&atilde;o profissional. Quem pode e quer pagar.</p>
+
+        <h3>O que inclui</h3>
+        <ul>
+          <li>Consulta 1:1 com nutricionista veterin&aacute;rio (45 min)</li>
+          <li>Plano revisado e aprovado pelo profissional</li>
+          <li>Relat&oacute;rio veterin&aacute;rio certificado</li>
+          <li>1 follow-up (30 dias depois)</li>
+          <li>Acesso Pro inclu&iacute;do por 3 meses</li>
+        </ul>
+
+        <p><strong>Contexto de pre&ccedil;o:</strong> Consulta vet nutricional custa $295-$750+ normalmente. A $199 via WAGGO (com plano IA como base, reduzindo trabalho do vet), &eacute; barganha.</p>
+        <p><strong>Convers&atilde;o esperada Pro &rarr; VetConnect:</strong> 3-5%</p>
+      </div>
+    </div>
+
+    <!-- AN&Aacute;LISE DE MONETIZA&Ccedil;&Atilde;O -->
+    <div class="section">
+      <div class="section-header">
+        <h2 class="section-title">An&aacute;lise de Monetiza&ccedil;&atilde;o</h2>
+      </div>
+
+      <div class="card" style="margin-bottom: var(--space-lg);">
+        <h3>Os 5 Modelos Avaliados</h3>
+        <p>Eu avaliei 5 modelos. Cada um tem trade-offs. Mas nem todo modelo serve pro WAGGO.</p>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>Modelo</th><th>Signups</th><th>Conv. Paga</th><th>Revenue Imediata</th><th>Melhor Para</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Free Trial 7d COM cart&atilde;o</strong></td><td>M&eacute;dio</td><td><strong>48.8%</strong></td><td>$0 (depois $9.99)</td><td>Produto com WOW r&aacute;pido</td></tr>
+              <tr><td><strong>Free Trial 7d SEM cart&atilde;o</strong></td><td><strong>Alto</strong></td><td>18-25%</td><td>$0</td><td>Produto novo que precisa de volume</td></tr>
+              <tr><td><strong>Paid Trial $1.99/7d</strong></td><td>Baixo</td><td><strong>60%+</strong></td><td>$1.99 imediato</td><td>Produto com valor percebido alto</td></tr>
+              <tr><td><strong>Freemium puro</strong></td><td><strong>Alt&iacute;ssimo</strong></td><td>2-5%</td><td>$0</td><td>Produto viral (n&atilde;o &eacute; nosso caso)</td></tr>
+              <tr><td><strong>Reverse Trial</strong></td><td>Alto</td><td>20-30%</td><td>$0</td><td>SaaS com muitos m&oacute;dulos</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card" style="margin-bottom: var(--space-lg);">
+        <h3>Minha Recomenda&ccedil;&atilde;o: HYBRID</h3>
+
+        <h4>Fase 1 (Launch &mdash; Primeiros 3 meses)</h4>
+        <blockquote><strong>Free Trial 7d SEM cart&atilde;o</strong><br>Por que: Volume. Dados. Aprendizado. WAGGO &eacute; novo, precisa provar product-market fit e otimizar o onboarding ANTES de meter paywall duro.</blockquote>
+
+        <h4>Fase 2 (Ap&oacute;s 1000+ trials)</h4>
+        <blockquote><strong>A/B Test: Trial SEM cart&atilde;o vs Trial COM cart&atilde;o</strong><br>Com dados reais, testar se o Aha Moment &eacute; forte o suficiente pra justificar barreira do cart&atilde;o.</blockquote>
+
+        <h4>Fase 3 (Otimizado)</h4>
+        <blockquote><strong>A/B Test: Trial COM cart&atilde;o vs Paid Trial $1.99</strong><br>Se convers&atilde;o com cart&atilde;o for boa, testar micro-commitment pago ($1.99/7d).</blockquote>
+
+        <p><strong>Por que essa progress&atilde;o?</strong> Porque cada fase gera os dados que informam a pr&oacute;xima decis&atilde;o. <strong>N&atilde;o adivinhar &mdash; testar.</strong></p>
+      </div>
+
+      <div class="card">
+        <h3>Freemium vs Trial: Por que N&Atilde;O freemium puro</h3>
+        <blockquote><em>"Mas Russell, por que n&atilde;o dar uma vers&atilde;o free limitada pra sempre?"</em></blockquote>
+        <p>Porque freemium puro funciona para produtos VIRAIS (Canva, Spotify, Notion). O WAGGO n&atilde;o tem loop viral natural &mdash; um tutor n&atilde;o "compartilha" o plano nutricional do pet como compartilha um design do Canva.</p>
+        <p>O trial limitado &eacute; melhor:</p>
+        <ol>
+          <li>Cria <strong>urg&ecirc;ncia</strong> (7 dias para experimentar)</li>
+          <li>Mostra <strong>tudo</strong> (o tutor v&ecirc; o valor completo)</li>
+          <li>For&ccedil;a <strong>decis&atilde;o</strong> (sim ou n&atilde;o no dia 7)</li>
+        </ol>
+        <p><strong>MAS</strong> &mdash; manter o resultado do quiz como "free forever". O mini-plano com 1 receita nunca expira. Isso mant&eacute;m o bait funcionando.</p>
+      </div>
+    </div>
+
+    <!-- FEATURE GATES -->
+    <div class="section">
+      <div class="section-header">
+        <h2 class="section-title">Feature Gates: Free vs Essential vs Pro</h2>
+        <div class="section-subtitle">A pergunta mais importante &eacute;: o que fica no free vs no pago? Regra de ouro: o free d&aacute; um GOSTINHO que faz o tutor QUERER o completo.</div>
+      </div>
+
+      <div class="card">
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>Feature</th><th>Free (Quiz)</th><th>Essential ($9.99)</th><th>Pro ($19.99)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Perfil nutricional do pet</td><td><span class="tag green">SIM (1 pet)</span></td><td><span class="tag green">SIM (1 pet)</span></td><td><span class="tag green">SIM (5 pets)</span></td></tr>
+              <tr><td>Mini-plano com 1 receita</td><td><span class="tag green">SIM</span></td><td>&mdash;</td><td>&mdash;</td></tr>
+              <tr><td>Plano completo IA</td><td>&mdash;</td><td><span class="tag green">SIM</span></td><td><span class="tag green">SIM</span></td></tr>
+              <tr><td>Receitas ilimitadas</td><td>&mdash;</td><td><span class="tag green">SIM</span></td><td><span class="tag green">SIM</span></td></tr>
+              <tr><td>Por&ccedil;&otilde;es calculadas</td><td>&mdash;</td><td><span class="tag green">SIM</span></td><td><span class="tag green">SIM</span></td></tr>
+              <tr><td>Lista de compras</td><td>&mdash;</td><td><span class="tag green">SIM</span></td><td><span class="tag green">SIM</span></td></tr>
+              <tr><td>Acompanhamento de peso</td><td>&mdash;</td><td><span class="tag green">SIM</span></td><td><span class="tag green">SIM</span></td></tr>
+              <tr><td>Ajuste autom&aacute;tico</td><td>&mdash;</td><td><span class="tag green">SIM</span></td><td><span class="tag green">SIM</span></td></tr>
+              <tr><td>Mix Feeding</td><td>&mdash;</td><td><span class="tag green">SIM</span></td><td><span class="tag green">SIM</span></td></tr>
+              <tr><td>Guia de Prepara&ccedil;&atilde;o</td><td>&mdash;</td><td><span class="tag green">SIM</span></td><td><span class="tag green">SIM</span></td></tr>
+              <tr><td>Primeiros Passos</td><td>&mdash;</td><td><span class="tag green">SIM</span></td><td><span class="tag green">SIM</span></td></tr>
+              <tr><td>Controle de Peso</td><td>&mdash;</td><td><span class="tag green">SIM</span></td><td><span class="tag green">SIM</span></td></tr>
+              <tr><td>Calculadora de Petiscos</td><td>&mdash;</td><td><span class="tag green">SIM</span></td><td><span class="tag green">SIM</span></td></tr>
+              <tr><td>Sa&uacute;de Digestiva</td><td>&mdash;</td><td>&mdash;</td><td><span class="tag green">SIM</span></td></tr>
+              <tr><td>Hipersensibilidade</td><td>&mdash;</td><td>&mdash;</td><td><span class="tag green">SIM</span></td></tr>
+              <tr><td>Modula&ccedil;&atilde;o Intestinal</td><td>&mdash;</td><td>&mdash;</td><td><span class="tag green">SIM</span></td></tr>
+              <tr><td>Relat&oacute;rio veterin&aacute;rio</td><td>&mdash;</td><td>&mdash;</td><td><span class="tag green">SIM</span></td></tr>
+              <tr><td>Hist&oacute;rico nutricional</td><td>&mdash;</td><td>&mdash;</td><td><span class="tag green">SIM</span></td></tr>
+              <tr><td>Receitas sazonais</td><td>&mdash;</td><td>&mdash;</td><td><span class="tag green">SIM</span></td></tr>
+              <tr><td>Multi-pet</td><td>&mdash;</td><td>&mdash;</td><td><span class="tag green">SIM (at&eacute; 5)</span></td></tr>
+              <tr><td>Suporte email</td><td>&mdash;</td><td><span class="tag green">SIM</span></td><td><span class="tag green">SIM</span></td></tr>
+              <tr><td>Suporte chat priorit&aacute;rio</td><td>&mdash;</td><td>&mdash;</td><td><span class="tag green">SIM</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Feature Gate Strategy</h3>
+        <p>O segredo &eacute;: o free d&aacute; <strong>UMA receita personalizada</strong> (prova que a IA funciona, cria desejo) mas N&Atilde;O d&aacute; o plano completo, nem por&ccedil;&otilde;es, nem lista de compras.</p>
+        <p>O tutor v&ecirc; a receita e pensa: <em>"Isso &eacute; EXATAMENTE o que eu precisava... mas preciso do plano completo."</em></p>
+        <p><strong>Esse &eacute; o Small Win que vende o trial.</strong></p>
+      </div>
+    </div>
+
+    <!-- FEATURES DE VALOR EXTRA -->
+    <div class="section">
+      <div class="section-header">
+        <h2 class="section-title">Features de Valor Extra (Roadmap de Reten&ccedil;&atilde;o)</h2>
+        <div class="section-subtitle">Pra manter o tutor na assinatura meses e meses, precisa de novidade.</div>
+      </div>
+
+      <div class="card-grid">
+        <div class="card">
+          <h3>Tier 1 &mdash; Alto Impacto, Esfor&ccedil;o M&eacute;dio <span class="tag blue">Pr&oacute;ximos 3 meses</span></h3>
+          <ol>
+            <li><strong>Comunidade de Tutores AN</strong> &mdash; Feature social dentro do app. Grupos por perfil. UGC de refei&ccedil;&otilde;es. Engajamento e reten&ccedil;&atilde;o.</li>
+            <li><strong>Receitas Sazonais/Tem&aacute;ticas</strong> &mdash; Natal, ver&atilde;o, Halloween. Novidade constante.</li>
+            <li><strong>Widget de Lembrete de Refei&ccedil;&atilde;o</strong> &mdash; Push notification no hor&aacute;rio. Habit loop.</li>
+          </ol>
+        </div>
+
+        <div class="card">
+          <h3>Tier 2 &mdash; Alto Impacto, Esfor&ccedil;o Alto <span class="tag amber">Meses 4-6</span></h3>
+          <ol start="4">
+            <li><strong>Tracking de Sa&uacute;de Integrado</strong> &mdash; Vacinas, verm&iacute;fugos, exames. O pet tem um "prontu&aacute;rio" no app.</li>
+            <li><strong>Gamifica&ccedil;&atilde;o</strong> &mdash; Streaks de pesagem, badges de consist&ecirc;ncia, milestones. Reten&ccedil;&atilde;o via jogos.</li>
+            <li><strong>Exporta&ccedil;&atilde;o de Relat&oacute;rio para Vet</strong> &mdash; PDF profissional. &Uacute;til E diferenciador.</li>
+          </ol>
+        </div>
+
+        <div class="card">
+          <h3>Tier 3 &mdash; Moonshots <span class="tag purple">Meses 6-12</span></h3>
+          <ol start="7">
+            <li><strong>Marketplace de Ingredientes</strong> &mdash; Parcerias com fornecedores de carne, ossos, v&iacute;sceras.</li>
+            <li><strong>Integra&ccedil;&atilde;o com Wearables Pet</strong> &mdash; FitBark, PetPace. Dados de atividade &rarr; ajuste do plano.</li>
+            <li><strong>Multi-pet com Dashboard Familiar</strong> &mdash; Vis&atilde;o geral de todos os pets da fam&iacute;lia.</li>
+            <li><strong>Compartilhamento com Pet Sitter</strong> &mdash; Link compartilh&aacute;vel do plano.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <!-- THE STACK -->
+    <div class="section">
+      <div class="section-header">
+        <h2 class="section-title">The Stack: A Oferta Irresist&iacute;vel do WAGGO</h2>
+        <div class="section-subtitle">Agora vem a parte que eu mais gosto... <strong>The Stack.</strong> Cada componente tem um valor expl&iacute;cito. A soma &eacute; absurdamente maior que o pre&ccedil;o.</div>
+      </div>
+
+      <div class="card">
+        <h3>O Stack do WAGGO Essential</h3>
+        <p>Quando voc&ecirc; se inscreve hoje, voc&ecirc; recebe...</p>
+      </div>
+
+      <div class="card" style="margin-top: var(--space-lg); padding: 0; overflow: hidden;">
+        <div class="stack-item">
+          <div>
+            <div class="stack-name"><strong>#1: Plano Nutricional Personalizado por IA</strong></div>
+            <p style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">N&atilde;o &eacute; uma tabela gen&eacute;rica. &Eacute; um plano criado ESPECIFICAMENTE pro seu pet &mdash; baseado no peso, idade, ra&ccedil;a, condi&ccedil;&otilde;es de sa&uacute;de e objetivos. A mesma an&aacute;lise que um nutricionista veterin&aacute;rio cobraria $295-$750... gerada em SEGUNDOS pela nossa IA.</p>
+          </div>
+          <span class="stack-value">$297</span>
+        </div>
+        <div class="stack-item">
+          <div>
+            <div class="stack-name"><strong>#2: 9 M&oacute;dulos Especializados</strong></div>
+            <p style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">Desde Dieta Personalizada at&eacute; Modula&ccedil;&atilde;o Intestinal. Cada m&oacute;dulo resolve uma necessidade espec&iacute;fica. S&atilde;o 9 nutricionistas especializados no seu bolso.</p>
+          </div>
+          <span class="stack-value">$497</span>
+        </div>
+        <div class="stack-item">
+          <div>
+            <div class="stack-name"><strong>#3: Receitas com Ingredientes Naturais &mdash; ILIMITADAS</strong></div>
+            <p style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">Receitas ILIMITADAS, personalizadas pro seu pet, com ingredientes que voc&ecirc; encontra no supermercado. Cada receita vem com por&ccedil;&otilde;es exatas e modo de preparo.</p>
+          </div>
+          <span class="stack-value">$147</span>
+        </div>
+        <div class="stack-item">
+          <div>
+            <div class="stack-name"><strong>#4: Lista de Compras Autom&aacute;tica</strong></div>
+            <p style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">Toda semana, uma lista pronta. Baseada nas receitas do plano. Com quantidades calculadas. Economiza 1-2 horas por semana.</p>
+          </div>
+          <span class="stack-value">$47</span>
+        </div>
+        <div class="stack-item">
+          <div>
+            <div class="stack-name"><strong>#5: Acompanhamento de Peso com Gr&aacute;ficos</strong></div>
+            <p style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">Registre o peso do seu pet e veja a evolu&ccedil;&atilde;o em gr&aacute;ficos claros. O plano se ajusta AUTOMATICAMENTE conforme o peso muda.</p>
+          </div>
+          <span class="stack-value">$97</span>
+        </div>
+        <div class="stack-item">
+          <div>
+            <div class="stack-name"><strong>#6: Ajuste Autom&aacute;tico Inteligente</strong></div>
+            <p style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">Conforme seu pet cresce, envelhece, ganha ou perde peso... o plano muda SOZINHO. A IA ajusta tudo automaticamente.</p>
+          </div>
+          <span class="stack-value">$97</span>
+        </div>
+        <div class="stack-total">
+          <span class="stack-name">VALOR TOTAL</span>
+          <span class="stack-value">$1,182</span>
+        </div>
+      </div>
+
+      <div class="card-grid cols-3" style="margin-top: var(--space-lg);">
+        <div class="card metric-card">
+          <div class="metric-value">$9.99</div>
+          <div class="metric-label">Seu investimento /m&ecirc;s</div>
+        </div>
+        <div class="card metric-card">
+          <div class="metric-value">118x</div>
+          <div class="metric-label">Ratio Valor/Pre&ccedil;o</div>
+        </div>
+        <div class="card metric-card">
+          <div class="metric-value">$1,182</div>
+          <div class="metric-label">Valor Total do Stack</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GARANTIA -->
+    <div class="section">
+      <div class="section-header">
+        <h2 class="section-title">Garantia: 7 Dias de Trial Completo</h2>
+      </div>
+
+      <div class="card highlight">
+        <p>Teste TUDO por 7 dias. Gere seu plano. Veja as receitas. Use a lista de compras. Acompanhe o peso.</p>
+        <p>Se por qualquer raz&atilde;o n&atilde;o for pra voc&ecirc;...</p>
+        <p><strong>Cancele antes dos 7 dias e n&atilde;o pague nada. Zero. Nenhum centavo.</strong></p>
+        <p>Sem perguntas. Sem drama. Sem aquele chat rob&oacute;tico que tenta te convencer a ficar.</p>
+        <p>O risco &eacute; TODO nosso. Porque n&oacute;s <strong>confiamos</strong> que quando voc&ecirc; vir o primeiro plano gerado pela IA... n&atilde;o vai querer parar.</p>
+      </div>
+    </div>
+
+    <!-- STACK POR PERFIL -->
+    <div class="section">
+      <div class="section-header">
+        <h2 class="section-title">Stack por Perfil (B&ocirc;nus Exclusivos do Quiz)</h2>
+        <div class="section-subtitle">Cada perfil do quiz recebe um b&ocirc;nus EXCLUSIVO. Isso aumenta a personaliza&ccedil;&atilde;o e faz o tutor sentir que a oferta foi FEITA PRA ELE.</div>
+      </div>
+
+      <div class="card">
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>Perfil</th><th>B&ocirc;nus Exclusivo</th><th>Valor</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>The Wellness Guardian</strong></td><td>"7-Day Transition Guide" &mdash; guia passo a passo para migrar de ra&ccedil;&atilde;o para AN com seguran&ccedil;a</td><td><strong>$47</strong></td></tr>
+              <tr><td><strong>The Fresh Start Explorer</strong></td><td>"Beginner's Confidence Kit" &mdash; 5 receitas ultra-simples + checklist de primeiros passos</td><td><strong>$37</strong></td></tr>
+              <tr><td><strong>The Precision Optimizer</strong></td><td>"Advanced Nutrition Dashboard" &mdash; m&eacute;tricas detalhadas e relat&oacute;rio export&aacute;vel (acesso Pro por 30 dias)</td><td><strong>$67</strong></td></tr>
+              <tr><td><strong>The Healing Protector</strong></td><td>"Sensitivity Safety Guide" &mdash; guia de ingredientes seguros para pets com alergias + protocolos de elimina&ccedil;&atilde;o</td><td><strong>$57</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJE&Ccedil;&Atilde;O DE LTV -->
+    <div class="section">
+      <div class="section-header">
+        <h2 class="section-title">Proje&ccedil;&atilde;o de LTV</h2>
+        <div class="section-subtitle">Aqui &eacute; onde a coisa fica interessante...</div>
+      </div>
+
+      <div class="card" style="margin-bottom: var(--space-lg);">
+        <h3>Cen&aacute;rio Conservador</h3>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>N&iacute;vel</th><th>Pre&ccedil;o</th><th>Conv. % do Anterior</th><th>Revenue/Lead</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Bait (Quiz)</td><td>$0</td><td>100% entram</td><td>$0</td></tr>
+              <tr><td>Trial (7d)</td><td>$0</td><td>40% convertem quiz &rarr; trial</td><td>$0</td></tr>
+              <tr><td>Essential ($9.99/m&ecirc;s)</td><td>$9.99/m&ecirc;s x 6 meses avg</td><td>25% trial &rarr; pago</td><td><strong>$5.99</strong></td></tr>
+              <tr><td>Pro ($19.99/m&ecirc;s)</td><td>$19.99/m&ecirc;s x 8 meses avg</td><td>15% Essential &rarr; Pro</td><td><strong>$2.40</strong></td></tr>
+              <tr><td>VetConnect ($199)</td><td>$199 one-time</td><td>3% Pro &rarr; VetConnect</td><td><strong>$0.09</strong></td></tr>
+              <tr><td colspan="3"><strong>LTV por Lead</strong></td><td><strong>$8.48</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card" style="margin-bottom: var(--space-lg);">
+        <h3>Cen&aacute;rio Otimista (ap&oacute;s otimiza&ccedil;&atilde;o de onboarding)</h3>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>N&iacute;vel</th><th>Pre&ccedil;o</th><th>Conv. %</th><th>Revenue/Lead</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Bait (Quiz)</td><td>$0</td><td>100%</td><td>$0</td></tr>
+              <tr><td>Trial (7d)</td><td>$0</td><td>50%</td><td>$0</td></tr>
+              <tr><td>Essential ($9.99/m&ecirc;s x 8 avg)</td><td>$79.92</td><td>35%</td><td><strong>$13.99</strong></td></tr>
+              <tr><td>Pro ($19.99/m&ecirc;s x 10 avg)</td><td>$199.90</td><td>20%</td><td><strong>$7.00</strong></td></tr>
+              <tr><td>VetConnect ($199)</td><td>$199</td><td>5%</td><td><strong>$0.35</strong></td></tr>
+              <tr><td>Annual billing bonus</td><td>+30% LTV</td><td>40% aderem</td><td><strong>+$3.00</strong></td></tr>
+              <tr><td colspan="3"><strong>LTV por Lead</strong></td><td><strong>$24.34</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Breakeven CPA</h3>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>Cen&aacute;rio</th><th>LTV/Lead</th><th>CPA M&aacute;ximo</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Conservador</td><td>$8.48</td><td><strong>$8.48</strong></td></tr>
+              <tr><td>Otimista</td><td>$24.34</td><td><strong>$24.34</strong></td></tr>
+              <tr><td><strong>Google Ads pet care</strong></td><td>13.41% conv</td><td>CPA estimado $3-10</td></tr>
+              <tr><td><strong>Meta Ads pet</strong></td><td>1-3% conv</td><td>CPA estimado $5-15</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p><strong>Insight:</strong> Mesmo no cen&aacute;rio conservador, o CPA pode ser competitivo com Google Ads (que tem 13.41% de convers&atilde;o no pet care &mdash; melhor da ind&uacute;stria!).</p>
+        <p>No cen&aacute;rio otimista, temos margem confort&aacute;vel para escalar.</p>
+      </div>
+    </div>
+
+    <!-- FUNNEL STACKING -->
+    <div class="section">
+      <div class="section-header">
+        <h2 class="section-title">Funnel Stacking: Como os Degraus se Conectam</h2>
+      </div>
+
+      <div class="funnel-visual">
+        <div class="funnel-step">
+          <div class="funnel-step-icon">&#127919;</div>
+          <div class="funnel-step-content">
+            <h4>WAGGO ESSENTIAL &mdash; LINCHPIN (Centro)</h4>
+            <p>$9.99/m&ecirc;s &mdash; Receita recorrente &mdash; Centro de gravidade</p>
+          </div>
+          <span class="funnel-price">$9.99/m</span>
+        </div>
+      </div>
+
+      <div class="card-grid cols-3" style="margin-top: var(--space-lg);">
+        <div class="card">
+          <h3>AQUISI&Ccedil;&Atilde;O</h3>
+          <ul>
+            <li>Quiz Funnel (Bait)</li>
+            <li>LP Principal</li>
+            <li>Content/SEO</li>
+            <li>Social (IG/YT)</li>
+            <li>Ads (Meta/Google)</li>
+            <li>Influencers</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>ATIVA&Ccedil;&Atilde;O</h3>
+          <ul>
+            <li>Onboarding 7d</li>
+            <li>Small Win Engine</li>
+            <li>Soap Opera Emails</li>
+            <li>In-app Tutorial</li>
+            <li>Push Notifications</li>
+            <li>Day 1-7 Journey</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>ASCENS&Atilde;O</h3>
+          <ul>
+            <li>Pro Upgrade</li>
+            <li>VetConnect</li>
+            <li>Comunidade</li>
+            <li>Features Extra</li>
+            <li>Annual Billing</li>
+            <li>Referral Program</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top: var(--space-lg);">
+        <h3>Triggers de Transi&ccedil;&atilde;o</h3>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>De &rarr; Para</th><th>Trigger</th><th>Timing</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Quiz &rarr; Trial</td><td>CTA no resultado do quiz</td><td>Imediato</td></tr>
+              <tr><td>Trial &rarr; Essential</td><td>Onboarding + Soap Opera Email 5</td><td>Dia 5-7</td></tr>
+              <tr><td>Essential &rarr; Pro</td><td>In-app upsell + email sequence</td><td>Dia 30-60</td></tr>
+              <tr><td>Pro &rarr; VetConnect</td><td>In-app CTA quando pet tem condi&ccedil;&atilde;o</td><td>Quando relevante</td></tr>
+              <tr><td>Essential &rarr; Annual</td><td>Email oferta anual (34% off)</td><td>M&ecirc;s 3</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- VEREDICTO FINAL -->
+    <div class="section">
+      <div class="section-header">
+        <h2 class="section-title">Veredicto Final</h2>
+      </div>
+
+      <div class="card highlight">
+        <p>A Value Ladder do WAGGO &eacute; <strong>clean, l&oacute;gica e escal&aacute;vel</strong>:</p>
+        <ol>
+          <li><strong>Bait:</strong> Quiz gr&aacute;tis &rarr; captura + qualifica</li>
+          <li><strong>Frontend:</strong> Trial 7d &rarr; prova valor</li>
+          <li><strong>Linchpin:</strong> Essential $9.99/m&ecirc;s &rarr; receita recorrente (CENTRO)</li>
+          <li><strong>Ascens&atilde;o:</strong> Pro $19.99/m&ecirc;s &rarr; power users</li>
+          <li><strong>Backend:</strong> VetConnect $199 &rarr; high-ticket para casos complexos</li>
+        </ol>
+        <p>Cada degrau resolve um problema. Cada degrau prepara o pr&oacute;ximo. Cada degrau <strong>aumenta o comprometimento</strong> do tutor.</p>
+        <p>E o Stack? <strong>118x o valor.</strong> $1,182 em valor por $9.99/m&ecirc;s.</p>
+        <p>Nenhum concorrente faz isso. <strong>Nenhum.</strong></p>
+        <p>Porque nenhum concorrente pensa em <strong>sistema</strong>. Eles pensam em produto.</p>
+        <p>N&oacute;s pensamos em <strong>jornada</strong>.</p>
+        <p>E essa jornada... come&ccedil;a com um quiz de 7 perguntas.</p>
+        <blockquote><em>"You're just one funnel away."</em></blockquote>
+      </div>
+    </div>
+
+    <!-- COMPLIANCE -->
+    <div class="section">
+      <div class="section-header">
+        <h2 class="section-title">Compliance Check</h2>
+      </div>
+
+      <div class="card">
+        <ul>
+          <li>Nenhum claim de cura ou tratamento de doen&ccedil;as</li>
+          <li>Disclaimer "Not a substitute for veterinary advice" em TODA pe&ccedil;a EN</li>
+          <li>Disclaimer "N&atilde;o substitui acompanhamento veterin&aacute;rio" em TODA pe&ccedil;a PT-BR</li>
+          <li>Features de sa&uacute;de descritas como "ajustes" e "planos", n&atilde;o como tratamentos</li>
+          <li>VetConnect envolve nutricionista real (n&atilde;o &eacute; IA substituindo vet)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="section">
+      <p style="text-align: center; color: var(--text-secondary); font-style: italic;">
+        &mdash; Russell Brunson, arquitetando a Value Ladder do WAGGO<br>
+        Data: 2026-02-26
+      </p>
+    </div>
+
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

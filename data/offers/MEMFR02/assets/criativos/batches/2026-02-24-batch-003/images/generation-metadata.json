@@ -1,0 +1,140 @@
+{
+  "generated": [
+    {
+      "conceptId": "concept-1",
+      "placement": "universal",
+      "path": "/Users/balbuena/B2G Capital/data/offers/MEMFR02/assets/criativos/batches/2026-02-24-batch/STE-IMG-MEMFR02-01H00.png",
+      "fileName": "STE-IMG-MEMFR02-01H00.png",
+      "provider": "gpt-image",
+      "bytes": 1661902,
+      "revisedPrompt": "Split visual: left side shows a warm family gathering (grandparent hugging grandchild, genuine joy), right side shows a clean scientific graphic with the number 16.000 in bold. White background with soft gold accents referencing honey.. Mood: Confiance et espoir validé par la science. Style: editorial. Colors: Blanc cassé, or doux, vert sauge — palette santé naturelle et sérieuse. Composition: Nombre 16.000 en grand format à gauche, image émotionnelle à droite, headline en bas centré. Context: infoproduto/saude/memoria. Any text in the image MUST be in French. High quality, professional advertisement, attention-grabbing"
+    },
+    {
+      "conceptId": "concept-2",
+      "placement": "universal",
+      "path": "/Users/balbuena/B2G Capital/data/offers/MEMFR02/assets/criativos/batches/2026-02-24-batch/STE-IMG-MEMFR02-02H00.png",
+      "fileName": "STE-IMG-MEMFR02-02H00.png",
+      "provider": "gpt-image",
+      "bytes": 1825927,
+      "revisedPrompt": "Close-up UGC-style of two hands (elderly, warm skin) preparing a small bowl with honey and a green powder, on a simple wooden kitchen table. Morning light. The gesture is calm and deliberate — 8 seconds of ritual.. Mood: Empowerment, autonomie, simplicité accessible. Style: ugc-style. Colors: Tons bois chaud, or ambré du miel, vert naturel de la plante — palette organique et rassurante. Composition: Mains centrées, pot de miel et poudre verte visibles, texte overlay en haut et en bas de l'image. Context: infoproduto/saude/memoria. Any text in the image MUST be in French. High quality, professional advertisement, attention-grabbing"
+    },
+    {
+      "conceptId": "concept-3",
+      "placement": "universal",
+      "path": "/Users/balbuena/B2G Capital/data/offers/MEMFR02/assets/criativos/batches/2026-02-24-batch/STE-IMG-MEMFR02-03H00.png",
+      "fileName": "STE-IMG-MEMFR02-03H00.png",
+      "provider": "gpt-image",
+      "bytes": 2141970,
+      "revisedPrompt": "A warm testimonial-style photo of an older couple (late 60s) sitting together at a kitchen table, laughing, with a small honey jar visible in the foreground. Authentic, candid, UGC feel — not a stock photo.. Mood: Joie retrouvée, connexion familiale restaurée. Style: ugc-style. Colors: Tons chauds naturels, lumière dorée de fin d'après-midi, palette vie quotidienne authentique. Composition: Couple centré, pot de miel en bas à gauche, headline en haut en blanc gras. Context: infoproduto/saude/memoria. Any text in the image MUST be in French. High quality, professional advertisement, attention-grabbing"
+    },
+    {
+      "conceptId": "concept-4",
+      "placement": "universal",
+      "path": "/Users/balbuena/B2G Capital/data/offers/MEMFR02/assets/criativos/batches/2026-02-24-batch/STE-IMG-MEMFR02-04H00.png",
+      "fileName": "STE-IMG-MEMFR02-04H00.png",
+      "provider": "gpt-image",
+      "bytes": 1360647,
+      "revisedPrompt": "A carousel-style image showing a clean step-by-step visual: slide 1 shows a honey jar and a small green plant (Bacopa) side by side on a white surface with the number '2' overlaid. Minimal, clear, empowering.. Mood: Clarté, autonomie, accessibilité. Style: editorial. Colors: Blanc pur, or miel, vert Bacopa — palette propre et médicale-naturelle. Composition: Deux ingrédients côte à côte, numérotation claire, headline en bas centré en typographie noire. Context: infoproduto/saude/memoria. Any text in the image MUST be in French. High quality, professional advertisement, attention-grabbing"
+    },
+    {
+      "conceptId": "concept-5",
+      "placement": "universal",
+      "path": "/Users/balbuena/B2G Capital/data/offers/MEMFR02/assets/criativos/batches/2026-02-24-batch/STE-IMG-MEMFR02-05H00.png",
+      "fileName": "STE-IMG-MEMFR02-05H00.png",
+      "provider": "gpt-image",
+      "bytes": 746125,
+      "revisedPrompt": "A bold editorial image showing a large number '16.000' in gold typography on a white background, with a small honey jar and a green leaf placed at the bottom as visual anchors. Clean, authoritative, impossible to scroll past.. Mood: Autorité par les chiffres, curiosité scientifique. Style: bold. Colors: Blanc, or typographique, vert naturel accent — impact visuel maximum avec sobriété française. Composition: Chiffre 16.000 dominant le haut, sous-titre en dessous, éléments naturels en bas pour ancrer dans le produit. Context: infoproduto/saude/memoria. Any text in the image MUST be in French. High quality, professional advertisement, attention-grabbing"
+    },
+    {
+      "conceptId": "concept-6",
+      "placement": "universal",
+      "path": "/Users/balbuena/B2G Capital/data/offers/MEMFR02/assets/criativos/batches/2026-02-24-batch/STE-IMG-MEMFR02-06H00.png",
+      "fileName": "STE-IMG-MEMFR02-06H00.png",
+      "provider": "gpt-image",
+      "bytes": 1930192,
+      "revisedPrompt": "UGC-style photo of an older man (70s) smiling confidently while reading a newspaper at breakfast — honey jar visible on the table, morning light, completely ordinary domestic scene that radiates cognitive confidence.. Mood: Confiance retrouvée, autonomie quotidienne, joie simple. Style: ugc-style. Colors: Tons petit-déjeuner chauds, lumière naturelle matinale, palette vie quotidienne authentique. Composition: Homme centré, journal à la main, pot de miel sur la table, headline en haut en blanc. Context: infoproduto/saude/memoria. Any text in the image MUST be in French. High quality, professional advertisement, attention-grabbing"
+    },
+    {
+      "conceptId": "concept-7",
+      "placement": "universal",
+      "path": "/Users/balbuena/B2G Capital/data/offers/MEMFR02/assets/criativos/batches/2026-02-24-batch/STE-IMG-MEMFR02-07H00.png",
+      "fileName": "STE-IMG-MEMFR02-07H00.png",
+      "provider": "gpt-image",
+      "bytes": 1923813,
+      "revisedPrompt": "A news-style editorial image showing a mock newspaper front page with the headline '97% de succès : l'étude sur la mémoire qui dérange' and a photo of honey and green herbs. Professional, credible, France 2 aesthetic.. Mood: Crédibilité journalistique, découverte importante, urgence informative. Style: editorial. Colors: Noir typographique, blanc journal, accent or miel — palette presse française sérieuse. Composition: Layout journal avec titre dominant, photo de l'ingrédient en dessous, logo fictif de publication en haut. Context: infoproduto/saude/memoria. Any text in the image MUST be in French. High quality, professional advertisement, attention-grabbing"
+    },
+    {
+      "conceptId": "concept-8",
+      "placement": "universal",
+      "path": "/Users/balbuena/B2G Capital/data/offers/MEMFR02/assets/criativos/batches/2026-02-24-batch/STE-IMG-MEMFR02-08H00.png",
+      "fileName": "STE-IMG-MEMFR02-08H00.png",
+      "provider": "gpt-image",
+      "bytes": 1993191,
+      "revisedPrompt": "A before/after conceptual image: left side shows a cluttered, anxious mental state (keys on floor, sticky notes everywhere, confused expression); right side shows clarity and calm (same person, serene, organized, honey jar on table). Emotional and relatable.. Mood: Transformation, soulagement, espoir concret. Style: ugc-style. Colors: Gauche : gris bleuté désaturé / Droite : tons chauds dorés — contraste émotionnel fort. Composition: Split gauche/droite avec ligne de séparation centrale, texte overlay en bas centré sur les deux parties. Context: infoproduto/saude/memoria. Any text in the image MUST be in French. High quality, professional advertisement, attention-grabbing"
+    },
+    {
+      "conceptId": "concept-9",
+      "placement": "universal",
+      "path": "/Users/balbuena/B2G Capital/data/offers/MEMFR02/assets/criativos/batches/2026-02-24-batch/STE-IMG-MEMFR02-09H00.png",
+      "fileName": "STE-IMG-MEMFR02-09H00.png",
+      "provider": "gpt-image",
+      "bytes": 1629468,
+      "revisedPrompt": "A testimonial collage showing 4-6 small portrait photos of diverse older adults (60-80s) with their names, ages and cities below each photo, arranged in a grid. At the top, the number '16.000' in large gold text. Authentic, community feel.. Mood: Appartenance communautaire, validation sociale massive, sécurité par le nombre. Style: editorial. Colors: Fond blanc chaud, cadres photo en or doux, typographie noire sobre — palette communauté et confiance. Composition: Grille de portraits en bas, chiffre 16.000 dominant en haut, headline en dessous du chiffre. Context: infoproduto/saude/memoria. Any text in the image MUST be in French. High quality, professional advertisement, attention-grabbing"
+    },
+    {
+      "conceptId": "concept-10",
+      "placement": "universal",
+      "path": "/Users/balbuena/B2G Capital/data/offers/MEMFR02/assets/criativos/batches/2026-02-24-batch/STE-IMG-MEMFR02-10H00.png",
+      "fileName": "STE-IMG-MEMFR02-10H00.png",
+      "provider": "gpt-image",
+      "bytes": 2068570,
+      "revisedPrompt": "Extreme close-up of a golden honey spoon being dipped into a jar, with a few green Bacopa leaves artfully placed beside it. Sensory, appetizing, mysterious. The simplicity of the two ingredients is the visual statement.. Mood: Mystère accessible, sensorialité, simplicité puissante. Style: editorial. Colors: Or profond, vert naturel intense, fond bois sombre — palette sensorielle et premium naturel. Composition: Cuillère de miel au centre en gros plan, feuilles de Bacopa à droite, fond flou, texte overlay minimal en bas. Context: infoproduto/saude/memoria. Any text in the image MUST be in French. High quality, professional advertisement, attention-grabbing"
+    },
+    {
+      "conceptId": "concept-11",
+      "placement": "universal",
+      "path": "/Users/balbuena/B2G Capital/data/offers/MEMFR02/assets/criativos/batches/2026-02-24-batch/STE-IMG-MEMFR02-11H00.png",
+      "fileName": "STE-IMG-MEMFR02-11H00.png",
+      "provider": "gpt-image",
+      "bytes": 1272088,
+      "revisedPrompt": "A clean infographic-style image showing a horizontal timeline: '3 semaines' with an upward arrow and the text '97% d'amélioration cognitive'. Below, a simple illustration of two ingredients (honey jar + green leaf). Scientific but accessible.. Mood: Clarté scientifique, rapidité des résultats, confiance par les données. Style: editorial. Colors: Bleu médical doux, or miel, vert naturel — palette santé scientifique accessible. Composition: Timeline en haut, pourcentage dominant au centre, ingrédients en bas, CTA en bas à droite. Context: infoproduto/saude/memoria. Any text in the image MUST be in French. High quality, professional advertisement, attention-grabbing"
+    },
+    {
+      "conceptId": "concept-12",
+      "placement": "universal",
+      "path": "/Users/balbuena/B2G Capital/data/offers/MEMFR02/assets/criativos/batches/2026-02-24-batch/STE-IMG-MEMFR02-12H00.png",
+      "fileName": "STE-IMG-MEMFR02-12H00.png",
+      "provider": "gpt-image",
+      "bytes": 1966787,
+      "revisedPrompt": "A warm UGC-style photo of a grandmother teaching her granddaughter how to prepare the honey ritual — intergenerational transmission, kitchen setting, both smiling. The honey jar is central. Emotional and deeply relatable for the 55+ audience.. Mood: Transmission familiale, héritage, connexion intergénérationnelle. Style: ugc-style. Colors: Tons cuisine chauds, lumière naturelle dorée, palette famille et authenticité. Composition: Grand-mère et petite-fille centrées, pot de miel en avant-plan, headline en haut en blanc gras. Context: infoproduto/saude/memoria. Any text in the image MUST be in French. High quality, professional advertisement, attention-grabbing"
+    },
+    {
+      "conceptId": "concept-13",
+      "placement": "universal",
+      "path": "/Users/balbuena/B2G Capital/data/offers/MEMFR02/assets/criativos/batches/2026-02-24-batch/STE-IMG-MEMFR02-13H00.png",
+      "fileName": "STE-IMG-MEMFR02-13H00.png",
+      "provider": "gpt-image",
+      "bytes": 514132,
+      "revisedPrompt": "A bold comparison graphic: left column titled 'Médicaments' with red X marks and failure statistics, right column titled 'Rituel ancestral' with green checkmarks and success statistics. Clean, factual, impossible to ignore.. Mood: Indignation constructive, révélation factuelle, empowerment par la comparaison. Style: bold. Colors: Rouge pour l'échec médicaments, vert pour le succès rituel, fond blanc — contraste visuel maximal. Composition: Deux colonnes égales avec ligne de séparation centrale, titres en haut de chaque colonne, statistiques listées en dessous, headline en bas centré. Context: infoproduto/saude/memoria. Any text in the image MUST be in French. High quality, professional advertisement, attention-grabbing"
+    },
+    {
+      "conceptId": "concept-14",
+      "placement": "universal",
+      "path": "/Users/balbuena/B2G Capital/data/offers/MEMFR02/assets/criativos/batches/2026-02-24-batch/STE-IMG-MEMFR02-14H00.png",
+      "fileName": "STE-IMG-MEMFR02-14H00.png",
+      "provider": "gpt-image",
+      "bytes": 1760775,
+      "revisedPrompt": "A simple, powerful UGC-style image of a hand-written note on a kitchen table that reads 'Miel + Bacopa. 8 secondes. Chaque matin.' with a honey jar and a small plant beside it. Intimate, personal, like finding a family secret.. Mood: Secret partagé, intimité, découverte personnelle. Style: ugc-style. Colors: Papier crème, encre bleue, or miel, vert naturel — palette secret de famille et authenticité. Composition: Note manuscrite centrée, ingrédients visibles en arrière-plan, éclairage naturel doux, headline en overlay discret. Context: infoproduto/saude/memoria. Any text in the image MUST be in French. High quality, professional advertisement, attention-grabbing"
+    },
+    {
+      "conceptId": "concept-15",
+      "placement": "universal",
+      "path": "/Users/balbuena/B2G Capital/data/offers/MEMFR02/assets/criativos/batches/2026-02-24-batch/STE-IMG-MEMFR02-15H00.png",
+      "fileName": "STE-IMG-MEMFR02-15H00.png",
+      "provider": "gpt-image",
+      "bytes": 1966600,
+      "revisedPrompt": "A powerful single-focus image: a close-up of an elderly person's eyes — warm, clear, present, deeply alive. Overlaid text anchors the emotion to the statistic. The eyes communicate cognitive presence that words cannot.. Mood: Présence, dignité, espoir profond, humanité. Style: editorial. Colors: Tons chair chauds, iris expressifs, fond légèrement flou — palette humanité et présence. Composition: Yeux centrés en très gros plan, headline en bas en typographie blanche élégante, sous-titre discret. Context: infoproduto/saude/memoria. Any text in the image MUST be in French. High quality, professional advertisement, attention-grabbing"
+    }
+  ],
+  "generatedAt": "2026-02-24T20:14:11.327Z"
+}

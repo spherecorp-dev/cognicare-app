@@ -1,0 +1,49 @@
+job_id: drip-MEMFR02-2026-02-24T02-44-23
+status: completed
+offer_id: MEMFR02
+campaign_id: '120242469291730310'
+campaign_name: CBO - TDC - MEMFR02 - AI - VIDEO TEST - 24.02
+campaign_config_id: cbo-tdc-ww-fr
+schedule:
+  creatives_per_batch: 1
+  interval_minutes: 1
+  total_creatives: 2
+  total_batches: 2
+progress:
+  batches_completed: 2
+  creatives_uploaded: 2
+  creatives_failed: 0
+  ad_sets_created:
+    - '120242469292730310'
+    - '120242469326250310'
+  next_ad_set_index: 3
+  next_batch_at: null
+notion_task_id: 31103654-c9e8-8173-9379-f5370a979806
+creative_ids:
+  - ZA-LS-MEMFR03-37H00
+  - ZA-LS-MEMFR03-38H00
+bid_amount: null
+batch_id: CRIATIVOS EM VIDEO
+account_id: null
+ad_copy: null
+batches:
+  - num: 1
+    ad_set_id: '120242469292730310'
+    ad_set_name: CBO - TDC - MEMFR02 - AI - VIDEO TEST - 24.02 - AdSet 01
+    creatives:
+      - ZA-LS-MEMFR03-37H00
+    created: 1
+    failed: 0
+    completed_at: '2026-02-24T02:45:07.366Z'
+  - num: 2
+    ad_set_id: '120242469326250310'
+    ad_set_name: CBO - TDC - MEMFR02 - AI - VIDEO TEST - 24.02 - AdSet 02
+    creatives:
+      - ZA-LS-MEMFR03-38H00
+    created: 1
+    failed: 0
+    completed_at: '2026-02-24T02:46:46.869Z'
+started_at: '2026-02-24T02:44:25.149Z'
+updated_at: '2026-02-24T02:46:46.869Z'
+completed_at: '2026-02-24T02:46:46.869Z'
+error: null

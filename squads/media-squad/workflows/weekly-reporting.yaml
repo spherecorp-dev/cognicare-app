@@ -1,0 +1,151 @@
+# Weekly Reporting Workflow
+#
+# Ciclo semanal: coleta consolidada → analise de tendencias → report
+# Executado pelo media-analyst com output para media-head
+#
+# Created: 2026-02-21
+# Squad: media-squad
+
+name: weekly-reporting
+version: 1.0.0
+description: "Geracao de report semanal consolidado com metricas, tendencias e recomendacoes"
+squad: media-squad
+
+metadata:
+  created: "2026-02-21"
+  author: squad-creator
+  tags:
+    - workflow
+    - media-squad
+    - reporting
+    - weekly
+    - analytics
+
+triggers:
+  - type: manual
+    command: "*weekly-report"
+  - type: schedule
+    cron: "0 9 * * 1"
+    description: "Executa toda segunda-feira as 9h"
+
+inputs:
+  - name: week_start
+    type: date
+    required: false
+    description: "Data inicio da semana (default: semana anterior)"
+  - name: week_end
+    type: date
+    required: false
+    description: "Data fim da semana (default: domingo anterior)"
+  - name: include_recommendations
+    type: boolean
+    required: false
+    default: true
+    description: "Incluir recomendacoes para proxima semana"
+
+steps:
+  - id: collect-metrics
+    name: "Step 1: Coletar Metricas Semanais"
+    description: "Coleta metricas consolidadas da semana"
+    action: task
+    agent: media-analyst
+    task: collect-platform-metrics
+    inputs:
+      period: "weekly"
+      start_date: "{{inputs.week_start}}"
+      end_date: "{{inputs.week_end}}"
+    on_error: retry
+    retry:
+      max_attempts: 3
+      delay: 10000
+
+  - id: analyze-kpis
+    name: "Step 2: Analisar KPIs Semanais"
+    description: "Analisa KPIs agregados da semana"
+    action: task
+    agent: media-analyst
+    task: analyze-daily-kpis
+    depends_on:
+      - collect-metrics
+    inputs:
+      metrics: "{{steps.collect-metrics.output}}"
+      aggregation: "weekly"
+    on_error: abort
+
+  - id: classify-performance
+    name: "Step 3: Classificar Performance"
+    description: "Classifica ads por performance semanal"
+    action: task
+    agent: media-analyst
+    task: classify-ad-performance
+    depends_on:
+      - analyze-kpis
+    on_error: abort
+
+  - id: detect-trends
+    name: "Step 4: Detectar Tendencias"
+    description: "Identifica tendencias e padroes week-over-week"
+    action: task
+    agent: media-analyst
+    task: detect-performance-trends
+    depends_on:
+      - classify-performance
+    on_error: abort
+
+  - id: generate-report
+    name: "Step 5: Gerar Report"
+    description: "Gera report semanal consolidado"
+    action: task
+    agent: media-analyst
+    task: generate-weekly-report
+    depends_on:
+      - detect-trends
+    inputs:
+      kpis: "{{steps.analyze-kpis.output}}"
+      classification: "{{steps.classify-performance.output}}"
+      trends: "{{steps.detect-trends.output}}"
+      include_recommendations: "{{inputs.include_recommendations}}"
+    on_error: abort
+
+  - id: recommend-next-week
+    name: "Step 6: Recomendar Acoes"
+    description: "Recomendacoes para a proxima semana"
+    action: task
+    agent: media-analyst
+    task: recommend-optimization-actions
+    depends_on:
+      - detect-trends
+    condition: "{{inputs.include_recommendations}}"
+    inputs:
+      trends: "{{steps.detect-trends.output}}"
+      scope: "weekly"
+    on_error: abort
+
+outputs:
+  - name: report
+    from: "{{steps.generate-report.output}}"
+    description: "Report semanal completo"
+  - name: trends
+    from: "{{steps.detect-trends.output}}"
+    description: "Tendencias identificadas"
+  - name: recommendations
+    from: "{{steps.recommend-next-week.output}}"
+    description: "Recomendacoes para proxima semana"
+
+completion:
+  on_success:
+    message: "Report semanal gerado com sucesso."
+    notify: true
+  on_failure:
+    message: "Falha na geracao do report semanal."
+    notify: true
+    rollback: false
+
+validation:
+  pre_run:
+    - "Verificar que existem dados da semana"
+    - "Verificar acesso a Meta Ads API"
+  post_run:
+    - "Report contem todas as campanhas ativas"
+    - "KPIs calculados corretamente"
+    - "Tendencias comparadas com semana anterior"

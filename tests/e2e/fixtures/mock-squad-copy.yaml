@@ -1,0 +1,37 @@
+# Mock Squad-Copy Pipeline for E2E Testing
+# Story 1.8: E2E Testing — Squad-copy Completo
+#
+# Simplified pipeline: 2 phases, 4 steps
+# Used by all E2E test suites
+
+squad:
+  id: e2e-test-squad
+  version: "1.0.0-test"
+
+pipeline:
+  phases:
+    - name: intelligence
+      steps:
+        - id: fetch-data
+          type: task_pura
+          task: mock-fetch-data
+          input:
+            offerId: "offer-e2e-001"
+        - id: analyze-data
+          type: task_pura
+          task: mock-analyze-data
+          input:
+            source: "{{fetch-data.output.data}}"
+
+    - name: production
+      steps:
+        - id: generate-output
+          type: task_pura
+          task: mock-generate-output
+          input:
+            analysis: "{{analyze-data.output.analysis}}"
+        - id: finalize
+          type: task_pura
+          task: mock-finalize
+          input:
+            content: "{{generate-output.output.content}}"

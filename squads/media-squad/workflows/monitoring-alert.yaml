@@ -1,0 +1,132 @@
+# Monitoring & Alert Workflow
+#
+# Monitoramento continuo de campanhas com alertas e auto-recovery
+# Executado pelo media-analyst em modo 24/7
+#
+# Created: 2026-02-21
+# Squad: media-squad
+
+name: monitoring-alert
+version: 1.0.0
+description: "Monitoramento 24/7 de campanhas com deteccao de anomalias, alertas criticos e auto-recovery"
+squad: media-squad
+
+metadata:
+  created: "2026-02-21"
+  author: squad-creator
+  tags:
+    - workflow
+    - media-squad
+    - monitoring
+    - alerts
+    - auto-recovery
+
+triggers:
+  - type: manual
+    command: "*monitor-campaigns"
+  - type: schedule
+    cron: "*/30 * * * *"
+    description: "Executa a cada 30 minutos"
+
+inputs:
+  - name: campaign_ids
+    type: array
+    required: false
+    description: "IDs de campanhas a monitorar (vazio = todas ativas)"
+  - name: severity_threshold
+    type: string
+    required: false
+    default: "warning"
+    description: "Nivel minimo de severidade para alertar (info|warning|critical)"
+  - name: auto_recover
+    type: boolean
+    required: false
+    default: true
+    description: "Tentar auto-recovery automaticamente"
+
+steps:
+  - id: monitor-anomalies
+    name: "Step 1: Monitorar Anomalias"
+    description: "Detecta anomalias em metricas (spend spike, CTR drop, etc)"
+    action: task
+    agent: media-analyst
+    task: monitor-anomalies
+    inputs:
+      campaign_ids: "{{inputs.campaign_ids}}"
+    on_error: retry
+    retry:
+      max_attempts: 3
+      delay: 10000
+
+  - id: detect-rejected
+    name: "Step 2: Detectar Rejeicoes"
+    description: "Verifica criativos rejeitados pela Meta"
+    action: task
+    agent: media-analyst
+    task: detect-rejected-creatives
+    depends_on:
+      - monitor-anomalies
+    on_error: retry
+    retry:
+      max_attempts: 2
+      delay: 5000
+
+  - id: send-alerts
+    name: "Step 3: Enviar Alertas"
+    description: "Envia alertas criticos se anomalias detectadas"
+    action: task
+    agent: media-analyst
+    task: send-critical-alerts
+    depends_on:
+      - monitor-anomalies
+      - detect-rejected
+    condition: "{{steps.monitor-anomalies.output.has_anomalies || steps.detect-rejected.output.has_rejections}}"
+    inputs:
+      anomalies: "{{steps.monitor-anomalies.output.anomalies}}"
+      rejections: "{{steps.detect-rejected.output.rejections}}"
+      severity_threshold: "{{inputs.severity_threshold}}"
+    on_error: abort
+
+  - id: auto-recover
+    name: "Step 4: Auto-Recovery"
+    description: "Tenta recuperacao automatica de campanhas afetadas"
+    action: task
+    agent: media-analyst
+    task: auto-recover-campaigns
+    depends_on:
+      - send-alerts
+    condition: "{{inputs.auto_recover && steps.send-alerts.output.recoverable_issues > 0}}"
+    inputs:
+      issues: "{{steps.send-alerts.output.issues}}"
+    on_error: abort
+
+outputs:
+  - name: anomalies_found
+    from: "{{steps.monitor-anomalies.output.anomaly_count}}"
+    description: "Numero de anomalias detectadas"
+  - name: rejections_found
+    from: "{{steps.detect-rejected.output.rejection_count}}"
+    description: "Numero de criativos rejeitados"
+  - name: alerts_sent
+    from: "{{steps.send-alerts.output.alert_count}}"
+    description: "Numero de alertas enviados"
+  - name: recovered
+    from: "{{steps.auto-recover.output.recovered_count}}"
+    description: "Numero de campanhas recuperadas"
+
+completion:
+  on_success:
+    message: "Monitoramento concluido. Anomalias: {{outputs.anomalies_found}}, Alertas: {{outputs.alerts_sent}}, Recuperados: {{outputs.recovered}}"
+    notify: false
+  on_failure:
+    message: "CRITICO: Monitoramento falhou. Verificar campanhas manualmente!"
+    notify: true
+    rollback: false
+
+validation:
+  pre_run:
+    - "Verificar acesso a Meta Ads API"
+    - "Verificar servico de alertas configurado"
+  post_run:
+    - "Todas as anomalias foram classificadas"
+    - "Alertas criticos foram enviados"

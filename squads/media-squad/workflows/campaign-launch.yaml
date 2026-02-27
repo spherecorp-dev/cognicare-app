@@ -1,0 +1,257 @@
+# Campaign Launch Workflow
+#
+# Fluxo completo de lancamento de campanha: estrategia → tracking → publicacao
+# Orquestra os 3 agents principais em sequencia com gates de aprovacao
+#
+# Created: 2026-02-21
+# Squad: media-squad
+
+name: campaign-launch
+version: 1.0.0
+description: "Fluxo end-to-end de lancamento de campanha Meta Ads — da analise estrategica ate a publicacao"
+squad: media-squad
+
+metadata:
+  created: "2026-02-21"
+  author: squad-creator
+  tags:
+    - workflow
+    - media-squad
+    - campaign
+    - launch
+
+triggers:
+  - type: manual
+    command: "*launch-campaign"
+
+inputs:
+  - name: offer_id
+    type: string
+    required: true
+    description: "ID da oferta a ser anunciada"
+  - name: budget
+    type: number
+    required: true
+    description: "Budget total disponivel para a campanha"
+  - name: creative_profile
+    type: string
+    required: false
+    description: "Perfil de criativos a utilizar (referencia ao squad-copy)"
+
+# Phase 1: Strategy (media-head)
+steps:
+  - id: analyze-context
+    name: "Phase 1.1: Analisar Contexto"
+    description: "Analisa oferta, historico e creative_profile"
+    action: task
+    agent: media-head
+    task: analyze-campaign-context
+    inputs:
+      offer_id: "{{inputs.offer_id}}"
+      budget: "{{inputs.budget}}"
+    on_error: abort
+
+  - id: decide-structure
+    name: "Phase 1.2: Decidir Estrutura"
+    description: "Define CBO vs ABO, nova vs existente"
+    action: task
+    agent: media-head
+    task: decide-campaign-structure
+    depends_on:
+      - analyze-context
+    inputs:
+      context: "{{steps.analyze-context.output}}"
+    on_error: abort
+
+  - id: define-budget
+    name: "Phase 1.3: Definir Budget"
+    description: "Aloca budget e define limites"
+    action: task
+    agent: media-head
+    task: define-budget-allocation
+    depends_on:
+      - decide-structure
+    inputs:
+      total_budget: "{{inputs.budget}}"
+      structure: "{{steps.decide-structure.output}}"
+    on_error: abort
+
+  - id: define-bidding
+    name: "Phase 1.4: Definir Bidding"
+    description: "Define estrategia de lances"
+    action: task
+    agent: media-head
+    task: define-bidding-strategy
+    depends_on:
+      - define-budget
+    on_error: abort
+
+  - id: define-funnel
+    name: "Phase 1.5: Definir Funnel"
+    description: "Define LP, funnel e angulo da oferta"
+    action: task
+    agent: media-head
+    task: define-funnel-strategy
+    depends_on:
+      - decide-structure
+    on_error: abort
+
+  - id: create-contingency
+    name: "Phase 1.6: Plano de Contingencia"
+    description: "Cria Plan B caso campanha underperform"
+    action: task
+    agent: media-head
+    task: create-contingency-plan
+    depends_on:
+      - define-budget
+      - define-bidding
+      - define-funnel
+    on_error: abort
+
+  - id: approve-launch
+    name: "Phase 1.7: Aprovacao GO/NO-GO"
+    description: "Decisao final do media-head"
+    action: task
+    agent: media-head
+    task: approve-campaign-launch
+    depends_on:
+      - create-contingency
+    on_error: abort
+
+  # Phase 2: Infrastructure (media-engineer)
+  - id: setup-redtrack
+    name: "Phase 2.1: Setup RedTrack"
+    description: "Integra oferta com RedTrack"
+    action: task
+    agent: media-engineer
+    task: setup-redtrack-integration
+    depends_on:
+      - approve-launch
+    condition: "{{steps.approve-launch.output.verdict == 'GO'}}"
+    on_error: abort
+
+  - id: setup-pixel
+    name: "Phase 2.2: Setup Pixel"
+    description: "Instala e verifica pixel Meta"
+    action: task
+    agent: media-engineer
+    task: setup-tracking-pixel
+    depends_on:
+      - setup-redtrack
+    on_error: abort
+
+  - id: configure-postback
+    name: "Phase 2.3: Configurar Postback"
+    description: "Configura postback RedTrack → Meta"
+    action: task
+    agent: media-engineer
+    task: configure-redtrack-postback
+    depends_on:
+      - setup-pixel
+    on_error: abort
+
+  - id: setup-domain
+    name: "Phase 2.4: Setup Dominio"
+    description: "Configura dominio para ads"
+    action: task
+    agent: media-engineer
+    task: setup-ad-domain
+    depends_on:
+      - setup-redtrack
+    on_error: retry
+    retry:
+      max_attempts: 2
+      delay: 5000
+
+  - id: test-tracking
+    name: "Phase 2.5: Testar Tracking"
+    description: "Testa fluxo completo RedTrack"
+    action: task
+    agent: media-engineer
+    task: test-redtrack-flow
+    depends_on:
+      - configure-postback
+      - setup-domain
+    on_error: abort
+
+  # Phase 3: Execution (media-buyer)
+  - id: assemble-ad
+    name: "Phase 3.1: Montar Ad"
+    description: "Monta ad completo (copy, creative, headline)"
+    action: task
+    agent: media-buyer
+    task: assemble-ad-content
+    depends_on:
+      - test-tracking
+    inputs:
+      creative_profile: "{{inputs.creative_profile}}"
+      structure: "{{steps.decide-structure.output}}"
+    on_error: abort
+
+  - id: upload-creative
+    name: "Phase 3.2: Upload Criativos"
+    description: "Faz upload dos assets para Meta"
+    action: task
+    agent: media-buyer
+    task: upload-creative-assets
+    depends_on:
+      - assemble-ad
+    on_error: retry
+    retry:
+      max_attempts: 3
+      delay: 2000
+
+  - id: publish-campaign
+    name: "Phase 3.3: Publicar Campanha"
+    description: "Publica campanha no Meta Ads"
+    action: task
+    agent: media-buyer
+    task: publish-meta-campaign
+    depends_on:
+      - upload-creative
+    on_error: abort
+
+  # Phase 4: Post-Launch (media-head + media-analyst)
+  - id: log-decision
+    name: "Phase 4.1: Registrar Decisao"
+    description: "Registra decisao no decision log para aprendizado"
+    action: task
+    agent: media-head
+    task: log-strategic-decision
+    depends_on:
+      - publish-campaign
+    on_error: retry
+    retry:
+      max_attempts: 2
+      delay: 1000
+
+outputs:
+  - name: campaign_id
+    from: "{{steps.publish-campaign.output.campaign_id}}"
+    description: "ID da campanha publicada no Meta"
+  - name: tracking_url
+    from: "{{steps.test-tracking.output.tracking_url}}"
+    description: "URL de tracking RedTrack"
+  - name: decision_log_entry
+    from: "{{steps.log-decision.output}}"
+    description: "Entrada no decision log"
+
+completion:
+  on_success:
+    message: "Campanha lancada com sucesso! Campaign ID: {{outputs.campaign_id}}"
+    notify: true
+    next_workflow: daily-optimization
+  on_failure:
+    message: "Falha no lancamento da campanha. Verificar step que falhou."
+    notify: true
+    rollback: true
+
+validation:
+  pre_run:
+    - "Verificar que offer_id existe no sistema"
+    - "Verificar que budget > 0"
+    - "Verificar saude do Business Manager"
+  post_run:
+    - "Verificar campanha publicada no Meta"
+    - "Verificar tracking funcionando"
+    - "Verificar decision log atualizado"

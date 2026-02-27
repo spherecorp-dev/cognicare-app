@@ -1,0 +1,44 @@
+id: GP01
+name: GlucoPure
+slug: glucopure
+vertical: nutraceutico/saude
+status: em_teste
+geos: [en]
+launched_at: ""
+
+produto:
+  descricao: "Suplemento natural para controle de glicose no sangue (capsulas)"
+  formato: capsulas
+  preco:
+    front_end: "$49 (1 frasco) / $39 cada (3 frascos) / $33 cada (6 frascos)"
+    upsells: ""
+    aov_medio: ""
+
+promessa: "Manter niveis saudaveis de acucar no sangue sem dietas extremas"
+mecanismo: "Formula com berberina + cromo + canela do Ceilao — ativa AMPK (enzima que regula metabolismo de glicose). Baseado em estudo de 2024 mostrando 18% reducao em glicose em jejum"
+diferencial: "Mecanismo AMPK + combinacao especifica de 3 ingredientes"
+
+publico_alvo:
+  demografico: "Adultos 45-65, ambos generos"
+  psicografico: "Pre-diabeticos ou com glicose alta, cansados de dietas restritivas, preocupados com saude a longo prazo"
+  awareness_level: solution_aware
+
+angulos:
+  validados: []
+  saturados: []
+  em_teste: []
+
+competidores:
+  - nome: GlucoTrust
+    diferencial: "Mecanismo AMPK vs formula generica"
+  - nome: Sugar Defender
+    diferencial: "Combinacao especifica de 3 ingredientes"
+  - nome: GlucoFort
+    diferencial: "Estudo 2024 como prova social"
+
+funnel:
+  tipo: ""
+  url_principal: ""
+  observacoes: ""
+
+notas: "Oferta ficticia para teste do pipeline. Mercado competitivo, muitas ofertas similares."

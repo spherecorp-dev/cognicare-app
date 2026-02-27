@@ -1,0 +1,47 @@
+job_id: drip-MEMFR02-2026-02-24T01-37-15
+status: completed
+offer_id: MEMFR02
+campaign_id: '120242466241660310'
+campaign_name: CBO - TDC - MEMFR02 - AI - 23.02
+campaign_config_id: cbo-tdc-ww-fr
+schedule:
+  creatives_per_batch: 1
+  interval_minutes: 1
+  total_creatives: 2
+  total_batches: 2
+progress:
+  batches_completed: 2
+  creatives_uploaded: 2
+  creatives_failed: 0
+  ad_sets_created:
+    - '120242467331840310'
+    - '120242467345920310'
+  next_ad_set_index: 6
+  next_batch_at: null
+notion_task_id: 31103654-c9e8-810c-a1de-edb31ea04540
+creative_ids:
+  - STE-IMG-MEMFR02-01H00
+  - STE-IMG-MEMFR02-03H00
+bid_amount: null
+batch_id: null
+batches:
+  - num: 1
+    ad_set_id: '120242467331840310'
+    ad_set_name: CBO - TDC - MEMFR02 - AI - 23.02 - AdSet 04
+    creatives:
+      - STE-IMG-MEMFR02-01H00
+    created: 1
+    failed: 0
+    completed_at: '2026-02-24T01:37:21.852Z'
+  - num: 2
+    ad_set_id: '120242467345920310'
+    ad_set_name: CBO - TDC - MEMFR02 - AI - 23.02 - AdSet 05
+    creatives:
+      - STE-IMG-MEMFR02-03H00
+    created: 1
+    failed: 0
+    completed_at: '2026-02-24T01:38:29.117Z'
+started_at: '2026-02-24T01:37:16.568Z'
+updated_at: '2026-02-24T01:38:29.117Z'
+completed_at: '2026-02-24T01:38:29.117Z'
+error: null

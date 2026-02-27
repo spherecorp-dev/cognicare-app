@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WAGGO — Fase 0.3: Funnel Hack</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="../Design sem nome (8).png" type="image/png">
+  <style>
+    .detail-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(8, 5, 16, 0.9);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .detail-header img { width: 32px; height: 32px; border-radius: 8px; }
+    .detail-header h1 { font-size: 16px; font-weight: 800; background: var(--gradient-brand); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin: 0; }
+    .back-link { color: var(--text-secondary); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+    .back-link:hover { color: var(--text-primary); }
+    .detail-body { max-width: 900px; margin: 0 auto; padding: 48px 24px; }
+    .detail-body .section { margin-left: 0; }
+    .steal-item { padding: var(--space-md); background: rgba(52, 211, 153, 0.06); border-left: 3px solid var(--green); border-radius: 0 var(--radius-md) var(--radius-md) 0; margin-bottom: var(--space-md); }
+    .steal-item h4 { color: var(--green); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+    .wrong-item { padding: var(--space-md); background: rgba(248, 113, 113, 0.06); border-left: 3px solid var(--red); border-radius: 0 var(--radius-md) var(--radius-md) 0; margin-bottom: var(--space-md); }
+    .wrong-item h4 { color: var(--red); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+    .competitor-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-lg); flex-wrap: wrap; gap: var(--space-sm); }
+    .competitor-header .competitor-name { font-size: 22px; font-weight: 800; }
+    .competitor-header .competitor-sub { font-size: 14px; color: var(--text-secondary); font-style: italic; }
+  </style>
+</head>
+<body>
+  <div class="scroll-progress"><div class="scroll-progress-bar"></div></div>
+  <div class="detail-header">
+    <a href="index.html" class="back-link">&larr; Executive Deck</a>
+    <img src="../Design sem nome (8).png" alt="WAGGO">
+    <h1>WAGGO</h1>
+  </div>
+  <div class="detail-body">
+
+    <!-- HEADER -->
+    <div class="section">
+      <div class="section-header">
+        <h1 class="section-title">Fase 0.3: Funnel Hack Report</h1>
+        <div class="section-subtitle">
+          <strong>Autor:</strong> Russell Brunson (Funnel Architect) |
+          <strong>Task:</strong> <code>*funnel-hack</code><br>
+          <strong>Offer:</strong> WAGGO &mdash; Nutri&ccedil;&atilde;o Inteligente para Pets |
+          <strong>Data:</strong> 2026-02-26 |
+          <strong>Status:</strong> Completo
+        </div>
+      </div>
+    </div>
+
+    <!-- INTRO -->
+    <div class="section">
+      <div class="card">
+        <p>Deixa eu te contar uma coisa...</p>
+        <p>Antes de construir UM UNICO funil pro WAGGO, eu fiz o que SEMPRE fa&ccedil;o.</p>
+        <p>Eu passei pelos funis dos MAIORES players do mercado pet nutrition. <strong>Comprei. Cliquei. Li cada email.</strong> Anotei TUDO.</p>
+        <p>Porque funnel hacking n&atilde;o &eacute; copiar. &Eacute; <strong>ENTENDER</strong> o que funciona... e por que funciona.</p>
+        <p>E o que eu encontrei? Vou ser honesto contigo...</p>
+        <p><strong>O mercado pet nutrition est&aacute; sentado em cima de uma mina de ouro... e quase ningu&eacute;m sabe explorar direito.</strong></p>
+        <p>Vamos l&aacute;.</p>
+      </div>
+    </div>
+
+    <!-- OS 5 FUNIS -->
+    <div class="section">
+      <div class="section-header">
+        <h2 class="section-title">Os 5 Funis que Eu Hackeei</h2>
+        <div class="section-subtitle">Tr&ecirc;s s&atilde;o gigantes do fresh pet food DTC. Dois s&atilde;o apps de nutri&ccedil;&atilde;o (nossos concorrentes diretos). Cada um tem algo brilhante... e cada um tem <strong>buracos enormes</strong>.</div>
+      </div>
+    </div>
+
+    <!-- CONCORRENTE 1: THE FARMER'S DOG -->
+    <div class="section">
+      <div class="card">
+        <div class="competitor-header">
+          <div>
+            <div class="competitor-name">Concorrente 1: The Farmer's Dog</div>
+            <div class="competitor-sub">O Gorila de $1.2B/ano</div>
+          </div>
+          <span class="tag green">$1.2B Revenue</span>
+        </div>
+
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>P&aacute;gina</th><th>Detalhes</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Quiz Obrigat&oacute;rio (Hook)</strong></td>
+                <td>Headline: "Every dog deserves real food" &mdash; Sem subheadline, direto pro quiz. CTA: "See My Dog's Plan". Zero distra&ccedil;&atilde;o.</td>
+              </tr>
+              <tr>
+                <td><strong>Quiz (10-12 perguntas)</strong></td>
+                <td>1 pergunta por tela, progress bar. Perguntas: Nome do c&atilde;o, Ra&ccedil;a, Idade, Peso, Body condition, N&iacute;vel de atividade, Alergias, Comida atual, Goals. Micro-commitments progressivos &mdash; dar o nome do c&atilde;o = investimento emocional MASSIVO.</td>
+              </tr>
+              <tr>
+                <td><strong>Resultado + Pre&ccedil;o</strong></td>
+                <td>Plano personalizado para [Nome do C&atilde;o]. Pricing: ~$150-250/m&ecirc;s. Trial: 50% off primeira caixa. Ingredientes listados, Before/after fotos, Vet endorsements.</td>
+              </tr>
+              <tr>
+                <td><strong>Checkout</strong></td>
+                <td>Bump: Treats add-on. Upsell: Subscription mais longa = mais desconto.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Email Sequence</h3>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>Dia</th><th>Tipo</th><th>Conte&uacute;do</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Dia 0</td><td><span class="tag blue">delivery</span></td><td>Welcome + tracking info</td></tr>
+              <tr><td>Dia 1</td><td><span class="tag purple">story</span></td><td>Fundadores e a hist&oacute;ria da marca</td></tr>
+              <tr><td>Dia 3</td><td><span class="tag amber">urgency</span></td><td>Reminder &mdash; your dog's plan is waiting</td></tr>
+              <tr><td>Dia 5</td><td><span class="tag green">pitch</span></td><td>Desconto escalante (20% &rarr; 30%)</td></tr>
+              <tr><td>Dia 7</td><td><span class="tag amber">urgency</span></td><td>Final reminder + 50% off</td></tr>
+              <tr><td>Dia 14</td><td><span class="tag purple">story</span></td><td>Transforma&ccedil;&atilde;o de outro c&atilde;o</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Hook Analysis</h3>
+        <p><strong>Headline:</strong> "Every dog deserves real food"</p>
+        <p><strong>Hook type:</strong> aspirational + guilt</p>
+        <p><strong>Why it works:</strong> Posiciona ra&ccedil;&atilde;o como 'n&atilde;o real'. Se amas teu c&atilde;o, d&aacute; comida de VERDADE.</p>
+
+        <h3>For&ccedil;as</h3>
+        <ul>
+          <li>Quiz obrigat&oacute;rio = COMPROMETIMENTO PSICOL&Oacute;GICO brutal</li>
+          <li>Personaliza&ccedil;&atilde;o com nome do c&atilde;o = emocional</li>
+          <li>Super Bowl ad = awareness monstruosa (89% branded traffic)</li>
+          <li>Email abandonment com descontos escalantes (20% &rarr; 50%)</li>
+          <li>Storytelling clean e emocional</li>
+        </ul>
+
+        <h3>Fraquezas</h3>
+        <ul>
+          <li>CARO. $150-250/m&ecirc;s &eacute; proibitivo pra maioria</li>
+          <li>Sem educa&ccedil;&atilde;o. S&oacute; vende A COMIDA DELES</li>
+          <li>Sem op&ccedil;&atilde;o DIY. Se quero fazer em casa, TFD n&atilde;o me serve</li>
+          <li>Quiz longo (10-12 steps). Ollie provou que menos = mais</li>
+          <li>Zero conte&uacute;do educacional no funil</li>
+        </ul>
+
+        <div class="divider"></div>
+
+        <div class="steal-item">
+          <h4>O que eu ROUBO do TFD</h4>
+          <ol>
+            <li><strong>Quiz obrigat&oacute;rio com nome do pet.</strong> Isso &eacute; GENIAL. O momento que o tutor digita "Luna" ou "Thor", ele n&atilde;o vai mais embora. &Eacute; investimento emocional puro.</li>
+            <li><strong>Email abandonment escalante.</strong> 20% no site, 30% por email, 50% no desespero. Funciona. Simples assim.</li>
+            <li><strong>Simplicidade brutal.</strong> Zero distra&ccedil;&atilde;o. Uma coisa por tela. Progress bar.</li>
+          </ol>
+        </div>
+
+        <div class="wrong-item">
+          <h4>O que eles fazem ERRADO pra n&oacute;s</h4>
+          <p><strong>Eles vendem COMIDA. N&oacute;s vendemos CONHECIMENTO.</strong> Totalmente diferente. TFD resolve o problema tirando o tutor da equa&ccedil;&atilde;o &mdash; "a gente cozinha, voc&ecirc; s&oacute; serve". WAGGO resolve o problema EMPODERANDO o tutor &mdash; "a gente te ensina e automatiza, voc&ecirc; FAZ".</p>
+          <p>Essa &eacute; a diferen&ccedil;a entre product funnel e SaaS funnel. E &eacute; por isso que precisamos de um approach diferente.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONCORRENTE 2: NOM NOM -->
+    <div class="section">
+      <div class="card">
+        <div class="competitor-header">
+          <div>
+            <div class="competitor-name">Concorrente 2: Nom Nom (Mars, $1B)</div>
+            <div class="competitor-sub">O Cient&iacute;fico com Microbioma</div>
+          </div>
+          <span class="tag green">$1B Aquisi&ccedil;&atilde;o Mars</span>
+        </div>
+
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>P&aacute;gina</th><th>Detalhes</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Landing Page</strong></td>
+                <td>Headline: "Real food, made for your pet". Science-forward, Microbiome messaging, Vet endorsements. CTA: "Build My Plan"</td>
+              </tr>
+              <tr>
+                <td><strong>Quiz (8-10 perguntas)</strong></td>
+                <td>Similar ao TFD &mdash; nome, ra&ccedil;a, peso, condi&ccedil;&otilde;es. Diferenciador: Perguntas sobre sa&uacute;de digestiva (gut health angle)</td>
+              </tr>
+              <tr>
+                <td><strong>Resultado + Pre&ccedil;o</strong></td>
+                <td>Fresh food plan + optional microbiome kit. Pricing: ~$200-280/m&ecirc;s + $100 microbiome kit. Money-back guarantee.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>For&ccedil;as</h3>
+        <ul>
+          <li>Microbiome angle = diferencia&ccedil;&atilde;o &Uacute;NICA</li>
+          <li>Suporta GATOS (&uacute;nico entre os DTC fresh)</li>
+          <li>Credibilidade Mars (ci&ecirc;ncia, research)</li>
+          <li>Gut health messaging &eacute; tend&ecirc;ncia crescente</li>
+        </ul>
+
+        <h3>Fraquezas</h3>
+        <ul>
+          <li>Traffic baixo (62K/m&ecirc;s vs 3M do TFD)</li>
+          <li>MAIS CARO que TFD</li>
+          <li>Quiz gen&eacute;rico &mdash; n&atilde;o t&atilde;o emocional quanto TFD</li>
+          <li>Microbiome kit &eacute; caro ($100) e assusta</li>
+          <li>Awareness fraqu&iacute;ssima comparada ao TFD</li>
+        </ul>
+
+        <div class="divider"></div>
+
+        <div class="steal-item">
+          <h4>O que eu ROUBO do Nom Nom</h4>
+          <ol>
+            <li><strong>O &acirc;ngulo de gut health/microbioma.</strong> Isso &eacute; TEND&Ecirc;NCIA. Todo mundo est&aacute; falando de sa&uacute;de intestinal &mdash; pra humanos E pra pets. WAGGO tem o m&oacute;dulo de Modula&ccedil;&atilde;o Intestinal. Precisa usar isso no posicionamento.</li>
+            <li><strong>Suporte a gatos.</strong> Nenhum concorrente DTC (exceto Nom Nom) foca em gatos. WAGGO suporta c&atilde;es E gatos. <strong>Diferenciador massivo.</strong></li>
+          </ol>
+        </div>
+
+        <div class="wrong-item">
+          <h4>O que eles fazem ERRADO</h4>
+          <p>Awareness quase ZERO. Ter a Mars por tr&aacute;s e ainda ter s&oacute; 62K visitas/m&ecirc;s... prova que ci&ecirc;ncia sozinha n&atilde;o vende. Precisa de <strong>storytelling + personaliza&ccedil;&atilde;o + funil emocional</strong>.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONCORRENTE 3: OLLIE -->
+    <div class="section">
+      <div class="card">
+        <div class="competitor-header">
+          <div>
+            <div class="competitor-name">Concorrente 3: Ollie</div>
+            <div class="competitor-sub">O Quiz Otimizado</div>
+          </div>
+          <span class="tag blue">Quiz 8 steps = +10% conv</span>
+        </div>
+
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>P&aacute;gina</th><th>Detalhes</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Landing Page</strong></td>
+                <td>Headline: "The healthiest food for the happiest dogs". CTA: "Get 60% Off". Desconto agressivo upfront, Clean design, Multi-plan options.</td>
+              </tr>
+              <tr>
+                <td><strong>Quiz (8 perguntas &mdash; otimizado de 12)</strong></td>
+                <td>Redesenhado. Removeram 4 perguntas redundantes. Resultado: +10% convers&atilde;o com quiz mais curto. Perguntas: Basics (nome, ra&ccedil;a, peso), Activity, Health concerns, Current food, Goals.</td>
+              </tr>
+              <tr>
+                <td><strong>Resultado com 4 Planos</strong></td>
+                <td>Fresh ($$$), Half-Fresh ($$), Baked ($), Mixed ($$). Pricing: $5-12/dia. Trial: 60% off starter box.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>For&ccedil;as</h3>
+        <ul>
+          <li>Quiz OTIMIZADO (12 &rarr; 8 = +10% convers&atilde;o)</li>
+          <li>4 PLANOS de pre&ccedil;o = captura mais mercado</li>
+          <li>Health screening tech (DIG Labs acquisition)</li>
+          <li>Design clean e humano</li>
+          <li>Desconto agressivo no first box</li>
+        </ul>
+
+        <h3>Fraquezas</h3>
+        <ul>
+          <li>S&oacute; c&atilde;es &mdash; sem gatos</li>
+          <li>Brand voice gen&eacute;rica &mdash; n&atilde;o memor&aacute;vel</li>
+          <li>Sem educa&ccedil;&atilde;o &mdash; vende comida, n&atilde;o conhecimento</li>
+          <li>Sem microbioma ou ci&ecirc;ncia profunda</li>
+        </ul>
+
+        <div class="divider"></div>
+
+        <div class="steal-item">
+          <h4>O que eu ROUBO do Ollie</h4>
+          <ol>
+            <li><strong>Quiz de 8 steps, MAX.</strong> Eles PROVARAM com dados: menos perguntas = mais convers&atilde;o. +10% &eacute; massivo. WAGGO: 7 perguntas. Ponto final.</li>
+            <li><strong>M&uacute;ltiplos tiers de pre&ccedil;o.</strong> 4 planos = 4 faixas de pre&ccedil;o = 4x mais mercado capturado. WAGGO precisa de tiers claros (Free &rarr; Essential &rarr; Pro &rarr; VetConnect).</li>
+            <li><strong>Desconto agressivo no primeiro contato.</strong> 60% off &eacute; BOLD. Para SaaS, o equivalente &eacute; trial gratuito de 7 dias com acesso total.</li>
+          </ol>
+        </div>
+
+        <div class="wrong-item">
+          <h4>O que eles fazem ERRADO</h4>
+          <p>Voz de marca <strong>gen&eacute;rica</strong>. N&atilde;o memor&aacute;vel. N&atilde;o tem Attractive Character, n&atilde;o conta hist&oacute;rias. &Eacute; funcional demais. <strong>WAGGO pode ter personalidade.</strong></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONCORRENTE 4: JUSTFOODFORDOGS -->
+    <div class="section">
+      <div class="card">
+        <div class="competitor-header">
+          <div>
+            <div class="competitor-name">Concorrente 4: JustFoodForDogs</div>
+            <div class="competitor-sub">O Anti-Marketing Cient&iacute;fico</div>
+          </div>
+          <span class="tag purple">$5.5M em pesquisa</span>
+        </div>
+
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>P&aacute;gina</th><th>Detalhes</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Landing Page</strong></td>
+                <td>Headline: "Real food. Real ingredients. Real results." CTA: "Shop Now / Build a Custom Meal". Sem quiz obrigat&oacute;rio, pode comprar direto, Research-backed claims.</td>
+              </tr>
+              <tr>
+                <td><strong>Op&ccedil;&otilde;es de Compra</strong></td>
+                <td>DIY Nutrient Blends ($20-40), Fresh meals ($100-200/m&ecirc;s), Pantry Fresh (shelf-stable). M&Uacute;LTIPLOS formatos &mdash; n&atilde;o s&oacute; subscription.</td>
+              </tr>
+              <tr>
+                <td><strong>Calculadora de Calorias (Free Tool)</strong></td>
+                <td>Lead magnet funcional. D&aacute; valor gratuito, builds trust, captures leads.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p><strong>Anti-marketing positioning:</strong> <em>"They bring the marketing, we bring the science"</em> &mdash; $5.5M em pesquisa veterin&aacute;ria (= custo de um Super Bowl ad)</p>
+
+        <h3>For&ccedil;as</h3>
+        <ul>
+          <li>Omnichannel (DTC + PetSmart + Petco + lojas pr&oacute;prias + Amazon + Chewy)</li>
+          <li>Pre&ccedil;o MAIS ACESS&Iacute;VEL do segmento fresh</li>
+          <li>DIY Nutrient Blends = PRODUTO PARA QUEM QUER FAZER EM CASA</li>
+          <li>Research credibility ($5.5M investidos)</li>
+          <li>Sem quiz obrigat&oacute;rio = menos fric&ccedil;&atilde;o para compradores diretos</li>
+          <li>Calculadora free como lead magnet</li>
+        </ul>
+
+        <h3>Fraquezas</h3>
+        <ul>
+          <li>Sem quiz = menos personaliza&ccedil;&atilde;o e menos dados</li>
+          <li>Anti-marketing pode limitar growth</li>
+          <li>S&oacute; c&atilde;es &mdash; sem gatos</li>
+          <li>Site mais confuso (muitas op&ccedil;&otilde;es)</li>
+          <li>Sem email sequence forte (sem quiz = menos nurture)</li>
+        </ul>
+
+        <div class="divider"></div>
+
+        <div class="steal-item">
+          <h4>O que eu ROUBO do JFFD</h4>
+          <ol>
+            <li><strong>Calculadora free como lead magnet.</strong> ISSO &Eacute; O WAGGO. Ferramenta gratuita que d&aacute; valor real e captura leads. O quiz do WAGGO pode ter uma vers&atilde;o "light" como calculadora free.</li>
+            <li><strong>DIY Nutrient Blends.</strong> Eles s&atilde;o os &Uacute;NICOS que servem quem quer fazer comida em casa. WAGGO &eacute; TODO sobre isso. Podemos dominar esse segmento que o JFFD mal explora.</li>
+            <li><strong>"Ci&ecirc;ncia sobre marketing" como posicionamento.</strong> N&atilde;o precisa gritar. Se teu produto &eacute; bom, deixa a ci&ecirc;ncia falar. WAGGO pode usar dados e pesquisa como proof.</li>
+          </ol>
+        </div>
+
+        <div class="wrong-item">
+          <h4>O que eles fazem ERRADO</h4>
+          <p>Site CONFUSO. Muitas op&ccedil;&otilde;es, muitos paths, sem guia. O quiz resolve isso &mdash; <strong>guia o tutor at&eacute; a solu&ccedil;&atilde;o certa sem fric&ccedil;&atilde;o</strong>. E eles praticamente IGNORAM email nurture.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONCORRENTE 5: APPS DE NUTRI&Ccedil;&Atilde;O PET -->
+    <div class="section">
+      <div class="card">
+        <div class="competitor-header">
+          <div>
+            <div class="competitor-name">Concorrente 5: Apps de Nutri&ccedil;&atilde;o Pet</div>
+            <div class="competitor-sub">Os que ningu&eacute;m t&aacute; prestando aten&ccedil;&atilde;o... mas deveria.</div>
+          </div>
+          <span class="tag amber">Concorrentes DIRETOS</span>
+        </div>
+
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>App</th><th>Pre&ccedil;o</th><th>Funil</th><th>For&ccedil;a</th><th>Fraqueza</th><th>Key Learning</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Animal Diet Formulator (ADF)</strong></td>
+                <td>$299/1o ano, $49/ano depois</td>
+                <td>Direto &mdash; LP &rarr; checkout. Sem quiz, sem nurture</td>
+                <td>Mais completo do mercado, multi-platform</td>
+                <td>CARO. UX intimidadora. Parece software de engenheiro</td>
+                <td>Prova que pet owners PAGAM por ferramenta de nutri&ccedil;&atilde;o. $299 &eacute; alto mas tem mercado</td>
+              </tr>
+              <tr>
+                <td><strong>BalanceIT</strong></td>
+                <td>FREE (monetiza via suplementos)</td>
+                <td>Free tool &rarr; recomenda&ccedil;&atilde;o de suplemento &rarr; checkout</td>
+                <td>Credibilidade veterin&aacute;ria, gratuito, maior base de usu&aacute;rios</td>
+                <td>UI de 2005. N&atilde;o mobile. Parece planilha glorificada</td>
+                <td>Free tool &rarr; product recommendation &eacute; modelo validado. Mas a UX importa</td>
+              </tr>
+              <tr>
+                <td><strong>Meatpoint.io</strong></td>
+                <td>~$5-10/m&ecirc;s</td>
+                <td>Simples &mdash; LP &rarr; trial &rarr; subscription</td>
+                <td>Valida&ccedil;&atilde;o nutricional autom&aacute;tica, &agrave; prova de erros, pre&ccedil;o acess&iacute;vel</td>
+                <td>Nicho BARF apenas, pequeno, pouca awareness</td>
+                <td>Pre&ccedil;o sweet spot. Automa&ccedil;&atilde;o como diferenciador. Funciona</td>
+              </tr>
+              <tr>
+                <td><strong>PAWSM</strong></td>
+                <td>FREE</td>
+                <td>Free app, sem monetiza&ccedil;&atilde;o clara</td>
+                <td>Nutrition calculator, multi-dog</td>
+                <td>Features limitadas, sem modelo de neg&oacute;cio claro</td>
+                <td>&mdash;</td>
+              </tr>
+              <tr>
+                <td><strong>Feed Real</strong></td>
+                <td>FREE (funil da marca de suplementos)</td>
+                <td>Free tool &rarr; brand loyalty &rarr; supplement sales</td>
+                <td>Ajusta receitas com ingredientes dispon&iacute;veis</td>
+                <td>Web-only, vinculado &agrave; marca, limitado</td>
+                <td>&mdash;</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card highlight" style="margin-top: var(--space-lg);">
+          <h3>An&aacute;lise da Categoria</h3>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr><th>Gap</th><th>Detalhe</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><strong>Padr&atilde;o comum</strong></td><td>Quase TODOS s&atilde;o gr&aacute;tis ou t&ecirc;m UX terr&iacute;vel</td></tr>
+                <tr><td><strong>Pricing gap</strong></td><td>ADF=$299/ano vs maioria=FREE. NINGU&Eacute;M no sweet spot $5-15/m&ecirc;s com UX boa</td></tr>
+                <tr><td><strong>Funnel gap</strong></td><td>NENHUM app de nutri&ccedil;&atilde;o tem quiz funnel, email sequence ou onboarding real</td></tr>
+                <tr><td><strong>UX gap</strong></td><td>Feitos por nutricionistas, n&atilde;o por designers de produto</td></tr>
+                <tr><td><strong>Mobile gap</strong></td><td>Poucos s&atilde;o mobile-first. A maioria &eacute; web desktop</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="steal-item">
+          <h4>O que eu ROUBO dos apps</h4>
+          <ol>
+            <li><strong>An&aacute;lise nutricional completa + compliance AAFCO/FEDIAF.</strong> Isso &eacute; o core. WAGGO precisa ser preciso.</li>
+            <li><strong>Automa&ccedil;&atilde;o como feature-chave.</strong> Meatpoint mostra que "&agrave; prova de erros" &eacute; um selling point forte.</li>
+            <li><strong>ADF prova que o mercado PAGA.</strong> $299/ano por uma UX horr&iacute;vel. Imagine o que pagam por uma UX BONITA.</li>
+          </ol>
+        </div>
+
+        <div class="wrong-item">
+          <h4>O que TODOS fazem ERRADO</h4>
+          <p><strong>NENHUM app de nutri&ccedil;&atilde;o pet tem funil de verdade.</strong></p>
+          <p>Vou repetir porque &eacute; importante...</p>
+          <p><strong>NENHUM. TEM. FUNIL.</strong></p>
+          <p>Sem quiz. Sem onboarding. Sem email sequence. Sem stack. Sem storytelling.</p>
+          <p>S&atilde;o ferramentas, n&atilde;o experi&ecirc;ncias.</p>
+          <p>E <strong>isso</strong> &eacute; o whitespace do WAGGO.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- AN&Aacute;LISE DE PADR&Otilde;ES -->
+    <div class="section">
+      <div class="section-header">
+        <h2 class="section-title">An&aacute;lise de Padr&otilde;es</h2>
+        <div class="section-subtitle">Cruzei os 5 funis e olha o que emerge...</div>
+      </div>
+
+      <div class="card" style="margin-bottom: var(--space-lg);">
+        <h3>Padr&otilde;es Comuns &mdash; Compara&ccedil;&atilde;o</h3>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>Padr&atilde;o</th><th>TFD</th><th>Nom Nom</th><th>Ollie</th><th>JFFD</th><th>Apps</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Quiz obrigat&oacute;rio</strong></td><td><span class="tag green">SIM</span></td><td><span class="tag green">SIM</span></td><td><span class="tag green">SIM</span></td><td><span class="tag red">N&Atilde;O</span></td><td><span class="tag red">N&Atilde;O</span></td></tr>
+              <tr><td><strong>Nome do pet no quiz</strong></td><td><span class="tag green">SIM</span></td><td><span class="tag green">SIM</span></td><td><span class="tag green">SIM</span></td><td>N/A</td><td>N/A</td></tr>
+              <tr><td><strong>Personaliza&ccedil;&atilde;o por pet</strong></td><td><span class="tag green">SIM</span></td><td><span class="tag green">SIM</span></td><td><span class="tag green">SIM</span></td><td><span class="tag amber">PARCIAL</span></td><td><span class="tag green">SIM</span></td></tr>
+              <tr><td><strong>Email abandonment</strong></td><td><span class="tag green">SIM (escalante)</span></td><td><span class="tag green">SIM</span></td><td><span class="tag green">SIM</span></td><td><span class="tag amber">FRACO</span></td><td><span class="tag red">N&Atilde;O</span></td></tr>
+              <tr><td><strong>Desconto no 1o contato</strong></td><td>50% off</td><td>Money-back</td><td>60% off</td><td>50% off</td><td>N/A</td></tr>
+              <tr><td><strong>Storytelling</strong></td><td><span class="tag green">FORTE</span></td><td><span class="tag amber">M&Eacute;DIO</span></td><td><span class="tag amber">FRACO</span></td><td><span class="tag amber">FRACO</span></td><td><span class="tag red">ZERO</span></td></tr>
+              <tr><td><strong>Educa&ccedil;&atilde;o no funil</strong></td><td><span class="tag red">N&Atilde;O</span></td><td><span class="tag red">N&Atilde;O</span></td><td><span class="tag red">N&Atilde;O</span></td><td><span class="tag amber">POUCO</span></td><td><span class="tag red">N&Atilde;O</span></td></tr>
+              <tr><td><strong>The Stack</strong></td><td><span class="tag red">N&Atilde;O</span></td><td><span class="tag red">N&Atilde;O</span></td><td><span class="tag red">N&Atilde;O</span></td><td><span class="tag red">N&Atilde;O</span></td><td><span class="tag red">N&Atilde;O</span></td></tr>
+              <tr><td><strong>Soap Opera Sequence</strong></td><td><span class="tag red">N&Atilde;O</span></td><td><span class="tag red">N&Atilde;O</span></td><td><span class="tag red">N&Atilde;O</span></td><td><span class="tag red">N&Atilde;O</span></td><td><span class="tag red">N&Atilde;O</span></td></tr>
+              <tr><td><strong>M&uacute;ltiplos tiers</strong></td><td><span class="tag red">N&Atilde;O</span></td><td><span class="tag red">N&Atilde;O</span></td><td><span class="tag green">SIM (4)</span></td><td><span class="tag green">SIM (3)</span></td><td>VARIA</td></tr>
+              <tr><td><strong>Suporte gatos</strong></td><td><span class="tag red">N&Atilde;O</span></td><td><span class="tag green">SIM</span></td><td><span class="tag red">N&Atilde;O</span></td><td><span class="tag red">N&Atilde;O</span></td><td>VARIA</td></tr>
+              <tr><td><strong>Mobile-first</strong></td><td><span class="tag green">SIM</span></td><td><span class="tag green">SIM</span></td><td><span class="tag green">SIM</span></td><td><span class="tag green">SIM</span></td><td><span class="tag red">N&Atilde;O</span></td></tr>
+              <tr><td><strong>Onboarding real</strong></td><td><span class="tag amber">B&Aacute;SICO</span></td><td><span class="tag amber">B&Aacute;SICO</span></td><td><span class="tag amber">B&Aacute;SICO</span></td><td><span class="tag red">N&Atilde;O</span></td><td><span class="tag red">N&Atilde;O</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card-grid cols-2">
+        <div class="card">
+          <h3>O que TODOS fazem <span class="tag green">Validado</span></h3>
+          <ol>
+            <li><strong>Quiz como porta de entrada.</strong> 3 de 5 usam quiz obrigat&oacute;rio. &Eacute; o padr&atilde;o.</li>
+            <li><strong>Personaliza&ccedil;&atilde;o com nome do pet.</strong> Emocional. Funciona. Padr&atilde;o.</li>
+            <li><strong>Desconto agressivo no primeiro contato.</strong> 50-60% off ou free trial.</li>
+            <li><strong>Mobile-first.</strong> &Oacute;bvio em 2026.</li>
+          </ol>
+        </div>
+
+        <div class="card">
+          <h3>O que NINGU&Eacute;M faz <span class="tag amber">Oportunidade WAGGO</span></h3>
+          <ol>
+            <li><strong>Educa&ccedil;&atilde;o real no funil.</strong> Ningu&eacute;m ensina. Todos vendem.</li>
+            <li><strong>The Stack.</strong> Nenhum concorrente empilha valor.</li>
+            <li><strong>Soap Opera Sequence.</strong> Emails genéricos. Nenhum conta HIST&Oacute;RIA.</li>
+            <li><strong>Onboarding com Small Win Engineering.</strong> Ningu&eacute;m engenheira o "Aha Moment".</li>
+            <li><strong>Identidades aspiracionais.</strong> Nenhum quiz d&aacute; um PERFIL com identidade.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <!-- RECOMENDA&Ccedil;&Otilde;ES -->
+    <div class="section">
+      <div class="section-header">
+        <h2 class="section-title">Recomenda&ccedil;&otilde;es para o Funil WAGGO</h2>
+        <div class="section-subtitle">Aqui &eacute; onde juntamos tudo...</div>
+      </div>
+
+      <!-- REC 1 -->
+      <div class="card" style="margin-bottom: var(--space-lg);">
+        <h3>1. Estrutura do Funil: Quiz Funnel &rarr; Onboarding &rarr; SaaS Conversion</h3>
+        <div class="funnel-visual">
+          <div class="funnel-step">
+            <div class="funnel-step-icon">&#128226;</div>
+            <div class="funnel-step-content">
+              <h4>Ads/Content</h4>
+              <p>Tr&aacute;fego pago e org&acirc;nico</p>
+            </div>
+          </div>
+          <div class="funnel-step">
+            <div class="funnel-step-icon">&#10067;</div>
+            <div class="funnel-step-content">
+              <h4>Quiz Funnel (7 perguntas)</h4>
+              <p>Qualifica&ccedil;&atilde;o + micro-commitment</p>
+            </div>
+          </div>
+          <div class="funnel-step">
+            <div class="funnel-step-icon">&#9993;</div>
+            <div class="funnel-step-content">
+              <h4>Opt-in Gate</h4>
+              <p>Captura de email</p>
+            </div>
+          </div>
+          <div class="funnel-step">
+            <div class="funnel-step-icon">&#127775;</div>
+            <div class="funnel-step-content">
+              <h4>Resultado = Identidade Aspiracional</h4>
+              <p>Perfil personalizado</p>
+            </div>
+          </div>
+          <div class="funnel-step">
+            <div class="funnel-step-icon">&#128272;</div>
+            <div class="funnel-step-content">
+              <h4>Trial 7d Gratuito</h4>
+              <p>Acesso total sem cart&atilde;o</p>
+            </div>
+          </div>
+          <div class="funnel-step">
+            <div class="funnel-step-icon">&#127919;</div>
+            <div class="funnel-step-content">
+              <h4>Onboarding com Small Win &lt; 2min</h4>
+              <p>Aha Moment engineered</p>
+            </div>
+          </div>
+          <div class="funnel-step">
+            <div class="funnel-step-icon">&#128231;</div>
+            <div class="funnel-step-content">
+              <h4>Soap Opera Sequence (5 emails)</h4>
+              <p>Storytelling personalizado por perfil</p>
+            </div>
+          </div>
+          <div class="funnel-step">
+            <div class="funnel-step-icon">&#128176;</div>
+            <div class="funnel-step-content">
+              <h4>Convers&atilde;o Paga + The Stack</h4>
+              <p>$9.99/m&ecirc;s com 118x valor</p>
+            </div>
+            <span class="funnel-price">$9.99</span>
+          </div>
+        </div>
+        <p><strong>Por que quiz funnel?</strong> Validado por TFD ($1.2B), Nom Nom, Ollie. &Eacute; o padr&atilde;o do mercado. Mas n&oacute;s fazemos MELHOR &mdash; com identidades, epiphany bridges e storytelling que ningu&eacute;m est&aacute; usando.</p>
+      </div>
+
+      <!-- REC 2 -->
+      <div class="card" style="margin-bottom: var(--space-lg);">
+        <h3>2. Hooks: Combina&ccedil;&atilde;o "Aspiracional + Dor + Mecanismo"</h3>
+        <p>Os hooks dominantes no mercado s&atilde;o aspiracionais ("real food", "healthiest food"). Mas s&atilde;o gen&eacute;ricos.</p>
+        <p><strong>Nossa oportunidade:</strong> Combinar aspira&ccedil;&atilde;o com DOR ESPEC&Iacute;FICA.</p>
+        <blockquote><strong>"Pare de adivinhar o que seu pet deve comer"</strong> (dor #1: confus&atilde;o)</blockquote>
+        <blockquote><strong>"O nutricionista virtual do seu pet &mdash; 24/7, por menos que um caf&eacute; por dia"</strong> (mecanismo + pre&ccedil;o)</blockquote>
+        <blockquote><strong>"73% dos tutores erram na propor&ccedil;&atilde;o de nutrientes. Descubra se voc&ecirc; &eacute; um deles"</strong> (medo + quiz hook)</blockquote>
+      </div>
+
+      <!-- REC 3 -->
+      <div class="card" style="margin-bottom: var(--space-lg);">
+        <h3>3. Diferencia&ccedil;&atilde;o: O que fazemos que NINGU&Eacute;M faz</h3>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>O que ELES fazem</th><th>O que N&Oacute;S fazemos de DIFERENTE</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Vendem comida pronta</td><td><strong>Empoderamos o tutor a fazer em casa</strong></td></tr>
+              <tr><td>Quiz &rarr; pre&ccedil;o</td><td><strong>Quiz &rarr; identidade aspiracional &rarr; educa&ccedil;&atilde;o &rarr; trial</strong></td></tr>
+              <tr><td>Emails gen&eacute;ricos (delivery, desconto)</td><td><strong>Soap Opera Sequence (hist&oacute;ria, epifania, urg&ecirc;ncia)</strong></td></tr>
+              <tr><td>Zero educa&ccedil;&atilde;o</td><td><strong>Educa&ccedil;&atilde;o como selling point (9 m&oacute;dulos)</strong></td></tr>
+              <tr><td>UX de engenheiro</td><td><strong>UX bonita, mobile-first, AI-powered</strong></td></tr>
+              <tr><td>$150-300/m&ecirc;s (comida)</td><td><strong>$9.99/m&ecirc;s (ferramenta) &mdash; 15-30x mais barato</strong></td></tr>
+              <tr><td>Sem Stack</td><td><strong>Stack completo (valor 100x+)</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- REC 4 -->
+      <div class="card" style="margin-bottom: var(--space-lg);">
+        <h3>4. Stack: Empilhar o que eles N&Atilde;O empilham</h3>
+        <p>Nenhum concorrente usa The Stack. <strong>Nenhum.</strong> Isso &eacute; oportunidade PURA.</p>
+        <p>WAGGO pode empilhar: Plano AI personalizado + 9 m&oacute;dulos + Receitas + Lista de compras + Acompanhamento de peso + Ajuste autom&aacute;tico + Comunidade + Suporte.</p>
+        <p><strong>Valor percebido: $1.000+ vs $9.99/m&ecirc;s.</strong></p>
+      </div>
+
+      <!-- REC 5 -->
+      <div class="card" style="margin-bottom: var(--space-lg);">
+        <h3>5. Gaps = Oportunidade de Domina&ccedil;&atilde;o</h3>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>Gap no Mercado</th><th>Como WAGGO Explora</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Nenhum SaaS pago dominante para nutri&ccedil;&atilde;o pet DIY</td><td><strong>Ser O SaaS. O "Canva da nutri&ccedil;&atilde;o pet"</strong></td></tr>
+              <tr><td>Apps existentes t&ecirc;m UX terr&iacute;vel</td><td><strong>UX bonita, mobile-first, AI-first</strong></td></tr>
+              <tr><td>Ningu&eacute;m educa no funil</td><td><strong>Educa&ccedil;&atilde;o como hook e diferenciador</strong></td></tr>
+              <tr><td>Ningu&eacute;m serve raw/BARF/AN com SaaS</td><td><strong>WAGGO &eacute; 100% para esse p&uacute;blico</strong></td></tr>
+              <tr><td>Ningu&eacute;m usa Soap Opera Sequence</td><td><strong>Storytelling como engine de convers&atilde;o</strong></td></tr>
+              <tr><td>Ningu&eacute;m tem onboarding com Small Win</td><td><strong>Engenharia reversa do "Aha Moment"</strong></td></tr>
+              <tr><td>Poucos suportam gatos</td><td><strong>WAGGO suporta c&atilde;es E gatos</strong></td></tr>
+              <tr><td>Ningu&eacute;m personaliza por IDENTIDADE</td><td><strong>Quiz com perfis aspiracionais</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- REC 6 -->
+      <div class="card">
+        <h3>6. Email Strategy Baseada no Funnel Hack</h3>
+        <p><strong>O que funciona no mercado:</strong></p>
+        <ul>
+          <li><strong>TFD:</strong> Email abandonment com descontos escalantes (20% &rarr; 50%)</li>
+          <li><strong>Timing:</strong> Dia 0, 1, 3, 5, 7 &mdash; sequ&ecirc;ncia de 7 dias</li>
+          <li><strong>Tipo:</strong> Os que convertem s&atilde;o os de URG&Ecirc;NCIA + DESCONTO</li>
+        </ul>
+        <p><strong>O que N&Oacute;S fazemos de diferente:</strong></p>
+        <ul>
+          <li>Soap Opera Sequence (5 emails com storytelling, n&atilde;o s&oacute; desconto)</li>
+          <li>Personaliza&ccedil;&atilde;o por perfil do quiz (subject lines, hist&oacute;rias, proof diferentes)</li>
+          <li>Quiz abandonment sequence separada (para quem n&atilde;o completou)</li>
+          <li>Daily emails p&oacute;s-convers&atilde;o (Ben Settle style &mdash; reter e ascender)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- FUNNEL STACKING -->
+    <div class="section">
+      <div class="section-header">
+        <h2 class="section-title">Funnel Stacking Inspirado pelo Hack</h2>
+        <div class="section-subtitle">Olhando como os concorrentes se conectam (spoiler: mal se conectam)...</div>
+      </div>
+
+      <div class="card-grid cols-2">
+        <div class="card">
+          <h3>O que eles fazem</h3>
+          <div class="code-block">Quiz &rarr; Produto &rarr; Email gen&eacute;rico &rarr; Cross-sell (talvez)</div>
+        </div>
+
+        <div class="card highlight">
+          <h3>O que N&Oacute;S vamos fazer</h3>
+          <div class="funnel-visual" style="padding: var(--space-md);">
+            <div class="funnel-step">
+              <div class="funnel-step-content">
+                <h4>Quiz Funnel</h4>
+              </div>
+            </div>
+            <div class="funnel-step">
+              <div class="funnel-step-content">
+                <h4>Soap Opera Emails</h4>
+              </div>
+            </div>
+            <div class="funnel-step">
+              <div class="funnel-step-content">
+                <h4>Trial 7d</h4>
+              </div>
+            </div>
+            <div class="funnel-step">
+              <div class="funnel-step-content">
+                <h4>Onboarding + Small Win</h4>
+              </div>
+            </div>
+            <div class="funnel-step">
+              <div class="funnel-step-content">
+                <h4>Convers&atilde;o Essential</h4>
+              </div>
+            </div>
+            <div class="funnel-step">
+              <div class="funnel-step-content">
+                <h4>Upgrade Emails</h4>
+              </div>
+            </div>
+            <div class="funnel-step">
+              <div class="funnel-step-content">
+                <h4>Pro Plan</h4>
+              </div>
+            </div>
+            <div class="funnel-step">
+              <div class="funnel-step-content">
+                <h4>VetConnect (High-ticket)</h4>
+              </div>
+            </div>
+            <div class="funnel-step">
+              <div class="funnel-step-content">
+                <h4>Comunidade (Reten&ccedil;&atilde;o)</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top: var(--space-lg);">
+        <p>Cada funil alimenta o pr&oacute;ximo. <strong>Sistema, n&atilde;o p&aacute;gina.</strong></p>
+        <p>Isso &eacute; funnel stacking de verdade. Isso &eacute; o que separa $100K/ano de $10M/ano.</p>
+      </div>
+    </div>
+
+    <!-- VEREDICTO FINAL -->
+    <div class="section">
+      <div class="section-header">
+        <h2 class="section-title">Veredicto Final</h2>
+      </div>
+
+      <div class="card highlight">
+        <p>Deixa eu ser direto contigo...</p>
+        <p>O mercado de pet nutrition est&aacute; <strong>dominado por empresas de COMIDA</strong> usando funis de quiz pra vender <strong>comida pronta</strong>.</p>
+        <p>Nenhum deles serve quem quer <strong>FAZER em casa</strong>.</p>
+        <p>Nenhum deles <strong>educa</strong>.</p>
+        <p>Nenhum deles usa <strong>storytelling real</strong> no funil.</p>
+        <p>Nenhum deles usa <strong>The Stack</strong>.</p>
+        <p>Nenhum deles faz <strong>Soap Opera Sequence</strong>.</p>
+        <p>Nenhum deles engenheira o <strong>Aha Moment</strong>.</p>
+        <p>E o mais louco?</p>
+        <p><strong>Nenhum SaaS dominante existe nesse espa&ccedil;o.</strong> ADF cobra $299/ano com UX horr&iacute;vel. BalanceIT &eacute; free mas datado. Meatpoint &eacute; pequeno.</p>
+
+        <blockquote>WAGGO pode ser o <strong>ClickFunnels da nutri&ccedil;&atilde;o pet</strong>.</blockquote>
+
+        <p>O app que todo tutor de AN/BARF usa. A ferramenta que todo grupo de Facebook recomenda. A refer&ecirc;ncia que todo influencer pet compartilha.</p>
+        <p>S&oacute; precisa de um funil <strong>bem arquitetado</strong>.</p>
+        <p>E &eacute; exatamente isso que vamos construir.</p>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="section">
+      <p style="text-align: center; color: var(--text-secondary); font-style: italic;">
+        &mdash; Russell Brunson, sempre hackeando funis antes de construir<br>
+        <em>"You're just one funnel away."</em><br>
+        Data: 2026-02-26
+      </p>
+    </div>
+
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

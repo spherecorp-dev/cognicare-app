@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WAGGO — Fase 8: Revisão Final &amp; QA</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="../Design sem nome (8).png" type="image/png">
+  <style>
+    .detail-header { position: sticky; top: 0; z-index: 100; background: rgba(8, 5, 16, 0.9); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 12px 24px; display: flex; align-items: center; gap: 16px; }
+    .detail-header img { width: 32px; height: 32px; border-radius: 8px; }
+    .detail-header h1 { font-size: 16px; font-weight: 800; background: var(--gradient-brand); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin: 0; }
+    .back-link { color: var(--text-secondary); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+    .back-link:hover { color: var(--text-primary); }
+    .detail-body { max-width: 900px; margin: 0 auto; padding: 48px 24px; }
+    .detail-body .section { margin-left: 0; }
+    .verdict-banner { text-align: center; padding: 32px; border-radius: 16px; background: linear-gradient(135deg, rgba(52, 211, 153, 0.08), rgba(139, 92, 246, 0.08)); border: 1px solid rgba(52, 211, 153, 0.3); margin-bottom: 24px; }
+    .verdict-banner h2 { font-size: 28px; font-weight: 900; color: var(--green); margin: 0 0 8px 0; }
+    .verdict-banner p { color: var(--text-secondary); margin: 0; font-size: 15px; }
+    .score-row { display: flex; flex-wrap: wrap; align-items: center; gap: 24px; margin: 16px 0; }
+    .score-block { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .score-block .score-label { font-size: 13px; color: var(--text-secondary); text-align: center; max-width: 100px; }
+    .review-section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+    .review-verdict { display: inline-block; padding: 4px 12px; border-radius: 6px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+    .verdict-approved { background: rgba(52, 211, 153, 0.15); color: #34d399; border: 1px solid rgba(52, 211, 153, 0.3); }
+    .verdict-warning { background: rgba(251, 191, 36, 0.15); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.3); }
+    .obs-card { border-left: 3px solid var(--amber); }
+    .obs-card.high { border-left-color: #ef4444; }
+    .obs-card.low { border-left-color: var(--text-secondary); }
+    .consistency-check { display: flex; align-items: center; gap: 8px; margin: 6px 0; }
+    .check-pass { color: var(--green); font-weight: bold; }
+    .check-warn { color: var(--amber); font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="scroll-progress"><div class="scroll-progress-bar"></div></div>
+  <div class="detail-header">
+    <a href="index.html" class="back-link">&larr; Executive Deck</a>
+    <img src="../Design sem nome (8).png" alt="WAGGO">
+    <h1>WAGGO</h1>
+  </div>
+  <div class="detail-body">
+
+    <!-- Header -->
+    <div class="section">
+      <div class="section-header">
+        <h1 class="section-title">Fase 8: Review Final (Todas as Peças)</h1>
+        <div class="section-subtitle">
+          <strong>Autor:</strong> Chief (Copy Chief &amp; Creative Quality Director) |
+          <strong>Data:</strong> 2026-02-26 | <strong>Status:</strong> Completo<br>
+          <strong>Task:</strong> Review Final Cross-Deliverable<br>
+          <strong>Peças revisadas:</strong><br>
+          &bull; WAGGO-FASE41-ANGLES.md (por @stefan-georgi) — revisado indiretamente na Fase 4.3<br>
+          &bull; WAGGO-FASE42-LP-COPY.md (por @gary-halbert) — revisado na Fase 4.3, APPROVED<br>
+          &bull; WAGGO-FASE6-VSL-SCRIPT.md (por @gary-halbert) — NOVO, revisado aqui<br>
+          &bull; WAGGO-FASE7-EMAIL-STRATEGY.md (por @ben-settle) — NOVO, revisado aqui
+        </div>
+      </div>
+    </div>
+
+    <!-- Veredicto Geral -->
+    <div class="section">
+      <div class="verdict-banner">
+        <h2>APPROVED — Go-to-Market Ready</h2>
+        <p>Com Observações (3 itens de prioridade alta antes do go-live)</p>
+      </div>
+      <div class="card">
+        <p>O pacote WAGGO está completo e coeso. Cada peça manteve a voz do agente que a produziu, respeitou o UMP definido pelo Georgi, integrou os ângulos corretamente, e seguiu compliance.</p>
+        <p>Os 4 agentes operaram com disciplina. Brunson montou a estrutura. Georgi definiu os ângulos. Halbert converteu em LP e VSL. Settle transformou em email. Cada um fez sua parte.</p>
+      </div>
+    </div>
+
+    <!-- REVIEW 1: VSL Script -->
+    <div class="section">
+      <div class="section-header">
+        <div class="review-section-header">
+          <h2 class="section-title">Review 1: VSL Script (Fase 6 — @gary-halbert)</h2>
+          <span class="review-verdict verdict-approved">APPROVED</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Critérios Eliminatórios</h3>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>Critério</th><th>Veredicto</th><th>Notas</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Creative profile respeitado (saas-demo)</td><td><span class="tag green">PASS</span></td><td>Formato Hybrid VSL com demo section. Produto mostrado funcionando. Apresentador face-cam. Exatamente o que saas-demo pede</td></tr>
+              <tr><td>Hook forte nos primeiros 3s</td><td><span class="tag green">PASS</span></td><td>"If you make your pet's food at home..." — Pattern interrupt suave mas impossível de ignorar. 6 variantes para A/B testing</td></tr>
+              <tr><td>CTA presente e clara</td><td><span class="tag green">PASS</span></td><td>2 CTAs no corpo (após demo + após Stack) + P.S. com CTA final. Cobertura adequada sem ser excessivo</td></tr>
+              <tr><td>Compliance do geo (EN/EUA)</td><td><span class="tag green">PASS</span></td><td>Disclaimers no final. Zero claims de saúde. Mecanismo como foco. "Not a substitute for vet advice" presente</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="text-align: center; margin-top: 12px;"><strong>Resultado eliminatório: 4/4 PASS.</strong></p>
+      </div>
+
+      <div class="card">
+        <h3>Critérios de Qualidade</h3>
+        <div class="score-row">
+          <div class="score-block">
+            <div class="score-ring" data-score="5" data-max="5"><span>5</span></div>
+            <div class="score-label">Mecanismo crível</div>
+          </div>
+          <div class="score-block">
+            <div class="score-ring" data-score="5" data-max="5"><span>5</span></div>
+            <div class="score-label">Tom alinhado</div>
+          </div>
+          <div class="score-block">
+            <div class="score-ring" data-score="4" data-max="5"><span>4</span></div>
+            <div class="score-label">Prova social</div>
+          </div>
+          <div class="score-block">
+            <div class="score-ring" data-score="5" data-max="5"><span>5</span></div>
+            <div class="score-label">Estrutura AIDA</div>
+          </div>
+          <div class="score-block">
+            <div class="score-ring" data-score="5" data-max="5"><span>5</span></div>
+            <div class="score-label">Diferenciação LP</div>
+          </div>
+          <div class="score-block">
+            <div class="score-ring" data-score="5" data-max="5"><span>5</span></div>
+            <div class="score-label">Direção produção</div>
+          </div>
+          <div class="score-block">
+            <div class="score-ring" data-score="5" data-max="5"><span>5</span></div>
+            <div class="score-label">Epiphany Bridge</div>
+          </div>
+          <div class="score-block">
+            <div class="score-ring" data-score="4" data-max="5"><span>4</span></div>
+            <div class="score-label">Demo section</div>
+          </div>
+        </div>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>Critério</th><th>Score</th><th>Notas</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Mecanismo crível pro público-alvo</td><td><strong>5/5</strong></td><td>"AI trained on AAFCO/FEDIAF + Nutritional Completeness Verification" — proprietário, verificável, diferenciado da LP</td></tr>
+              <tr><td>Tom alinhado com oferta e geo</td><td><strong>5/5</strong></td><td>Conversacional, empático, face-cam. Halbert standard para EN. Vulnerabilidade na story section funciona bem</td></tr>
+              <tr><td>Prova social/dado convincente</td><td><strong>4/5</strong></td><td>5 tipos de proof stacking (ciência, mercado, lógica, social, demo). Social proof ajustado para "thousands" per observação anterior</td></tr>
+              <tr><td>Estrutura Hook&rarr;Problema&rarr;Mecanismo&rarr;Prova&rarr;CTA</td><td><strong>5/5</strong></td><td>AIDA impecável adaptado para hybrid VSL. 10 blocos bem segmentados com direção visual</td></tr>
+              <tr><td>Diferenciação da LP</td><td><strong>5/5</strong></td><td>LP = ângulo #2 (preço), racional. VSL = ângulo #3 (medo), emocional. Complementares. Não redundantes</td></tr>
+              <tr><td>Direção de produção</td><td><strong>5/5</strong></td><td>Notas de casting, música por bloco, legendas, B-roll necessário. Pronto para executar</td></tr>
+              <tr><td>Epiphany Bridge na story</td><td><strong>5/5</strong></td><td>A história do Golden Retriever com deficiência de zinco é crível, vulnerável e específica</td></tr>
+              <tr><td>Demo section</td><td><strong>4/5</strong></td><td>Script bem escrito para demo. Depende de mockup/produto real para execução</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="text-align: center; margin-top: 12px;">
+          <strong>Score médio de qualidade:</strong>
+          <span style="font-size: 20px; font-weight: 900; color: var(--green);">4.75/5</span>
+          — ACIMA do threshold.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Critérios de Contexto</h3>
+        <div class="score-row">
+          <div class="score-block">
+            <div class="score-ring" data-score="5" data-max="5"><span>5</span></div>
+            <div class="score-label">Ângulos Georgi</div>
+          </div>
+          <div class="score-block">
+            <div class="score-ring" data-score="5" data-max="5"><span>5</span></div>
+            <div class="score-label">Diferenciado LP</div>
+          </div>
+          <div class="score-block">
+            <div class="score-ring" data-score="5" data-max="5"><span>5</span></div>
+            <div class="score-label">Formato canal</div>
+          </div>
+          <div class="score-block">
+            <div class="score-ring" data-score="5" data-max="5"><span>5</span></div>
+            <div class="score-label">Hooks testáveis</div>
+          </div>
+        </div>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>Critério</th><th>Score</th><th>Notas</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Alinhado com ângulos do Georgi</td><td><strong>5/5</strong></td><td>Ângulo #3 como primário (recomendação explícita do Georgi para VSL). Suportes #1, #2, #4 integrados naturalmente</td></tr>
+              <tr><td>Diferenciado da LP</td><td><strong>5/5</strong></td><td>Complementar, não redundante. Abordagem emocional vs racional</td></tr>
+              <tr><td>Formato adequado pro canal</td><td><strong>5/5</strong></td><td>Hybrid VSL é ideal para SaaS demo. 17 min é sweet spot. Talking head + slides + demo = mix correto</td></tr>
+              <tr><td>Hooks testáveis</td><td><strong>5/5</strong></td><td>6 variantes escritas com tipos diferentes (forbidden knowledge, fear+stat, question, IF/THEN, controversy, social proof)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="text-align: center; margin-top: 12px;">
+          <strong>Score médio de contexto:</strong>
+          <span style="font-size: 20px; font-weight: 900; color: var(--green);">5/5</span>
+        </p>
+      </div>
+
+      <div class="card obs-card">
+        <h3>Observação V1: Founder Story</h3>
+        <p><span class="tag amber">Severidade: Média</span></p>
+        <p>O Bloco 2 (Epiphany Bridge) é uma história ficcional/arquetípica. Antes da produção, precisa ser adaptada para a história REAL do founder ou de um membro da equipe. A estrutura emocional deve ser mantida — só trocar os detalhes reais.</p>
+        <p><em>Não bloqueia aprovação mas DEVE ser resolvido antes de produzir.</em></p>
+      </div>
+      <div class="card obs-card">
+        <h3>Observação V2: Demo Dependência</h3>
+        <p><span class="tag amber">Severidade: Média</span></p>
+        <p>O Bloco 5 (Demo) assume que existe screen recording ou mockup animado do produto. Se WAGGO ainda está em desenvolvimento, usar wireframe animado ou protótipo clicável.</p>
+        <p><em>Afeta produção, não script.</em></p>
+      </div>
+      <div class="card obs-card low">
+        <h3>Observação V3: Mini VSL</h3>
+        <p><span class="tag blue">Severidade: Baixa</span></p>
+        <p>O Halbert mencionou possibilidade de Mini VSL derivada (3-5 min) para retargeting. Recomendo solicitar quando houver dados de performance da VSL principal.</p>
+        <p><em>Oportunidade, não problema.</em></p>
+      </div>
+    </div>
+
+    <!-- REVIEW 2: Email Strategy -->
+    <div class="section">
+      <div class="section-header">
+        <div class="review-section-header">
+          <h2 class="section-title">Review 2: Email Strategy (Fase 7 — @ben-settle)</h2>
+          <span class="review-verdict verdict-approved">APPROVED</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Critérios Eliminatórios</h3>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>Critério</th><th>Veredicto</th><th>Notas</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Cada email vende algo (Settle rule #1)</td><td><span class="tag green">PASS</span></td><td>Verificado em todas as 5 SOS + 7 onboarding + 4 abandonment. Cada email tem CTA</td></tr>
+              <tr><td>Subject lines criam curiosidade sem revelar</td><td><span class="tag green">PASS</span></td><td>30 subject lines na biblioteca. Nenhuma revela conteúdo. Curiosity-driven</td></tr>
+              <tr><td>Tom soa como pessoa, não empresa</td><td><span class="tag green">PASS</span></td><td>Plain text. Conversacional. Sem "Dear valued subscriber." Voz de "amigo esperto de pets"</td></tr>
+              <tr><td>Compliance (CAN-SPAM, claims)</td><td><span class="tag green">PASS</span></td><td>Disclaimers presentes. Unsubscribe mencionado. Zero claims de saúde. FTC-safe</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="text-align: center; margin-top: 12px;"><strong>Resultado eliminatório: 4/4 PASS.</strong></p>
+      </div>
+
+      <div class="card">
+        <h3>Critérios de Qualidade</h3>
+        <div class="score-row">
+          <div class="score-block">
+            <div class="score-ring" data-score="5" data-max="5"><span>5</span></div>
+            <div class="score-label">Infotainment</div>
+          </div>
+          <div class="score-block">
+            <div class="score-ring" data-score="5" data-max="5"><span>5</span></div>
+            <div class="score-label">Progressão SOS</div>
+          </div>
+          <div class="score-block">
+            <div class="score-ring" data-score="4" data-max="5"><span>4</span></div>
+            <div class="score-label">Standalone</div>
+          </div>
+          <div class="score-block">
+            <div class="score-ring" data-score="5" data-max="5"><span>5</span></div>
+            <div class="score-label">Tone adaptation</div>
+          </div>
+          <div class="score-block">
+            <div class="score-ring" data-score="5" data-max="5"><span>5</span></div>
+            <div class="score-label">Angle integration</div>
+          </div>
+          <div class="score-block">
+            <div class="score-ring" data-score="5" data-max="5"><span>5</span></div>
+            <div class="score-label">Subject lines</div>
+          </div>
+          <div class="score-block">
+            <div class="score-ring" data-score="5" data-max="5"><span>5</span></div>
+            <div class="score-label">Frequency</div>
+          </div>
+          <div class="score-block">
+            <div class="score-ring" data-score="5" data-max="5"><span>5</span></div>
+            <div class="score-label">Onboarding</div>
+          </div>
+        </div>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>Critério</th><th>Score</th><th>Notas</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Infotainment (entretem E informa)</td><td><strong>5/5</strong></td><td>Cada email conta uma história ou usa uma analogia. A analogia GPS do SOS Email 3 é particularmente eficaz</td></tr>
+              <tr><td>Progressão do SOS</td><td><strong>5/5</strong></td><td>Arco narrativo claro: resultado &rarr; backstory &rarr; epifania &rarr; benefícios &rarr; urgência. Rifle method bem executado</td></tr>
+              <tr><td>Standalone capability</td><td><strong>4/5</strong></td><td>SOS é episódico por design (rifle), mas cada email TAMBÉM funciona sozinho. Onboarding e weekly são 100% standalone</td></tr>
+              <tr><td>Tone adaptation para SaaS pet</td><td><strong>5/5</strong></td><td>O Settle natural seria mais crude. A adaptação para pet parents é perfeita: direto, pessoal, empático, mas nunca boring</td></tr>
+              <tr><td>Angle integration</td><td><strong>5/5</strong></td><td>Segue a recomendação do Georgi: ângulos combinados, não um-por-email. Tabela de combinação no Part 1 é útil</td></tr>
+              <tr><td>Subject line variety</td><td><strong>5/5</strong></td><td>30 subject lines cobrindo todos os 7 tipos de email. Boa distribuição</td></tr>
+              <tr><td>Email frequency strategy</td><td><strong>5/5</strong></td><td>Progressão inteligente: daily sequences &rarr; weekly &rarr; daily (month 3+). Não sobrecarrega no início</td></tr>
+              <tr><td>Onboarding sequence</td><td><strong>5/5</strong></td><td>7 emails, cada um focado em uma feature. Day 5 (repulsion soft) é estratégico. Day 6 (conversion) com math direto</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="text-align: center; margin-top: 12px;">
+          <strong>Score médio de qualidade:</strong>
+          <span style="font-size: 20px; font-weight: 900; color: var(--green);">4.87/5</span>
+          — ACIMA do threshold.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Critérios de Contexto</h3>
+        <div class="score-row">
+          <div class="score-block">
+            <div class="score-ring" data-score="5" data-max="5"><span>5</span></div>
+            <div class="score-label">Funnel (Brunson)</div>
+          </div>
+          <div class="score-block">
+            <div class="score-ring" data-score="5" data-max="5"><span>5</span></div>
+            <div class="score-label">LP/VSL (Halbert)</div>
+          </div>
+          <div class="score-block">
+            <div class="score-ring" data-score="5" data-max="5"><span>5</span></div>
+            <div class="score-label">Ângulos (Georgi)</div>
+          </div>
+          <div class="score-block">
+            <div class="score-ring" data-score="4" data-max="5"><span>4</span></div>
+            <div class="score-label">Escalabilidade</div>
+          </div>
+        </div>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>Critério</th><th>Score</th><th>Notas</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Alinhado com funnel architecture (Brunson)</td><td><strong>5/5</strong></td><td>SOS, abandonment, onboarding, post-conv, upgrade — todos mapeados na Fase 3. Timings consistentes</td></tr>
+              <tr><td>Alinhado com LP e VSL (Halbert)</td><td><strong>5/5</strong></td><td>Mecanismo (AI + AAFCO/FEDIAF), Stack ($1,182), price anchoring ($575 vs $9.99) — todos consistentes</td></tr>
+              <tr><td>Alinhado com ângulos (Georgi)</td><td><strong>5/5</strong></td><td>Angle Combination Guide segue recomendações explícitas do Georgi</td></tr>
+              <tr><td>Escalabilidade</td><td><strong>4/5</strong></td><td>Weekly templates são bom ponto de partida. Daily emails precisarão de conteúdo contínuo. Plano claro para isso</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="text-align: center; margin-top: 12px;">
+          <strong>Score médio de contexto:</strong>
+          <span style="font-size: 20px; font-weight: 900; color: var(--green);">4.75/5</span>
+        </p>
+      </div>
+
+      <div class="card obs-card high">
+        <h3>Observação E1: Testimonials Placeholder</h3>
+        <p><span class="tag red">Severidade: Alta</span></p>
+        <p>Emails de social proof (Weekly #4, Post-Conv) usam testimonials placeholder. DEVEM ser substituídos por depoimentos reais antes do envio.</p>
+        <p><em>Não enviar com testimonials fabricados — isso viola FTC e destrói credibilidade.</em></p>
+      </div>
+      <div class="card obs-card low">
+        <h3>Observação E2: Pro Upgrade Sequence</h3>
+        <p><span class="tag blue">Severidade: Baixa</span></p>
+        <p>O Settle mencionou que não escreveu a Pro Upgrade sequence completa (3 emails). Apenas Post-Conv 3 serve como teaser. A sequence completa deve ser escrita após dados reais de uso.</p>
+        <p><em>Não é necessário no launch. Implementar após Month 1.</em></p>
+      </div>
+      <div class="card obs-card">
+        <h3>Observação E3: [Max] Personalization Token</h3>
+        <p><span class="tag amber">Severidade: Média</span></p>
+        <p>Todos os emails usam [Max] como personalização. Precisa verificar com equipe de dev se o email system suporta merge tags dinâmicos (nome do pet + profile name).</p>
+        <p><em>Sem personalization, usar fallback genérico ("your pet").</em></p>
+      </div>
+      <div class="card obs-card low">
+        <h3>Observação E4: Repulsion Email (Onboarding Day 5)</h3>
+        <p><span class="tag blue">Severidade: Informativa</span></p>
+        <p>O email "WAGGO is not for everyone" é um soft repulsion. Para pet parents, o tom está correto (não tão agressivo quanto o Settle natural). Manter como está — funciona como filtro sem alienar.</p>
+        <p><em>Nenhuma ação necessária.</em></p>
+      </div>
+    </div>
+
+    <!-- CROSS-DELIVERABLE CONSISTENCY CHECK -->
+    <div class="section">
+      <div class="section-header">
+        <h2 class="section-title">Cross-Deliverable Consistency Check</h2>
+      </div>
+
+      <div class="card">
+        <h3>Mecanismo Único (UMP)</h3>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>Peça</th><th>Como o UMP aparece</th><th>Consistente?</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Ângulos (Georgi)</td><td>"IA treinada em AAFCO/FEDIAF + plano personalizado em &lt;2 min"</td><td><span class="check-pass">&#10003;</span></td></tr>
+              <tr><td>LP (Halbert)</td><td>"WAGGO's AI is trained on AAFCO/FEDIAF guidelines" + demo preview</td><td><span class="check-pass">&#10003;</span></td></tr>
+              <tr><td>VSL (Halbert)</td><td>"AI trained on AAFCO/FEDIAF + Nutritional Completeness Verification"</td><td><span class="check-pass">&#10003;</span></td></tr>
+              <tr><td>Emails (Settle)</td><td>"AAFCO/FEDIAF standards" + "every meal verified"</td><td><span class="check-pass">&#10003;</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p><strong>Resultado: UMP 100% consistente em todas as peças.</strong> O mecanismo é o mesmo. A ênfase varia por peça (LP foca no plano, VSL foca na verificação, emails focam na praticidade).</p>
+      </div>
+
+      <div class="card">
+        <h3>Price Anchoring</h3>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>Peça</th><th>Anchoring</th><th>Consistente?</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>LP</td><td>$575 consulta vs $9.99/mês. Stack: $1,182 total value</td><td><span class="check-pass">&#10003;</span></td></tr>
+              <tr><td>VSL</td><td>$575 consulta vs $9.99/mês. $0.33/dia. Stack: $1,182</td><td><span class="check-pass">&#10003;</span></td></tr>
+              <tr><td>Emails (SOS 5)</td><td>$575 vs $9.99. Stack resumido: $1,163</td><td><span class="check-warn">&#9888;</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p><strong>Discrepância:</strong> Stack value no SOS Email 5 é $1,163, enquanto LP e VSL usam $1,182. Isso vem do Brunson Phase 1 original vs. ajustes posteriores.</p>
+        <p><strong>Recomendação:</strong> Padronizar para <strong>$1,182</strong> em todas as peças. Ajustar SOS Email 5.</p>
+      </div>
+
+      <div class="card">
+        <h3>Social Proof Numbers</h3>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>Peça</th><th>Social Proof</th><th>Consistente?</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>LP</td><td>"47,382 pet parents" (flagged na Observação #1 do review anterior)</td><td><span class="check-warn">&#9888;</span></td></tr>
+              <tr><td>VSL</td><td>"thousands of pet parents" (ajustado per observação)</td><td><span class="check-pass">&#10003;</span></td></tr>
+              <tr><td>Emails</td><td>"thousands" / nenhum número específico</td><td><span class="check-pass">&#10003;</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p><strong>Resultado:</strong> VSL e emails seguiram a recomendação de não usar números fabricados. LP ainda usa "47,382" — manter a observação original: substituir antes de ir live.</p>
+      </div>
+
+      <div class="card">
+        <h3>Ângulos Integrados</h3>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>Peça</th><th>Ângulo Primário</th><th>Suportes</th><th>Alinhado?</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>LP</td><td>#2 ($575 Secret) + #1 (Ratio Trap)</td><td>#3, #4, #6</td><td><span class="check-pass">&#10003;</span></td></tr>
+              <tr><td>VSL</td><td>#3 (Silent Deficiency)</td><td>#1, #2, #4</td><td><span class="check-pass">&#10003;</span></td></tr>
+              <tr><td>Emails</td><td>Combinados por tema (tabela de combinação)</td><td>Múltiplos</td><td><span class="check-pass">&#10003;</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p><strong>Resultado: Ângulos 100% alinhados com as recomendações do Georgi.</strong></p>
+      </div>
+
+      <div class="card">
+        <h3>Tom e Voz</h3>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>Peça</th><th>Voz</th><th>Consistência</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>LP</td><td>Halbert: direto, proof-stacking, AIDA, greased slide</td><td><span class="check-pass">&#10003;</span></td></tr>
+              <tr><td>VSL</td><td>Halbert: vulnerável, storytelling, face-cam, emocional</td><td><span class="check-pass">&#10003;</span></td></tr>
+              <tr><td>Emails</td><td>Settle: conversacional, plain text, infotainment, personality-driven</td><td><span class="check-pass">&#10003;</span></td></tr>
+              <tr><td>Ângulos</td><td>Georgi: estratégico, mechanism-focused, fascinations</td><td><span class="check-pass">&#10003;</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p><strong>Nota:</strong> Cada agente manteve sua voz distinta. Não houve "contaminação" de estilo entre agentes. O UMP e as mensagens-chave são consistentes, mas a FORMA como cada um entrega é única. Isso é exatamente o que deveria acontecer.</p>
+      </div>
+
+      <div class="card">
+        <h3>Compliance Cross-Check</h3>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>Check</th><th>LP</th><th>VSL</th><th>Emails</th><th>Status</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>"Not a substitute for vet advice"</td><td><span class="check-pass">&#10003;</span></td><td><span class="check-pass">&#10003;</span></td><td><span class="check-pass">&#10003;</span></td><td><span class="tag green">PASS</span></td></tr>
+              <tr><td>Zero claims de cura/tratamento</td><td><span class="check-pass">&#10003;</span></td><td><span class="check-pass">&#10003;</span></td><td><span class="check-pass">&#10003;</span></td><td><span class="tag green">PASS</span></td></tr>
+              <tr><td>Módulos de saúde como "suporte/gerenciamento"</td><td><span class="check-pass">&#10003;</span></td><td><span class="check-pass">&#10003;</span></td><td><span class="check-pass">&#10003;</span></td><td><span class="tag green">PASS</span></td></tr>
+              <tr><td>Garantia honesta (7 dias)</td><td><span class="check-pass">&#10003;</span></td><td><span class="check-pass">&#10003;</span></td><td><span class="check-pass">&#10003;</span></td><td><span class="tag green">PASS</span></td></tr>
+              <tr><td>Pricing transparente</td><td><span class="check-pass">&#10003;</span></td><td><span class="check-pass">&#10003;</span></td><td><span class="check-pass">&#10003;</span></td><td><span class="tag green">PASS</span></td></tr>
+              <tr><td>Social proof verificável</td><td><span class="check-warn">&#9888;</span></td><td><span class="check-pass">&#10003;</span></td><td><span class="check-pass">&#10003;</span></td><td><span class="tag amber">LP precisa ajuste</span></td></tr>
+              <tr><td>CAN-SPAM compliance</td><td>N/A</td><td>N/A</td><td><span class="check-pass">&#10003;</span></td><td><span class="tag green">PASS</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p><strong>Compliance: PASS com 1 ponto de atenção pendente</strong> (social proof na LP — já flagged).</p>
+      </div>
+    </div>
+
+    <!-- RESUMO DE OBSERVAÇÕES -->
+    <div class="section">
+      <div class="section-header">
+        <h2 class="section-title">Resumo de Observações (Todas as Peças)</h2>
+      </div>
+
+      <div class="card">
+        <h3><span class="tag red">Prioridade Alta</span></h3>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>#</th><th>Observação</th><th>Peça</th><th>Ação</th><th>Quem</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>Social proof "47,382" fabricado</td><td>LP</td><td>Substituir por "thousands" ou número real</td><td>Dev/Marketing</td></tr>
+              <tr><td>2</td><td>Testimonials placeholder</td><td>Emails</td><td>Substituir por depoimentos reais antes de envio</td><td>Marketing</td></tr>
+              <tr><td>3</td><td>Stack value inconsistente ($1,163 vs $1,182)</td><td>SOS Email 5</td><td>Padronizar para $1,182</td><td>@ben-settle</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3><span class="tag amber">Prioridade Média</span></h3>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>#</th><th>Observação</th><th>Peça</th><th>Ação</th><th>Quem</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>4</td><td>Founder story ficcional</td><td>VSL</td><td>Adaptar para história real do founder</td><td>Produção</td></tr>
+              <tr><td>5</td><td>Demo depende de mockup/produto</td><td>VSL</td><td>Criar wireframe animado para MVP</td><td>Dev</td></tr>
+              <tr><td>6</td><td>Email personalization tokens ([Max])</td><td>Emails</td><td>Verificar suporte de merge tags no email system</td><td>Dev</td></tr>
+              <tr><td>7</td><td>Mobile optimization da LP</td><td>LP</td><td>Implementar seções colapsáveis, accordion</td><td>Dev</td></tr>
+              <tr><td>8</td><td>Preview section dependência técnica</td><td>LP</td><td>Definir approach MVP (estático vs dinâmico)</td><td>Dev</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3><span class="tag blue">Prioridade Baixa</span></h3>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>#</th><th>Observação</th><th>Peça</th><th>Ação</th><th>Quem</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>9</td><td>FAQ gap ("natural feeding is expensive")</td><td>LP</td><td>Adicionar FAQ</td><td>@gary-halbert</td></tr>
+              <tr><td>10</td><td>Tom da Seção 3 (AAFCO/FEDIAF)</td><td>LP</td><td>Ajuste cosmético opcional</td><td>@gary-halbert</td></tr>
+              <tr><td>11</td><td>Mini VSL para retargeting</td><td>VSL</td><td>Produzir após dados de performance</td><td>@gary-halbert</td></tr>
+              <tr><td>12</td><td>Pro Upgrade email sequence</td><td>Emails</td><td>Escrever após Month 1 de dados</td><td>@ben-settle</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCORECARD FINAL -->
+    <div class="section">
+      <div class="section-header">
+        <h2 class="section-title">Scorecard Final</h2>
+      </div>
+
+      <div class="card">
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>Peça</th><th>Eliminatório</th><th>Qualidade</th><th>Contexto</th><th>Veredicto</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Ângulos (Georgi)</td><td>10/10 PASS</td><td>—</td><td>—</td><td><span class="tag green">APPROVED</span> (Fase 4.1)</td></tr>
+              <tr><td>LP (Halbert)</td><td>4/4 PASS</td><td>4.6/5</td><td>4.75/5</td><td><span class="tag green">APPROVED</span> (Fase 4.3)</td></tr>
+              <tr><td>VSL (Halbert)</td><td>4/4 PASS</td><td>4.75/5</td><td>5/5</td><td><span class="tag green">APPROVED</span></td></tr>
+              <tr><td>Emails (Settle)</td><td>4/4 PASS</td><td>4.87/5</td><td>4.75/5</td><td><span class="tag green">APPROVED</span></td></tr>
+              <tr><td><strong>Cross-Deliverable</strong></td><td>UMP &#10003; Price &#9888; Angles &#10003; Compliance &#10003;</td><td></td><td></td><td><span class="tag green">APPROVED</span> com 3 itens de ação</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div style="text-align: center; margin-top: 24px;">
+          <p><strong>Score Médio Global:</strong></p>
+          <div class="score-ring" data-score="4.79" data-max="5" style="margin: 16px auto;"><span>4.79</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VEREDICTO FINAL -->
+    <div class="section">
+      <div class="section-header">
+        <h2 class="section-title">Veredicto Final</h2>
+      </div>
+
+      <div class="verdict-banner">
+        <h2>APPROVED — Go-to-Market Ready</h2>
+        <p>O pacote WAGGO está aprovado para implementação.</p>
+      </div>
+
+      <div class="card">
+        <h3>Qualidade Geral</h3>
+        <p>Excepcional. Cada agente entregou work product que excede o threshold em todas as métricas. A consistência cross-deliverable é forte — mecanismo, ângulos, compliance e messaging são coerentes em todas as peças.</p>
+      </div>
+
+      <div class="card">
+        <h3>Ponto Forte do Pacote</h3>
+        <p>A complementaridade entre LP (racional, price-driven) e VSL (emocional, fear-driven) cria dois caminhos de conversão para diferentes perfis psicográficos. Os emails nutrem com personalidade e vendem sem pedir desculpas.</p>
+      </div>
+
+      <div class="card">
+        <h3>Ponto de Atenção</h3>
+        <p>3 itens de prioridade alta devem ser resolvidos antes do go-live (social proof, testimonials, stack value consistency).</p>
+      </div>
+
+      <div class="card">
+        <h3>Próximos Passos Recomendados</h3>
+        <ol>
+          <li><strong>Imediato:</strong> Resolver os 3 itens de prioridade alta</li>
+          <li><strong>Pré-produção:</strong> Adaptar founder story da VSL + criar mockups de demo</li>
+          <li><strong>Dev:</strong> Implementar LP (mobile-first), quiz funnel, email automations com merge tags</li>
+          <li><strong>Produção:</strong> Gravar VSL com apresentador real + screen recording/mockup</li>
+          <li><strong>Launch:</strong> LP + Quiz + SOS + Onboarding emails. VSL como segundo touchpoint.</li>
+          <li><strong>Mês 1:</strong> Coletar testimonials reais. Escrever Pro Upgrade sequence.</li>
+          <li><strong>Mês 3:</strong> Escalar para daily emails (Settle shotgun method)</li>
+        </ol>
+      </div>
+
+      <div class="card">
+        <h3>Estrutura de Entregáveis Finais</h3>
+        <div style="font-family: monospace; font-size: 13px; line-height: 1.8; color: var(--text-primary); white-space: pre-line; padding: 12px; background: rgba(0,0,0,0.2); border-radius: 8px;">data/offers/WAGGO/assets/entregaveis/
+├── WAGGO-FASE0-RESEARCH.md          ← Pesquisa de mercado
+├── WAGGO-FASE03-FUNNEL-HACK.md      ← Análise de concorrentes
+├── WAGGO-FASE1-PRODUCT-STRATEGY.md  ← Value Ladder + Stack + Monetização
+├── WAGGO-FASE2-SEGMENTATION.md      ← 4 Perfis aspiracionais + quiz mapping
+├── WAGGO-FASE3-FUNNEL-ARCHITECTURE.md ← Funis + Onboarding + Automações
+├── WAGGO-FASE41-ANGLES.md           ← 10 ângulos de venda (Georgi)
+├── WAGGO-FASE42-LP-COPY.md          ← LP completa (Halbert) — APPROVED
+├── WAGGO-FASE43-LP-REVIEW.md        ← Review da LP (Chief) — APPROVED
+├── WAGGO-FASE6-VSL-SCRIPT.md        ← VSL Hybrid 17min (Halbert) — APPROVED
+├── WAGGO-FASE7-EMAIL-STRATEGY.md    ← Email strategy + sequences (Settle) — APPROVED
+└── WAGGO-FASE8-FINAL-REVIEW.md      ← Review Final (Chief) — APPROVED
+├── WAGGO-STRATEGIC-PLAN.md          ← Plano estratégico master</div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="section">
+      <p style="text-align: center; color: var(--text-secondary); font-style: italic;">
+        — Chief, filtrando winners<br><br>
+        "Julgar com base em padrões, não gosto pessoal."<br>
+        "Este pacote tem cara de winner. APPROVED."
+      </p>
+    </div>
+
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

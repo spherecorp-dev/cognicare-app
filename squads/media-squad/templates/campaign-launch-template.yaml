@@ -1,0 +1,153 @@
+# Campaign Launch Template — Media Squad
+# Template genérico para criação de campanhas Meta Ads.
+# Dados específicos da oferta vêm de: data/offers/{OFFER_ID}/campaign-config.yaml
+#
+# O agente @media-head decide qual profile usar baseado na oferta e no contexto.
+# Cada offer pode ter múltiplos profiles — o agente seleciona o mais adequado.
+
+# ─── Naming Convention ────────────────────────────────────────────────────────
+# Campanha: {type} - {method} - {offer_id} - {source} - {date}
+# Ad Set:   {campaign_name} - AdSet
+# Ad:       {creative_filename} (sem extensão)
+#
+# Variáveis:
+#   type:      CBO | ABO
+#   method:    TDC (Tráfego de Conversão) | ROAS | REACH
+#   offer_id:  ID da oferta (ex: MEMFR02)
+#   source:    AI | MANUAL | HYBRID
+#   date:      DD.MM
+
+naming:
+  campaign: "{type} - {method} - {offer_id} - {source} - {date}"
+  ad_set: "{campaign_name} - AdSet"
+  ad: "{creative_filename}"
+
+# ─── Campaign Profiles ───────────────────────────────────────────────────────
+# Cada profile é um conjunto de configs pronto pra usar.
+# O agente seleciona o profile com base no contexto da oferta.
+
+profiles:
+
+  cbo-tdc-worldwide-fr:
+    description: "CBO Bid Cap, vendas, worldwide excl Africa, francês"
+    campaign:
+      objective: OUTCOME_SALES
+      bid_strategy: LOWEST_COST_WITH_BID_CAP
+      status: PAUSED
+      special_ad_categories: []
+    ad_set:
+      billing_event: IMPRESSIONS
+      optimization_goal: OFFSITE_CONVERSIONS
+      promoted_object:
+        custom_event_type: PURCHASE
+        # pixel_id: vem da oferta (campaign-config.yaml)
+      targeting:
+        geo_locations:
+          country_groups: [europe, north_america, south_america, asia, oceania]
+        excluded_geo_locations:
+          countries: [TW, BR, VE, SG, GF]
+        locales: [9, 44, 1003]  # Francês (FR), Francês (CA), Francês (Todos)
+    ad:
+      status: PAUSED
+      cta: LEARN_MORE
+
+  cbo-tdc-europe-fr:
+    description: "CBO Bid Cap, vendas, só Europa, francês"
+    campaign:
+      objective: OUTCOME_SALES
+      bid_strategy: LOWEST_COST_WITH_BID_CAP
+      status: PAUSED
+      special_ad_categories: []
+    ad_set:
+      billing_event: IMPRESSIONS
+      optimization_goal: OFFSITE_CONVERSIONS
+      promoted_object:
+        custom_event_type: PURCHASE
+      targeting:
+        geo_locations:
+          countries: [FR, BE, CH, LU, MC]
+        locales: [9, 1003]
+    ad:
+      status: PAUSED
+      cta: LEARN_MORE
+
+  cbo-tdc-worldwide-en:
+    description: "CBO Bid Cap, vendas, worldwide excl Africa, inglês"
+    campaign:
+      objective: OUTCOME_SALES
+      bid_strategy: LOWEST_COST_WITH_BID_CAP
+      status: PAUSED
+      special_ad_categories: []
+    ad_set:
+      billing_event: IMPRESSIONS
+      optimization_goal: OFFSITE_CONVERSIONS
+      promoted_object:
+        custom_event_type: PURCHASE
+      targeting:
+        geo_locations:
+          country_groups: [europe, north_america, south_america, asia, oceania]
+        excluded_geo_locations:
+          countries: [TW, SG, GF]
+        locales: [6, 24]  # English (US), English (UK)
+    ad:
+      status: PAUSED
+      cta: LEARN_MORE
+
+  cbo-tdc-worldwide-es:
+    description: "CBO Bid Cap, vendas, worldwide excl Africa, espanhol"
+    campaign:
+      objective: OUTCOME_SALES
+      bid_strategy: LOWEST_COST_WITH_BID_CAP
+      status: PAUSED
+      special_ad_categories: []
+    ad_set:
+      billing_event: IMPRESSIONS
+      optimization_goal: OFFSITE_CONVERSIONS
+      promoted_object:
+        custom_event_type: PURCHASE
+      targeting:
+        geo_locations:
+          country_groups: [europe, north_america, south_america, asia, oceania]
+        excluded_geo_locations:
+          countries: [TW, BR, SG, GF]
+        locales: [3, 45, 1001]  # Espanhol (ES), Espanhol (LA), Espanhol (Todos)
+    ad:
+      status: PAUSED
+      cta: LEARN_MORE
+
+# ─── URL Tracking ─────────────────────────────────────────────────────────────
+# Parâmetros de tracking padrão (campo url_tags no Meta Ads, separado do link)
+# O agente usa estes params pra TODAS as campanhas.
+
+url_tags: "sub1={{ad.id}}&sub2={{adset.id}}&sub3={{campaign.id}}&sub4={{ad.name}}&sub5={{adset.name}}&sub6={{campaign.name}}&sub7={{placement}}&sub8={{site_source_name}}&utm_source=facebook&utm_medium=paid"
+
+# ─── Campos que vêm da Oferta ────────────────────────────────────────────────
+# O agente deve buscar estes dados em: data/offers/{OFFER_ID}/campaign-config.yaml
+#
+# Obrigatórios:
+#   - account_id:   Conta de ads (act_XXXX)
+#   - page_id:      Facebook Page vinculada
+#   - pixel_id:     Pixel de tracking
+#   - link_url:     URL de destino (VSL/LP)
+#   - bid_amount:   Limite de lance em centavos (ex: 20000 = R$200)
+#   - daily_budget: Orçamento diário em centavos (ex: 10000 = R$100)
+#   - profile:      Qual profile de campanha usar (ex: cbo-tdc-worldwide-fr)
+#
+# Opcionais (override do profile):
+#   - targeting_override:  Sobrescreve targeting do profile
+#   - locales_override:    Sobrescreve idiomas do profile
+#   - excluded_countries_override: Adiciona países à exclusão
+
+# ─── Meta API Reference ──────────────────────────────────────────────────────
+meta_api:
+  version: v21.0
+  locale_ids:
+    french_france: 9
+    french_canada: 44
+    french_all: 1003
+    english_us: 6
+    english_uk: 24
+    spanish_spain: 3
+    spanish_latam: 45
+    spanish_all: 1001
+  regulated_countries_to_exclude: [TW, SG]  # Exigem categorias regulamentadas regionais

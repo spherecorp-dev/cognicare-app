@@ -1,0 +1,37 @@
+# Performance Atual — WAGGO
+# Snapshot das metricas atuais da oferta
+# Atualizado por: @analyst, agentes de trafego, manualmente
+
+offer_id: WAGGO
+updated_at: ""
+
+metricas:
+  roas: null
+  cpa: null
+  ctr: null
+  cvr: null
+  spend_total: null
+  spend_diario_medio: null
+  receita_total: null
+  conversoes_total: null
+
+targets:
+  roas_target: null
+  cpa_target: null
+  spend_diario_target: null
+
+por_geo:
+  # en:
+  #   roas: null
+  #   cpa: null
+  #   spend: null
+  # pt-br:
+  #   roas: null
+  #   cpa: null
+  #   spend: null
+
+por_plataforma:
+  # meta:
+  #   roas: null
+  #   cpa: null
+  #   spend: null

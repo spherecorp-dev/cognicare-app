@@ -1,0 +1,114 @@
+name: media-squad
+version: 1.0.0
+description: Squad especializado em gestão de campanhas Meta Ads - decisões estratégicas com aprendizado contínuo, infraestrutura de tracking via RedTrack, execução de campanhas e análise/otimização em tempo real
+author: Unknown
+license: MIT
+slashPrefix: media
+
+aios:
+  minVersion: "2.1.0"
+  type: squad
+
+focus:
+  platform: meta
+  expansion: [tiktok, google, native]
+
+components:
+  agents:
+    - media-head.md
+    - media-engineer.md
+    - media-buyer.md
+    - media-analyst.md
+  tasks:
+    # media-head tasks
+    - analyze-campaign-context.md
+    - decide-campaign-structure.md
+    - define-budget-allocation.md
+    - define-bidding-strategy.md
+    - define-funnel-strategy.md
+    - create-contingency-plan.md
+    - log-strategic-decision.md
+    - approve-campaign-launch.md
+    # media-engineer tasks
+    - setup-redtrack-integration.md
+    - setup-tracking-pixel.md
+    - verify-sales-attribution.md
+    - configure-redtrack-postback.md
+    - warm-account-profiles.md
+    - check-business-manager-health.md
+    - setup-ad-domain.md
+    - test-redtrack-flow.md
+    # media-buyer tasks
+    - assemble-ad-content.md
+    - publish-meta-campaign.md
+    - upload-creative-assets.md
+    - adjust-campaign-bids.md
+    - reallocate-campaign-budget.md
+    - scale-winning-ads.md
+    - pause-losing-ads.md
+    # media-analyst tasks
+    - monitor-anomalies.md
+    - detect-rejected-creatives.md
+    - send-critical-alerts.md
+    - auto-recover-campaigns.md
+    - collect-platform-metrics.md
+    - analyze-daily-kpis.md
+    - classify-ad-performance.md
+    - detect-performance-trends.md
+    - generate-weekly-report.md
+    - recommend-optimization-actions.md
+  workflows:
+    - campaign-launch.yaml
+    - tracking-setup.yaml
+    - daily-optimization.yaml
+    - monitoring-alert.yaml
+    - weekly-reporting.yaml
+  checklists:
+    - pre-launch-checklist.md
+    - tracking-verification-checklist.md
+    - weekly-review-checklist.md
+    - account-health-checklist.md
+  templates:
+    - weekly-report-template.md
+    - campaign-brief-template.md
+    - decision-log-template.md
+  tools: []
+  scripts: []
+
+config:
+  extends: extend
+  files:
+    - meta-ad-specs.md
+    - redtrack-config.md
+    - classification-rules.md
+
+dependencies:
+  node:
+    - facebook-nodejs-business-sdk
+    - axios
+  python: []
+  squads: []
+  external:
+    - name: Meta Ads API
+      type: api
+      required: true
+    - name: RedTrack
+      type: service
+      required: true
+    - name: Multilogin
+      type: tool
+      required: false
+
+tags:
+  - media
+  - meta-ads
+  - campaign-management
+  - tracking
+  - optimization
+  - redtrack
+
+metadata:
+  domain: meta-ads-campaign-management
+  created_from_blueprint: ../squads/.designs/media-squad-design.yaml
+  created_at: "2026-02-20"
+  overall_confidence: 0.93

@@ -1,0 +1,734 @@
+# B2G Capital — Mapa Arquitetural do Sistema AIOS
+
+> Gerado em: 2026-02-22 | Versão: 1.0
+
+---
+
+## Visão Geral: 5 Camadas
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                        🖥️  DASHBOARD (Next.js)                         │
+│   Chat Jarvis │ Run Monitor │ Pipeline View │ Logs │ Outputs │ Queue   │
+└───────┬───────────────┬──────────────┬──────────────┬───────────────────┘
+        │               │              │              │
+        ▼               ▼              ▼              ▼
+┌─────────────────────────────────────────────────────────────────────────┐
+│                         🔌 API LAYER (Routes)                          │
+│  /jarvis/chat  │  /runs  │  /runs/[id]/*  │  /queue/*  │  /webhooks   │
+└───────┬───────────────┬──────────────┬──────────────┬───────────────────┘
+        │               │              │              │
+        ▼               ▼              ▼              ▼
+┌─────────────────────────────────────────────────────────────────────────┐
+│                    🧠 JARVIS (Intelligence Layer)                       │
+│  Command Parser │ Delegator │ Monitor │ Proactive │ Pattern Engine     │
+└───────┬───────────────┬──────────────┬──────────────────────────────────┘
+        │               │              │
+        ▼               ▼              ▼
+┌─────────────────────────────────────────────────────────────────────────┐
+│                  ⚙️  SQUAD ENGINE (Orchestration)                       │
+│  Orchestrator │ Pipeline Engine │ State Manager │ Condition Engine      │
+│  Task Executor │ Gate Evaluator │ Parallel Exec │ Retry + Idempotency  │
+└───────┬───────────────┬──────────────┬──────────────────────────────────┘
+        │               │              │
+        ▼               ▼              ▼
+┌─────────────────────────────────────────────────────────────────────────┐
+│                    🎯 SQUADS + AGENTS + TASKS                          │
+│  squad-copy (Stefan Georgi + Copy Chief)  │  media-squad (4 agents)    │
+│  22 tasks (intelligence→strategy→prod→QA) │  29 tasks (launch→optim)  │
+└───────┬───────────────┬──────────────┬──────────────────────────────────┘
+        │               │              │
+        ▼               ▼              ▼
+┌─────────────────────────────────────────────────────────────────────────┐
+│                    🔧 SERVICES (Shared Infrastructure)                  │
+│  LLM Service (Claude) │ Image Gen (NanoBanana/DALL-E) │ Transcription  │
+│  Meta Ads API │ Notion API │ Redis │ MongoDB │ BullMQ Queue            │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 1. Jarvis — Cérebro do Sistema
+
+```
+                              ┌──────────────────┐
+                              │   👤 USUÁRIO      │
+                              │  "Roda squad-copy │
+                              │   pra MEMFR02"    │
+                              └────────┬─────────┘
+                                       │
+                                       ▼
+                    ┌──────────────────────────────────────┐
+                    │         JARVIS CHAT (API)            │
+                    │    dashboard/api/jarvis/chat          │
+                    │                                      │
+                    │  Tools disponíveis:                   │
+                    │  • run_squad(squad, pipeline, params) │
+                    │  • check_status(run_id)               │
+                    │  • control_run(run_id, action)        │
+                    │  • morning_brief()                    │
+                    │  • delegate_task(agent, task, input)  │
+                    │  • create_notion_task(...)            │
+                    └──────────┬───────────────────────────┘
+                               │
+                    ┌──────────▼───────────────────────────┐
+                    │      COMMAND PARSER                   │
+                    │  jarvis-command-parser.js             │
+                    │                                      │
+                    │  NLP → Structured Command:            │
+                    │  • RUN_SQUAD                          │
+                    │  • CHECK_STATUS                       │
+                    │  • CONTROL_RUN (pause/resume/abort)   │
+                    │  • MORNING_BRIEF                      │
+                    │  • DELEGATE_TASK                      │
+                    │  • LIST_OFFERS / LIST_SQUADS          │
+                    └──────────┬───────────────────────────┘
+                               │
+              ┌────────────────┼────────────────┐
+              ▼                ▼                ▼
+   ┌──────────────┐  ┌────────────────┐  ┌──────────────────┐
+   │  DELEGATOR   │  │   MONITOR      │  │  PROACTIVE       │
+   │              │  │                │  │  INTELLIGENCE     │
+   │ Routes to:   │  │ • Stale check  │  │                  │
+   │ 14 agents    │  │ • Anomalies    │  │ • Morning brief  │
+   │ by domain    │  │ • Alerts       │  │ • Anomaly detect │
+   │              │  │ • Health rpt   │  │ • Next actions   │
+   └──────┬───────┘  └────────────────┘  └──────────────────┘
+          │
+          ▼
+   ┌──────────────────────────────────┐
+   │      PATTERN ENGINE              │
+   │  jarvis-pattern-engine.js        │
+   │                                  │
+   │  TF-IDF scoring:                 │
+   │  exact ≥90% │ strong 70-89%      │
+   │  partial 50-69% │ weak <50%      │
+   │                                  │
+   │  Learns from outcomes →          │
+   │  Improves future suggestions     │
+   └──────────────────────────────────┘
+```
+
+### Jarvis Delegation Routing Table
+
+```
+┌─────────────────────┬──────────────────────┬──────────────┐
+│ Domínio             │ Agente               │ Squad        │
+├─────────────────────┼──────────────────────┼──────────────┤
+│ strategy_product    │ @pm (Morgan)         │              │
+│ architecture_tech   │ @architect (Aria)    │              │
+│ stories_backlog     │ @sm (River)          │              │
+│ validation          │ @po (Pax)            │              │
+│ implementation      │ @dev (Dex)           │              │
+│ quality             │ @qa (Quinn)          │              │
+│ database            │ @data-engineer (Dara)│              │
+│ research            │ @analyst (Atlas)     │              │
+│ deploy              │ @devops (Gage)       │              │
+│ design              │ @ux (Uma)            │              │
+│ copy                │ @stefan-georgi       │ squad-copy   │
+│ copy_chief          │ @copy-chief          │ squad-copy   │
+│ media               │ @media-head          │ media-squad  │
+│ framework           │ @aios-master (Orion) │              │
+└─────────────────────┴──────────────────────┴──────────────┘
+```
+
+---
+
+## 2. Squad Engine — Motor de Execução
+
+```
+        ┌──────────────────────────┐
+        │   POST /api/runs         │
+        │   { squadId, trigger,    │
+        │     pipeline, priority } │
+        └────────────┬─────────────┘
+                     │
+                     ▼
+        ┌──────────────────────────┐
+        │     QUEUE MANAGER        │     ┌─────────────────┐
+        │     (BullMQ)             │────▶│  QUEUE WORKER   │
+        │                          │     │  Processa jobs   │
+        │  Prioridades:            │     │  em background   │
+        │  • critical (1)          │     └────────┬────────┘
+        │  • high (2)              │              │
+        │  • normal (3)            │              │
+        │  • low (4)               │              ▼
+        └──────────────────────────┘
+                                    ┌──────────────────────────────┐
+                                    │     SQUAD ORCHESTRATOR       │
+                                    │     squad-orchestrator.js    │
+                                    │                              │
+                                    │  1. resolveSquadPath()       │
+                                    │  2. loadSquad() + validate   │
+                                    │  3. executeSquad()           │
+                                    └──────────────┬───────────────┘
+                                                   │
+                              ┌─────────────────────┼─────────────────────┐
+                              ▼                     ▼                     ▼
+               ┌──────────────────┐  ┌──────────────────┐  ┌──────────────────┐
+               │  STATE MANAGER   │  │ CONDITION ENGINE  │  │  EVENT STORE     │
+               │                  │  │                   │  │                  │
+               │ • Save/Load      │  │ • Pre-conditions  │  │ • step.started   │
+               │ • Pause/Resume   │  │ • Post-conditions │  │ • step.completed │
+               │ • SHA256 checksum│  │ • {{path}} resolve│  │ • step.failed    │
+               │ • Redis + FS     │  │ • Validation types│  │ • anomaly        │
+               │ • MongoDB archive│  │                   │  │ • Append-only    │
+               └──────────────────┘  └──────────────────┘  └──────────────────┘
+                                                   │
+                                                   ▼
+                              ┌─────────────────────────────────────────┐
+                              │        PIPELINE EXECUTION LOOP          │
+                              │                                         │
+                              │  Para cada step no pipeline:            │
+                              │                                         │
+                              │  ┌─────────────────────────────────┐    │
+                              │  │ 1. PRE-CONDITIONS (blockers)    │    │
+                              │  │    ConditionEngine.validate()   │    │
+                              │  │    Fail? → HALT pipeline        │    │
+                              │  └──────────────┬──────────────────┘    │
+                              │                 ▼                       │
+                              │  ┌─────────────────────────────────┐    │
+                              │  │ 2. IDEMPOTENCY CHECK            │    │
+                              │  │    Já executou? → Skip + reuse  │    │
+                              │  └──────────────┬──────────────────┘    │
+                              │                 ▼                       │
+                              │  ┌─────────────────────────────────┐    │
+                              │  │ 3. TASK EXECUTION               │    │
+                              │  │    ┌─────────┐  ┌────────────┐  │    │
+                              │  │    │task_pura │  │agent_task  │  │    │
+                              │  │    │(JS func) │  │(LLM call)  │  │    │
+                              │  │    └─────────┘  └────────────┘  │    │
+                              │  └──────────────┬──────────────────┘    │
+                              │                 ▼                       │
+                              │  ┌─────────────────────────────────┐    │
+                              │  │ 4. OUTPUT → CONTEXT ACCUMULATE  │    │
+                              │  │    step.output merges into ctx  │    │
+                              │  └──────────────┬──────────────────┘    │
+                              │                 ▼                       │
+                              │  ┌─────────────────────────────────┐    │
+                              │  │ 5. POST-CONDITIONS (validate)   │    │
+                              │  │    Check output schema          │    │
+                              │  └──────────────┬──────────────────┘    │
+                              │                 ▼                       │
+                              │  ┌─────────────────────────────────┐    │
+                              │  │ 6. GATE EVALUATION              │    │
+                              │  │    on_verdict: approved → next  │    │
+                              │  │    on_verdict: rejected → loop  │    │
+                              │  └──────────────┬──────────────────┘    │
+                              │                 ▼                       │
+                              │  ┌─────────────────────────────────┐    │
+                              │  │ 7. STATE CHECKPOINT             │    │
+                              │  │    Save context + checksum      │    │
+                              │  │    Redis + FS dual-write        │    │
+                              │  └─────────────────────────────────┘    │
+                              │                                         │
+                              │  Loop até pipeline completo ou falha    │
+                              └─────────────────────────────────────────┘
+```
+
+### Tipos de Task
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                     TASK EXECUTOR                                │
+│                     task-executor.js                             │
+│                                                                  │
+│  Detecta tipo do step e roteia:                                  │
+│                                                                  │
+│  ┌───────────────────────┐     ┌──────────────────────────────┐ │
+│  │     PURE TASK          │     │      AGENT TASK              │ │
+│  │  pure-task-runner.js   │     │   agent-task-runner.js       │ │
+│  │                        │     │                              │ │
+│  │  Execução determinista │     │  1. Load persona (.md)       │ │
+│  │  Sem LLM, sem I/O     │     │  2. Load task instructions   │ │
+│  │  externo (ou com API)  │     │  3. Format input + context   │ │
+│  │                        │     │  4. Call LLMService.execute() │ │
+│  │  Exemplos:             │     │  5. Parse structured output  │ │
+│  │  • fetch-offer-data    │     │                              │ │
+│  │  • generate-prompts    │     │  Exemplos:                   │ │
+│  │  • package-creative    │     │  • interpret-offer-data      │ │
+│  │  • spy-transcribe      │     │  • suggest-angles            │ │
+│  │  • catalog-references  │     │  • generate-image-concepts   │ │
+│  │                        │     │  • review-creative           │ │
+│  └───────────────────────┘     └──────────────────────────────┘ │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 3. Squad-Copy — Pipeline Criativo Completo
+
+```
+                        ┌──────────────────────┐
+                        │  TRIGGER: MEMFR02    │
+                        │  offerId + platforms  │
+                        └──────────┬───────────┘
+                                   │
+═══════════════════════════════════════════════════════════
+  PHASE 1: INTELLIGENCE (Entender a oferta e o mercado)
+═══════════════════════════════════════════════════════════
+                                   │
+                    ┌──────────────▼──────────────┐
+                    │  fetch-offer-data [PURE]     │
+                    │  Lê: offer.yaml, performance,│
+                    │  winners, compliance, assets │
+                    └──────────────┬──────────────┘
+                                   │
+                    ┌──────────────▼──────────────┐
+                    │  interpret-offer-data        │
+                    │  [@copy-chief → LLM]         │
+                    │  Analisa UMP, público, dores │
+                    └──────────────┬──────────────┘
+                                   │
+                    ┌──────────────▼──────────────┐
+                    │  direct-spy [@copy-chief]    │
+                    │  Define estratégia de spy    │
+                    └──────────────┬──────────────┘
+                                   │
+              ┌────────────────────┼────────────────────┐
+              ▼                    ▼                    ▼
+   ┌──────────────┐    ┌──────────────┐    ┌──────────────┐
+   │ spy-scrape   │    │spy-transcribe│    │spy-reconstruct│
+   │ [PURE]       │    │[PURE/Whisper]│    │[@copy-chief]  │
+   └──────┬───────┘    └──────┬───────┘    └──────┬───────┘
+          └────────────────────┼────────────────────┘
+                               ▼
+              ┌────────────────────────────────┐
+              │  catalog-references [PURE]      │
+              │  Organiza referências coletadas │
+              └──────────────┬─────────────────┘
+                             ▼
+              ┌────────────────────────────────┐
+              │  deconstruct-references [PURE]  │
+              │  Extrai padrões e estruturas    │
+              └──────────────┬─────────────────┘
+                             │
+═══════════════════════════════════════════════════════════
+  PHASE 2: STRATEGY (Decidir ângulos e métodos)
+═══════════════════════════════════════════════════════════
+                             │
+              ┌──────────────▼──────────────┐
+              │  suggest-angles              │
+              │  [@stefan-georgi → LLM]      │
+              │  5-12 ângulos com confidence  │
+              └──────────────┬──────────────┘
+                             │
+              ┌──────────────▼──────────────┐
+              │  select-method               │
+              │  [@copy-chief → LLM]         │
+              │  RMBC? PAS? AIDA? %split     │
+              └──────────────┬──────────────┘
+                             │
+              ┌──────────────▼──────────────┐
+              │  decide-format               │
+              │  [@copy-chief → LLM]         │
+              │  Imagem vs Vídeo por ângulo  │
+              └──────────────┬──────────────┘
+                             │
+═══════════════════════════════════════════════════════════
+  PHASE 3: PRODUCTION (Gerar criativos)
+═══════════════════════════════════════════════════════════
+                             │
+              ┌──────────────┼──────────────┐
+              ▼                              ▼
+   ┌──────────────────┐          ┌──────────────────┐
+   │ IMAGE PATH       │          │ VIDEO PATH       │
+   │                  │          │                  │
+   │ generate-image-  │          │ generate-scripts │
+   │ concepts         │          │ [@stefan-georgi] │
+   │ [@stefan-georgi] │          │ 5-10 variações   │
+   └────────┬─────────┘          └────────┬─────────┘
+            │                             │
+            ▼                             ▼
+   ┌──────────────────┐          ┌──────────────────┐
+   │ review-image-    │          │ review-creative  │
+   │ concept          │◄─────┐  │ [@copy-chief]    │◄─────┐
+   │ [@copy-chief]    │      │  │                  │      │
+   │                  │      │  │ approved/rejected│      │
+   │ approved/rejected│      │  └────────┬─────────┘      │
+   └────────┬─────────┘      │           │                │
+            │                │           │   ┌────────────┘
+    ┌───────┴───────┐        │   ┌───────┴───────┐
+    │  approved?    │        │   │  approved?    │
+    │  YES    NO    │        │   │  YES    NO    │
+    │   │   request-│────────┘   │   │   request-│
+    │   │   revision│            │   │   revision│
+    │   ▼           │            │   ▼           │
+    │               │            │               │
+   ┌▼─────────────────┐        ┌▼─────────────────┐
+   │generate-image-    │        │generate-ad-copy  │
+   │prompts [PURE]     │        │[@stefan-georgi]   │
+   │NanoBanana/DALL-E  │        │Headlines + descs  │
+   │format             │        │per platform       │
+   └────────┬──────────┘        └────────┬─────────┘
+            │                            │
+            ▼                            │
+   ┌──────────────────┐                  │
+   │generate-images-  │                  │
+   │api [PURE]        │                  │
+   │NanoBanana primary│                  │
+   │DALL-E fallback   │                  │
+   └────────┬─────────┘                  │
+            │                            │
+            ▼                            │
+   ┌──────────────────┐                  │
+   │review-generated- │                  │
+   │image             │                  │
+   │[@copy-chief]     │                  │
+   │Quality check     │                  │
+   └────────┬─────────┘                  │
+            │                            │
+═══════════════════════════════════════════════════════════
+  PHASE 5: DELIVERY (Empacotar e entregar)
+═══════════════════════════════════════════════════════════
+            │                            │
+            └────────────┬───────────────┘
+                         ▼
+              ┌──────────────────────┐
+              │ package-image-       │
+              │ creative [PURE]      │
+              │                      │
+              │ • Naming convention  │
+              │ • Multi-size export  │
+              │ • META-AD-COPY.md    │
+              │ • TIKTOK-AD-COPY.md  │
+              │ • creative-registry  │
+              │ • BATCH-README.md    │
+              └──────────────────────┘
+```
+
+### Agentes do Squad-Copy
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                       SQUAD-COPY v4.0.1                         │
+│                   "Persuasion Engine"                            │
+│                                                                  │
+│  ┌───────────────────────────┐  ┌────────────────────────────┐  │
+│  │  🎭 STEFAN GEORGI         │  │  🎯 COPY CHIEF             │  │
+│  │  Copy Thinker             │  │  Strategic QA & Orchestrator│  │
+│  │                           │  │                            │  │
+│  │  Método: RMBC             │  │  Papel:                    │  │
+│  │  R - Research             │  │  • Interpretar oferta      │  │
+│  │  M - Mechanism            │  │  • Dirigir spy             │  │
+│  │  B - Brief                │  │  • Selecionar método       │  │
+│  │  C - Copy                 │  │  • Decidir formato         │  │
+│  │                           │  │  • Revisar criativos       │  │
+│  │  Faz:                     │  │  • Aprovar/Rejeitar        │  │
+│  │  • Suggest angles         │  │  • Pedir revisões          │  │
+│  │  • Generate concepts      │  │                            │  │
+│  │  • Generate scripts       │  │  Filosofia:                │  │
+│  │  • Generate ad copy       │  │  "Qualidade > Quantidade"  │  │
+│  │                           │  │                            │  │
+│  │  Filosofia:               │  │  Futuro: Lead Agent do     │  │
+│  │  Trust → Love → Profit    │  │  Persuasion Engine cross-  │  │
+│  │                           │  │  squads                    │  │
+│  └───────────────────────────┘  └────────────────────────────┘  │
+│                                                                  │
+│  Plataformas: Meta, TikTok, YouTube*, Native*                   │
+│  Geos: FR, ES, EN                                               │
+│  Modo: 100% autônomo (0 intervenção humana obrigatória)         │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 4. Media-Squad — Gestão de Campanhas
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                      MEDIA-SQUAD v1.0.0                         │
+│              "Meta Ads Campaign Management"                      │
+│                                                                  │
+│  ┌──────────────┐ ┌──────────────┐ ┌──────────┐ ┌───────────┐  │
+│  │ 🧠 MEDIA     │ │ 🔧 MEDIA     │ │ 💰 MEDIA │ │ 📊 MEDIA  │  │
+│  │   HEAD       │ │  ENGINEER    │ │  BUYER   │ │  ANALYST  │  │
+│  │              │ │              │ │          │ │           │  │
+│  │ Estratégia   │ │ Tracking     │ │ Execução │ │ Monitorar │  │
+│  │ Budget alloc │ │ Pixels       │ │ Campanhas│ │ Anomalias │  │
+│  │ Bidding      │ │ RedTrack     │ │ Scale/   │ │ KPIs      │  │
+│  │ Funil        │ │ UTMs         │ │ Pause    │ │ Relatórios│  │
+│  │ Contingência │ │ Multilogin   │ │ Upload   │ │ Trends    │  │
+│  └──────────────┘ └──────────────┘ └──────────┘ └───────────┘  │
+│                                                                  │
+│  5 Pipelines:                                                    │
+│  ┌─────────────────┐ ┌──────────────────┐ ┌──────────────────┐  │
+│  │ campaign-launch  │ │ tracking-setup   │ │daily-optimization│  │
+│  │ Cria campanha    │ │ RedTrack + pixel │ │ Scale winners    │  │
+│  │ com criativos    │ │ + UTMs           │ │ Pause losers     │  │
+│  └─────────────────┘ └──────────────────┘ └──────────────────┘  │
+│  ┌─────────────────┐ ┌──────────────────┐                       │
+│  │monitoring-alert  │ │ weekly-reporting │                       │
+│  │ Alertas quando   │ │ Relatório        │                       │
+│  │ métricas saem    │ │ semanal auto     │                       │
+│  └─────────────────┘ └──────────────────┘                       │
+│                                                                  │
+│  Integrações: Meta Ads API, RedTrack, Multilogin                │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 5. Services — Infraestrutura Compartilhada
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                     SERVICES LAYER                               │
+│                                                                  │
+│  ┌─────────────────────────────────────────────────────────┐    │
+│  │  🤖 LLM SERVICE (llm-service.js)                        │    │
+│  │                                                          │    │
+│  │  Model: claude-sonnet-4-5 │ Max: 8192 tokens            │    │
+│  │                                                          │    │
+│  │  execute() ──────── Chamada única com auto-continuation  │    │
+│  │    │                (até 5 rounds se truncar)            │    │
+│  │    ├─ systemPrompt (persona do agente)                   │    │
+│  │    ├─ taskInstructions (o que fazer)                     │    │
+│  │    ├─ input (dados de contexto)                          │    │
+│  │    └─ outputFormat (json/text/yaml)                      │    │
+│  │                                                          │    │
+│  │  executeBatch() ─── Para 50+ criativos de uma vez        │    │
+│  │    │                Chunks de 10, concurrency 3          │    │
+│  │    ├─ items[] (array grande)                             │    │
+│  │    ├─ chunkSize (default 10)                             │    │
+│  │    └─ concurrency (default 3)                            │    │
+│  │                                                          │    │
+│  │  JSON Parser: 6-level fallback                           │    │
+│  │    raw → fence strip → open fence → brace extract →      │    │
+│  │    truncation repair → graceful fallback                 │    │
+│  └─────────────────────────────────────────────────────────┘    │
+│                                                                  │
+│  ┌───────────────────┐ ┌─────────────────┐ ┌────────────────┐  │
+│  │ 🎨 IMAGE GEN      │ │ 🎤 TRANSCRIPTION│ │ 📢 META ADS    │  │
+│  │                   │ │                 │ │                │  │
+│  │ NanoBanana (1st)  │ │ Whisper API     │ │ Campaign CRUD  │  │
+│  │ DALL-E (fallback) │ │ Audio → Text    │ │ Creative upload │  │
+│  │ Flux (planned)    │ │ Segmentation    │ │ Analytics      │  │
+│  │ Midjourney (plan) │ │                 │ │ Optimization   │  │
+│  │                   │ │                 │ │                │  │
+│  │ Plug-and-play     │ │                 │ │                │  │
+│  │ provider system   │ │                 │ │                │  │
+│  └───────────────────┘ └─────────────────┘ └────────────────┘  │
+│                                                                  │
+│  ┌───────────────────┐ ┌─────────────────┐ ┌────────────────┐  │
+│  │ 📝 NOTION         │ │ 🔴 REDIS        │ │ 🍃 MONGODB     │  │
+│  │                   │ │                 │ │                │  │
+│  │ Task management   │ │ State cache     │ │ Run archive    │  │
+│  │ Create/Update     │ │ Queue (BullMQ)  │ │ Auto-archive   │  │
+│  │ Query tasks       │ │ Circuit breaker │ │ on completion  │  │
+│  └───────────────────┘ └─────────────────┘ └────────────────┘  │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 6. Dashboard — Interface Completa
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                     DASHBOARD (Next.js)                          │
+│                                                                  │
+│  ┌─────────────────────────────────────────────────────────┐    │
+│  │ 💬 JARVIS CHAT (/jarvis)                                 │    │
+│  │ Chat com tool use → dispara squads, monitora, delega     │    │
+│  └─────────────────────────────────────────────────────────┘    │
+│                                                                  │
+│  ┌─────────────────────────────────────────────────────────┐    │
+│  │ 🏃 RUNS (/runs)                                          │    │
+│  │ Lista de execuções │ Filtros │ Status em real-time        │    │
+│  │                                                          │    │
+│  │ /runs/[runId] — Detalhes:                                │    │
+│  │ ├─ Pipeline Visualizer (fases com progresso)             │    │
+│  │ ├─ Step Details (lista de tasks com status)              │    │
+│  │ ├─ Controls (pause/resume/abort)                         │    │
+│  │ ├─ Execution Logs (terminal-style, color-coded)          │    │
+│  │ ├─ Agent Logs (expandable cards per agent execution)     │    │
+│  │ ├─ Context Snapshot (accumulated context viewer)         │    │
+│  │ └─ Outputs (quando completo)                             │    │
+│  └─────────────────────────────────────────────────────────┘    │
+│                                                                  │
+│  ┌────────────┐ ┌────────────┐ ┌────────────┐ ┌────────────┐   │
+│  │ /pipeline  │ │ /campaigns │ │ /outputs   │ │ /settings  │   │
+│  │ Visual     │ │ (planned)  │ │ Browse all │ │ Config     │   │
+│  │ builder    │ │            │ │ outputs    │ │            │   │
+│  └────────────┘ └────────────┘ └────────────┘ └────────────┘   │
+│                                                                  │
+│  API Endpoints:                                                  │
+│  ├─ /api/jarvis/chat      POST  (tool use streaming)            │
+│  ├─ /api/jarvis/monitor   GET   (health report)                 │
+│  ├─ /api/jarvis/transcribe POST (Whisper)                       │
+│  ├─ /api/jarvis/speak     POST  (TTS)                           │
+│  ├─ /api/runs             GET/POST (CRUD)                       │
+│  ├─ /api/runs/[id]/state  GET   (SSE real-time)                 │
+│  ├─ /api/runs/[id]/control POST (pause/resume/abort)            │
+│  ├─ /api/runs/[id]/logs   GET   (execution logs)                │
+│  ├─ /api/runs/[id]/outputs GET  (task outputs)                  │
+│  ├─ /api/queue/status     GET   (BullMQ status)                 │
+│  ├─ /api/queue/dlq        GET   (dead letter queue)             │
+│  ├─ /api/squads           GET   (available squads)              │
+│  ├─ /api/webhooks/n8n     POST  (n8n triggers)                  │
+│  └─ /api/health           GET   (system health)                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 7. Fluxo Completo: Usuário → Resultado
+
+```
+┌──────┐
+│ USER │ "Gera 50 criativos pra MEMFR02"
+└──┬───┘
+   │
+   ▼
+┌──────────────────┐     ┌──────────────────────────────────┐
+│  JARVIS CHAT     │────▶│  COMMAND PARSER                   │
+│  /api/jarvis/chat│     │  "Roda squad-copy pra MEMFR02"   │
+└──────────────────┘     │  → { action: RUN_SQUAD,           │
+                         │    squad: 'squad-copy',            │
+                         │    params: { offerId: 'MEMFR02' } }│
+                         └──────────────┬─────────────────────┘
+                                        │
+                                        ▼
+                         ┌──────────────────────────────────┐
+                         │  POST /api/runs                   │
+                         │  { squadId: 'squad-copy',         │
+                         │    trigger: { offerId: 'MEMFR02' }│
+                         │    pipeline: 'creative-pipeline' } │
+                         └──────────────┬─────────────────────┘
+                                        │
+                                        ▼
+                         ┌──────────────────────────────────┐
+                         │  BULLMQ QUEUE                     │
+                         │  Enqueue job → Worker picks up    │
+                         └──────────────┬─────────────────────┘
+                                        │
+                                        ▼
+                         ┌──────────────────────────────────┐
+                         │  SQUAD ORCHESTRATOR               │
+                         │                                   │
+                         │  1. Load squad-copy/squad.yaml    │
+                         │  2. Load creative-pipeline.yaml   │
+                         │  3. Validate + init state         │
+                         │  4. Generate runId                │
+                         └──────────────┬─────────────────────┘
+                                        │
+      ┌─────────────────────────────────┼──────────────────────────┐
+      │                                 │                          │
+      ▼                                 ▼                          ▼
+┌────────────┐                ┌──────────────────┐        ┌────────────┐
+│ Phase 1:   │                │ Phase 2:         │        │ Phase 3:   │
+│INTELLIGENCE│ ──────────────▶│ STRATEGY         │───────▶│ PRODUCTION │
+│            │                │                  │        │            │
+│@copy-chief │                │@stefan-georgi    │        │@stefan +   │
+│interprets  │                │suggests angles   │        │@copy-chief │
+│offer data  │                │@copy-chief       │        │generate +  │
+│+ spy       │                │selects method    │        │review loop │
+└────────────┘                └──────────────────┘        └─────┬──────┘
+                                                                │
+                              ┌─────────────────────────────────┘
+                              │
+                              ▼
+                   ┌──────────────────┐          ┌──────────────────┐
+                   │ LLM SERVICE      │          │ IMAGE GEN        │
+                   │ executeBatch()   │          │ SERVICE          │
+                   │                  │          │                  │
+                   │ 50 criativos →   │          │ NanoBanana API   │
+                   │ 5 chunks × 10   │          │ 50 images gen    │
+                   │ concurrency: 3   │          │ text overlay     │
+                   │                  │          │ multi-size       │
+                   └──────────────────┘          └──────────────────┘
+                              │                          │
+                              └────────────┬─────────────┘
+                                           │
+                                           ▼
+                              ┌──────────────────────┐
+                              │  DELIVERY             │
+                              │  package-image-       │
+                              │  creative             │
+                              │                       │
+                              │  Output:              │
+                              │  ├─ 50 images (2      │
+                              │  │  sizes each)       │
+                              │  ├─ META-AD-COPY.md   │
+                              │  ├─ TIKTOK-AD-COPY.md │
+                              │  ├─ BATCH-README.md   │
+                              │  └─ creative-registry  │
+                              └──────────┬─────────────┘
+                                         │
+                                         ▼
+                              ┌──────────────────────┐
+                              │  STATE: COMPLETED     │
+                              │  Archived → MongoDB   │
+                              │  Outputs → /api/runs  │
+                              │  /[runId]/outputs     │
+                              └──────────────────────┘
+                                         │
+                                         ▼
+                              ┌──────────────────────┐
+                              │  JARVIS RESPONDS:     │
+                              │  "✅ 50 criativos     │
+                              │  gerados para MEMFR02.│
+                              │  2 tamanhos cada.     │
+                              │  Batch pronto em      │
+                              │  data/offers/MEMFR02/ │
+                              │  assets/criativos/"   │
+                              └──────────────────────┘
+```
+
+---
+
+## 8. Resiliência e Padrões
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    PADRÕES DE RESILIÊNCIA                         │
+│                                                                  │
+│  ┌─────────────────┐  ┌─────────────────┐  ┌────────────────┐  │
+│  │ DUAL-WRITE      │  │ CIRCUIT BREAKER │  │ IDEMPOTENCY    │  │
+│  │                 │  │                 │  │                │  │
+│  │ Redis (primary) │  │ CLOSED → OPEN   │  │ (runId, taskId,│  │
+│  │ FS (fallback)   │  │ → HALF_OPEN     │  │  inputHash)    │  │
+│  │ MongoDB (archive│  │                 │  │ Skip duplicate │  │
+│  │                 │  │ 5 failures →    │  │ executions     │  │
+│  │ Se Redis cai:   │  │ open 60s →      │  │                │  │
+│  │ FS assume       │  │ test 1 request  │  │                │  │
+│  └─────────────────┘  └─────────────────┘  └────────────────┘  │
+│                                                                  │
+│  ┌─────────────────┐  ┌─────────────────┐  ┌────────────────┐  │
+│  │ RETRY HANDLER   │  │ AUTO-CONTINUE   │  │ CHECKSUM       │  │
+│  │                 │  │                 │  │ VALIDATION     │  │
+│  │ Exponential     │  │ LLM trunca?    │  │                │  │
+│  │ backoff         │  │ Auto-continua   │  │ SHA256 em cada │  │
+│  │ Max N retries   │  │ até 5 rounds    │  │ state save     │  │
+│  │ Compensation    │  │ Concatena texto │  │ Detecta        │  │
+│  │ on failure      │  │ Repair JSON     │  │ corrupção      │  │
+│  └─────────────────┘  └─────────────────┘  └────────────────┘  │
+│                                                                  │
+│  ┌─────────────────┐  ┌─────────────────┐  ┌────────────────┐  │
+│  │ PAUSE/RESUME    │  │ EVENT STORE     │  │ DEAD LETTER Q  │  │
+│  │                 │  │                 │  │                │  │
+│  │ Save state →    │  │ Append-only     │  │ Jobs que       │  │
+│  │ checkpoint      │  │ Fire-and-forget │  │ falharam →     │  │
+│  │ Resume from     │  │ Event loss ≠    │  │ retry manual   │  │
+│  │ exact point     │  │ pipeline stop   │  │ via /api/queue │  │
+│  └─────────────────┘  └─────────────────┘  └────────────────┘  │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## Legenda
+
+| Símbolo | Significado |
+|---------|-------------|
+| `[PURE]` | Task pura — JavaScript determinístico, sem LLM |
+| `[@agent → LLM]` | Task de agente — persona + instructions + LLM call |
+| `→` | Fluxo sequencial |
+| `──▶` | Delegação / chamada |
+| `◄───┐ ... ────┘` | Loop de revisão (approved/rejected) |
+| `═══` | Separador de fase |
+
+---
+
+*Gerado automaticamente a partir da análise do codebase B2G Capital AIOS*

@@ -1,0 +1,504 @@
+# Epic Execution Plan: Squad Orchestration Engine
+# Created: 2026-02-20
+# Epic: epic-squad-orchestration-engine.md
+# PRD: docs/prd/squad-orchestration-engine.md
+# Total Stories: 21 (4 phases)
+
+metadata:
+  epic_id: squad-orchestration-engine
+  epic_file: docs/epics/epic-squad-orchestration-engine.md
+  prd_file: docs/prd/squad-orchestration-engine.md
+  created_at: 2026-02-20
+  created_by: "@pm (Morgan)"
+  status: draft
+  total_stories: 21
+  total_phases: 4
+  estimated_duration: 8-10 weeks
+  project: B2G Capital AIOS Framework
+  enhancement_type: brownfield
+
+phases:
+  # ============================================================================
+  # FASE 1: MVP — Core Engine (9 stories, 3-4 weeks)
+  # ============================================================================
+  phase_1:
+    name: "MVP — Core Engine"
+    duration: "3-4 weeks"
+    deliverable: "Core engine, dashboard, event sourcing, n8n contracts"
+    stories:
+      - story_id: "1.1"
+        title: "Squad Orchestrator Core — Carregamento e Validação de Playbooks"
+        file: "docs/stories/squad-orchestration-engine/1.1-squad-orchestrator-core.md"
+        executor: "@dev"
+        quality_gate: "@architect"
+        quality_gate_tools: ["code_review", "pattern_validation", "yaml_schema_validation"]
+        estimated_effort: "2-3 days"
+        dependencies: []
+        acceptance_criteria:
+          - "SquadOrchestrator loads squad.yaml from squads/{name}/"
+          - "Validates schema (name, version, components, workflows)"
+          - "Loads workflows/{pipeline}.yaml"
+          - "Validates pipeline schema (phases, steps, trigger, context)"
+          - "Rejects invalid YAML or missing required fields"
+          - "Loads initial context from pipeline.context.load_on_start"
+          - "Creates unique runId (format: {squad}-{timestamp})"
+          - "Initializes state in .aios/squad-runs/{runId}/state.yaml"
+
+      - story_id: "1.2"
+        title: "Task Executor — Execução de Tasks Puras e Agent Tasks"
+        file: "docs/stories/squad-orchestration-engine/1.2-task-executor.md"
+        executor: "@dev"
+        quality_gate: "@architect"
+        quality_gate_tools: ["code_review", "agent_integration_test", "output_validation"]
+        estimated_effort: "3-4 days"
+        dependencies: ["1.1"]
+        acceptance_criteria:
+          - "TaskExecutor.executeTask() loads task file from squads/{name}/tasks/{task}.md"
+          - "Executes task_pura (JavaScript function or script)"
+          - "Executes agent_task (invokes AgentInvoker)"
+          - "Interpolates variables in input ({{context.field}})"
+          - "Returns structured output per task file"
+          - "Saves output to run context"
+          - "Emits step.completed event with duration and output"
+
+      - story_id: "1.3"
+        title: "Condition Engine — Validação de Pre/Post-Conditions"
+        file: "docs/stories/squad-orchestration-engine/1.3-condition-engine.md"
+        executor: "@dev"
+        quality_gate: "@architect"
+        quality_gate_tools: ["validation_logic_review", "error_handling_check"]
+        estimated_effort: "2-3 days"
+        dependencies: ["1.2"]
+        acceptance_criteria:
+          - "ConditionEngine.validate() receives conditions array + context"
+          - "Resolves source in context (e.g., fetch-offer-data.output.offer_context)"
+          - "Validates validation rule (e.g., offer_context present, angles >= 3)"
+          - "Returns { all: boolean, blockersFailed: boolean, failures: [...] }"
+          - "If blocker=true and fails, TaskExecutor throws PreConditionError"
+          - "Post-conditions validated after task execution"
+          - "Failed conditions logged in event log"
+
+      - story_id: "1.4"
+        title: "State Manager — Pause/Resume com File System"
+        file: "docs/stories/squad-orchestration-engine/1.4-state-manager.md"
+        executor: "@dev"
+        quality_gate: "@architect"
+        quality_gate_tools: ["state_integrity_check", "recovery_testing"]
+        estimated_effort: "2-3 days"
+        dependencies: ["1.1", "1.2", "1.3"]
+        acceptance_criteria:
+          - "StateManager.save() saves complete state to .aios/squad-runs/{runId}/state.yaml"
+          - "State includes: status, current_phase, current_step, accumulated context, completed phases"
+          - "StateManager.pause() changes status to paused, saves timestamp"
+          - "StateManager.resume() loads state, changes to running, continues from where stopped"
+          - "POST /api/runs/{runId}/control accepts {action: pause|resume|abort}"
+          - "Pause waits for current task to complete (graceful)"
+          - "Resume validates state.yaml integrity before resuming"
+
+      - story_id: "1.5"
+        title: "Dashboard Backend — API Routes para Runs"
+        file: "docs/stories/squad-orchestration-engine/1.5-dashboard-backend.md"
+        executor: "@dev"
+        quality_gate: "@architect"
+        quality_gate_tools: ["api_contract_review", "error_response_validation"]
+        estimated_effort: "2-3 days"
+        dependencies: ["1.1", "1.2", "1.3", "1.4"]
+        acceptance_criteria:
+          - "POST /api/runs creates new execution: {squadId, trigger} → {runId}"
+          - "GET /api/runs lists all executions (paginated, last 50)"
+          - "GET /api/runs/{runId}/state returns current state (polling every 2s)"
+          - "POST /api/runs/{runId}/control accepts {action: pause|resume|abort}"
+          - "GET /api/runs/{runId}/logs returns execution logs (last 100 lines)"
+          - "GET /api/runs/{runId}/outputs returns generated artifacts"
+          - "Endpoints return 404 if runId not found, 400 if invalid payload"
+
+      - story_id: "1.6"
+        title: "Dashboard Frontend — Pipeline Monitor UI"
+        file: "docs/stories/squad-orchestration-engine/1.6-dashboard-frontend.md"
+        executor: "@ux-design-expert"
+        quality_gate: "@dev"
+        quality_gate_tools: ["component_validation", "accessibility_check", "design_review"]
+        estimated_effort: "3-4 days"
+        dependencies: ["1.5"]
+        acceptance_criteria:
+          - "Page /dashboard/runs lists executions with status (running, paused, completed, failed)"
+          - "Page /dashboard/runs/{runId} shows execution details"
+          - "PipelineVisualizer: phase diagram (Green=completed, Yellow=running, Gray=pending, Red=failed)"
+          - "StepDetails: current step with input/output"
+          - "ContextSnapshot: accumulated data (collapsible)"
+          - "Controls: pause/resume/abort with confirmation"
+          - "Polling every 2s to update state (useQuery with refetchInterval)"
+          - "Shows final outputs when run completes"
+          - "Shows errors with stack trace if run fails"
+
+      - story_id: "1.7"
+        title: "Event Sourcing — Audit Trail com events.jsonl"
+        file: "docs/stories/squad-orchestration-engine/1.7-event-sourcing.md"
+        executor: "@dev"
+        quality_gate: "@architect"
+        quality_gate_tools: ["event_schema_validation", "replay_testing"]
+        estimated_effort: "2-3 days"
+        dependencies: ["1.1", "1.2", "1.3", "1.4", "1.5", "1.6"]
+        acceptance_criteria:
+          - "EventStore implemented in event-store.js"
+          - "All events saved to .aios/squad-runs/{runId}/events.jsonl (append-only)"
+          - "Events include: run.started, phase.started, step.completed, gate.evaluated, run.paused, run.completed"
+          - "Each event has: { event, timestamp, data: {...} }"
+          - "EventStore.replay(runId) reconstructs state from events"
+          - "Dashboard displays event timeline on run details page"
+          - "Replay works even if state.yaml corrupted (recovery)"
+
+      - story_id: "1.8"
+        title: "E2E Testing — Squad-copy Completo"
+        file: "docs/stories/squad-orchestration-engine/1.8-e2e-testing.md"
+        executor: "@dev"
+        quality_gate: "@architect"
+        quality_gate_tools: ["test_coverage_review", "e2e_validation"]
+        estimated_effort: "3-4 days"
+        dependencies: ["1.1", "1.2", "1.3", "1.4", "1.5", "1.6", "1.7"]
+        acceptance_criteria:
+          - "Test suite with Cypress or Playwright"
+          - "Mock external APIs (DALL-E, Whisper) with nock or MSW"
+          - "Test flow: trigger run via POST /api/runs → poll state → validate outputs"
+          - "Test pause/resume in middle of pipeline"
+          - "Test abort and cleanup"
+          - "Test error handling (external API fails → retry → fallback)"
+          - "CI integrated (run tests before deploy)"
+
+      - story_id: "1.9"
+        title: "n8n Integration Contracts — Webhook Input/Output"
+        file: "docs/stories/squad-orchestration-engine/1.9-n8n-integration.md"
+        executor: "@dev"
+        quality_gate: "@architect"
+        quality_gate_tools: ["webhook_contract_review", "auth_validation"]
+        estimated_effort: "2-3 days"
+        dependencies: ["1.1", "1.2", "1.3", "1.4", "1.5", "1.6", "1.7", "1.8"]
+        acceptance_criteria:
+          - "POST /api/webhooks/n8n implemented per contract (section 3.6.3 PRD)"
+          - "Validates API key in Authorization: Bearer {token} header"
+          - "Rate limiting: max 100 requests/min per API key"
+          - "Registers callback URL in run state for later notification"
+          - "Callback implemented: POST {callback_url} on run completion"
+          - "Callback includes: runId, status, duration, outputs_path, error (if failed)"
+          - "Callback retry: 3x with exponential backoff on connection error"
+          - "Webhook logs saved to .aios/webhooks/log.jsonl"
+
+  # ============================================================================
+  # FASE 2: Robustez — Production-Grade Reliability (5 stories, 2-3 weeks)
+  # ============================================================================
+  phase_2:
+    name: "Robustez — Production-Grade Reliability"
+    duration: "2-3 weeks"
+    deliverable: "Gates, idempotency, circuit breakers, retry, API integrations"
+    stories:
+      - story_id: "2.1"
+        title: "Gate Evaluator — Review Gates com Loops"
+        file: "docs/stories/squad-orchestration-engine/2.1-gate-evaluator.md"
+        executor: "@dev"
+        quality_gate: "@architect"
+        quality_gate_tools: ["gate_logic_review", "loop_validation"]
+        estimated_effort: "2-3 days"
+        dependencies: ["1.1", "1.2", "1.3", "1.4", "1.5", "1.6", "1.7", "1.8"]
+        acceptance_criteria:
+          - "GateEvaluator.evaluateReviewGate() processes verdicts: APPROVED, REVISION_NEEDED, REJECTED"
+          - "APPROVED → continue to on_verdict.APPROVED"
+          - "REVISION_NEEDED → loop to on_verdict.REVISION_NEEDED if rounds < max_rounds"
+          - "REJECTED → go to on_verdict.REJECTED or discard"
+          - "Increments context.review_rounds each loop"
+          - "If rounds >= max_rounds, escalate (create gate.escalated event)"
+          - "All verdicts logged in event log"
+          - "Dashboard shows review loops in timeline"
+
+      - story_id: "2.2"
+        title: "Idempotency Keys — Evitar Execução Duplicada"
+        file: "docs/stories/squad-orchestration-engine/2.2-idempotency-keys.md"
+        executor: "@dev"
+        quality_gate: "@architect"
+        quality_gate_tools: ["cache_strategy_review", "idempotency_testing"]
+        estimated_effort: "2 days"
+        dependencies: ["1.1", "1.2", "1.3", "1.4", "1.5", "1.6", "1.7", "1.8", "2.1"]
+        acceptance_criteria:
+          - "TaskExecutor generates hash of (runId, step.id, input) as idempotency key"
+          - "Before executing task, checks cache: resultCache.get(key)"
+          - "If cache hit, returns cached result (skips execution)"
+          - "If cache miss, executes task, saves result in cache with TTL 24h"
+          - "Cache uses LRU (max 1000 entries) in memory (MVP) or Redis (production)"
+          - "Logs when task skipped due to cache hit"
+
+      - story_id: "2.3"
+        title: "Circuit Breaker — Proteção de APIs Externas"
+        file: "docs/stories/squad-orchestration-engine/2.3-circuit-breaker.md"
+        executor: "@dev"
+        quality_gate: "@architect"
+        quality_gate_tools: ["circuit_breaker_review", "failure_handling_validation"]
+        estimated_effort: "2 days"
+        dependencies: ["1.1", "1.2", "1.3", "1.4", "1.5", "1.6", "1.7", "1.8", "2.1", "2.2"]
+        acceptance_criteria:
+          - "APICircuitBreaker class with states: CLOSED | OPEN | HALF_OPEN"
+          - "Failure threshold: 5 consecutive failures → open circuit"
+          - "Timeout: circuit open for 60s, then tries HALF_OPEN"
+          - "If HALF_OPEN and success → reset to CLOSED"
+          - "If HALF_OPEN and failure → back to OPEN"
+          - "CircuitBreakerOpenError thrown when circuit open (doesn't try API)"
+          - "Dashboard shows circuit breaker status (DALL-E, Whisper, etc.)"
+
+      - story_id: "2.4"
+        title: "Error Handling — Retry Logic e Compensating Transactions"
+        file: "docs/stories/squad-orchestration-engine/2.4-error-handling.md"
+        executor: "@dev"
+        quality_gate: "@architect"
+        quality_gate_tools: ["error_handling_review", "retry_strategy_validation"]
+        estimated_effort: "3 days"
+        dependencies: ["1.1", "1.2", "1.3", "1.4", "1.5", "1.6", "1.7", "1.8", "2.1", "2.2", "2.3"]
+        acceptance_criteria:
+          - "Retry with exponential backoff for transient errors"
+          - "Rate limit (429) → retry 3x: 2s, 4s, 8s"
+          - "Timeout → retry 2x: 5s, 10s"
+          - "Non-transient errors (400, 401) → fail immediately"
+          - "Compensating transactions defined in playbook: on_failure.compensate"
+          - "Executed in reverse order if phase fails"
+          - "Structured logs of retry attempts and compensations"
+          - "Dashboard shows retries in timeline"
+
+      - story_id: "2.5"
+        title: "External API Integrations — DALL-E, Whisper, Spy Scraping"
+        file: "docs/stories/squad-orchestration-engine/2.5-external-api-integrations.md"
+        executor: "@dev"
+        quality_gate: "@architect"
+        quality_gate_tools: ["api_integration_review", "error_handling_validation", "security_scan"]
+        estimated_effort: "4-5 days"
+        dependencies: ["1.1", "1.2", "1.3", "1.4", "1.5", "1.6", "1.7", "1.8", "1.9", "2.1", "2.2", "2.3", "2.4"]
+        acceptance_criteria:
+          - "ImageGeneratorClient supports DALL-E, MidJourney, NanoBanana, Flux"
+          - "Circuit breaker per provider (threshold: 5 failures, timeout: 60s)"
+          - "Retry with exponential backoff (3x: 2s, 4s, 8s) for rate limits"
+          - "Content policy handling: sanitize prompt, retry 1x"
+          - "WhisperClient for audio/video transcription"
+          - "Multi-language support (FR, ES, EN, auto-detect)"
+          - "Timeout 60s per file, retry 2x with higher timeout"
+          - "Meta Ad Library API client (download ads)"
+          - "TikTok Creative Center API client (download videos)"
+          - "Concurrency control: max 5 downloads simultaneous"
+          - "Save raw media to .aios/squad-runs/{runId}/spy-downloads/"
+          - "API keys in .env (OPENAI_API_KEY, MIDJOURNEY_API_KEY, etc.)"
+          - "Provider selection configurable in playbook or runtime override"
+          - "Fallback between providers (DALL-E fails → try MidJourney)"
+          - "Structured logs in .aios/squad-runs/{runId}/logs/api-errors.jsonl"
+          - "Circuit breaker status visible in dashboard"
+          - "Graceful degradation: skip concept if API fails after retries"
+
+  # ============================================================================
+  # FASE 3: Automação — Webhooks & Inter-Squad (3 stories, 1 week)
+  # ============================================================================
+  phase_3:
+    name: "Automação — Webhooks & Inter-Squad"
+    duration: "1 week"
+    deliverable: "Webhooks, inter-squad communication, runtime overrides"
+    stories:
+      - story_id: "3.1"
+        title: "Webhook API — Trigger Externo via n8n"
+        file: "docs/stories/squad-orchestration-engine/3.1-webhook-api.md"
+        executor: "@dev"
+        quality_gate: "@architect"
+        quality_gate_tools: ["webhook_security_review", "rate_limiting_validation"]
+        estimated_effort: "2 days"
+        dependencies: ["1.1", "1.2", "1.3", "1.4", "1.5", "1.6", "1.7", "1.8", "2.1", "2.2", "2.3", "2.4"]
+        acceptance_criteria:
+          - "POST /api/webhooks/n8n accepts payload: { event, payload: { offerId } }"
+          - "Validates API key in Authorization: Bearer {key} header"
+          - "If event=offer.created, triggers squad-copy with { offer: offerId }"
+          - "Returns { success: true, runId } immediately (async)"
+          - "Registers callback webhook URL (if provided) to notify on run completion"
+          - "Rate limiting: max 100 requests/min per API key"
+          - "Webhook logs in .aios/webhooks/log.jsonl"
+
+      - story_id: "3.2"
+        title: "Inter-Squad Communication — Squad-to-Squad Calls"
+        file: "docs/stories/squad-orchestration-engine/3.2-inter-squad-communication.md"
+        executor: "@dev"
+        quality_gate: "@architect"
+        quality_gate_tools: ["inter_squad_protocol_review", "timeout_handling_validation"]
+        estimated_effort: "2-3 days"
+        dependencies: ["1.1", "1.2", "1.3", "1.4", "1.5", "1.6", "1.7", "1.8", "2.1", "2.2", "2.3", "2.4", "3.1"]
+        acceptance_criteria:
+          - "SquadOrchestrator.executeSquad() accepts trigger.type = inter_squad"
+          - "trigger.caller identifies calling squad (e.g., squad-trafego)"
+          - "waitForCompletion() method waits for run to complete (with timeout)"
+          - "getOutputs() returns structured outputs from run"
+          - "Logs show caller and relationship between runs"
+          - "Dashboard displays inter-squad calls in timeline"
+
+      - story_id: "3.3"
+        title: "Override System — Runtime Parameter Overrides"
+        file: "docs/stories/squad-orchestration-engine/3.3-override-system.md"
+        executor: "@dev"
+        quality_gate: "@architect"
+        quality_gate_tools: ["override_validation_review", "backward_compatibility_check"]
+        estimated_effort: "2 days"
+        dependencies: ["1.1", "1.2", "1.3", "1.4", "1.5", "1.6", "1.7", "1.8", "2.1", "2.2", "2.3", "2.4", "3.1", "3.2"]
+        acceptance_criteria:
+          - "Trigger accepts overrides field: { method, geos, platforms, skip_phases }"
+          - "Overrides passed to tasks via context"
+          - "Tasks check context.overrides.{field} before using defaults"
+          - "Example: select-method checks overrides.method — if present, returns directly without agent deciding"
+          - "Dashboard shows applied overrides on run details page"
+          - "Validation: overrides must be valid values (e.g., method must be modelagem|variacao|do-zero)"
+
+  # ============================================================================
+  # FASE 4: Scale — Queue, Redis, MongoDB (4 stories, 2 weeks)
+  # ============================================================================
+  phase_4:
+    name: "Scale — Queue, Redis, MongoDB"
+    duration: "2 weeks"
+    deliverable: "Queue-based execution, Redis cache, MongoDB history, parallelization"
+    stories:
+      - story_id: "4.1"
+        title: "Queue-Based Execution — BullMQ Integration"
+        file: "docs/stories/squad-orchestration-engine/4.1-queue-based-execution.md"
+        executor: "@devops"
+        quality_gate: "@architect"
+        quality_gate_tools: ["infrastructure_review", "queue_strategy_validation", "scalability_testing"]
+        estimated_effort: "3-4 days"
+        dependencies: ["1.1", "1.2", "1.3", "1.4", "1.5", "1.6", "1.7", "1.8", "2.1", "2.2", "2.3", "2.4", "3.1", "3.2", "3.3"]
+        acceptance_criteria:
+          - "Integration with BullMQ (Redis-backed queue)"
+          - "POST /api/runs enqueues job instead of executing directly"
+          - "Workers (max 10 concurrent) process jobs from queue"
+          - "Dashboard shows queue size and worker status"
+          - "Priority support: urgent runs can have high priority"
+          - "Failed jobs go to Dead Letter Queue (DLQ) after 3 retries"
+          - "Queue operation logs in .aios/queue/log.jsonl"
+
+      - story_id: "4.2"
+        title: "Redis State Cache — Fast Pause/Resume"
+        file: "docs/stories/squad-orchestration-engine/4.2-redis-state-cache.md"
+        executor: "@devops"
+        quality_gate: "@architect"
+        quality_gate_tools: ["cache_strategy_review", "failover_testing"]
+        estimated_effort: "2-3 days"
+        dependencies: ["1.1", "1.2", "1.3", "1.4", "1.5", "1.6", "1.7", "1.8", "2.1", "2.2", "2.3", "2.4", "3.1", "3.2", "3.3", "4.1"]
+        acceptance_criteria:
+          - "StateManager uses Redis for active state (key: run:{runId})"
+          - "File System maintained for backup and history"
+          - "save() writes to Redis + File System (dual write)"
+          - "load() reads from Redis first, fallback to File System if miss"
+          - "TTL 24h in Redis (after completion, state only in File System)"
+          - "Redis cluster (Upstash or Railway) for high availability"
+          - "Metrics: redis_hits, redis_misses, redis_latency"
+
+      - story_id: "4.3"
+        title: "MongoDB Historical Storage — Queryable Run History"
+        file: "docs/stories/squad-orchestration-engine/4.3-mongodb-historical-storage.md"
+        executor: "@data-engineer"
+        quality_gate: "@dev"
+        quality_gate_tools: ["schema_validation", "query_optimization", "index_review"]
+        estimated_effort: "2-3 days"
+        dependencies: ["1.1", "1.2", "1.3", "1.4", "1.5", "1.6", "1.7", "1.8", "2.1", "2.2", "2.3", "2.4", "3.1", "3.2", "3.3", "4.1", "4.2"]
+        acceptance_criteria:
+          - "Completed runs saved to MongoDB collection squad_runs"
+          - "Schema: { runId, squadId, trigger, status, started_at, completed_at, duration_ms, outputs, events_summary }"
+          - "Indexes: squadId, status, started_at"
+          - "Dashboard /dashboard/analytics with aggregate queries: avg duration per squad, success rate (24h, 7d, 30d), top failing tasks"
+          - "API endpoint GET /api/analytics returns metrics"
+          - "Data retention: 90 days (then archive or delete)"
+
+      - story_id: "4.4"
+        title: "Paralelização de Steps — Parallel Groups"
+        file: "docs/stories/squad-orchestration-engine/4.4-parallelization.md"
+        executor: "@dev"
+        quality_gate: "@architect"
+        quality_gate_tools: ["parallelization_review", "race_condition_testing"]
+        estimated_effort: "2-3 days"
+        dependencies: ["1.1", "1.2", "1.3", "1.4", "1.5", "1.6", "1.7", "1.8", "2.1", "2.2", "2.3", "2.4", "3.1", "3.2", "3.3", "4.1", "4.2", "4.3"]
+        acceptance_criteria:
+          - "Playbook supports type: parallel_group with array of tasks"
+          - "ParallelExecutor executes tasks in Promise.all()"
+          - "wait_for_all: true waits for all to complete before proceeding"
+          - "If one task fails, cancels others (or continues if fail_fast: false)"
+          - "Logs show parallel execution with timestamps"
+          - "Dashboard visualizes parallel steps as group"
+
+success_criteria:
+  phase_1:
+    - "MVP running squad-copy end-to-end with manual trigger via dashboard"
+    - "Dashboard shows real-time progress with pause/resume controls"
+    - "Event Sourcing implemented (complete audit trail)"
+    - "n8n webhook contracts functional (trigger + callback)"
+    - "All Phase 1 stories completed with passing tests"
+    - "Story Development Cycle continues working without regressions"
+
+  phase_2:
+    - "Review gates with loops implemented and tested"
+    - "Idempotency prevents duplicate task execution"
+    - "Circuit breakers protect external APIs"
+    - "Retry logic with exponential backoff handles transient errors"
+    - "External API integrations (DALL-E, Whisper, Spy) functional with mocks"
+    - "All Phase 2 stories completed with passing tests"
+
+  phase_3:
+    - "n8n webhooks trigger squad-copy automatically"
+    - "Inter-squad communication enables squad-trafego → squad-copy calls"
+    - "Runtime overrides modify pipeline behavior (method, geos, platforms)"
+    - "All Phase 3 stories completed with passing tests"
+    - "Automation reduces manual intervention to 0%"
+
+  phase_4:
+    - "Queue-based execution supports 100+ concurrent runs"
+    - "Redis cache reduces pause/resume latency to <100ms"
+    - "MongoDB stores queryable run history for analytics"
+    - "Parallel execution reduces pipeline duration by 30%+"
+    - "All Phase 4 stories completed with passing tests"
+    - "Production-ready infrastructure deployed"
+
+risks:
+  - risk: "External APIs unstable (DALL-E, Whisper)"
+    mitigation: "Circuit Breaker + Retry + Fallback (Stories 2.3, 2.4, 2.5)"
+    phase: 2
+
+  - risk: "State corruption (pause/resume)"
+    mitigation: "Event Sourcing replay + Dual write Redis/File System (Stories 1.7, 4.2)"
+    phase: [1, 4]
+
+  - risk: "Performance degradation (many concurrent runs)"
+    mitigation: "Queue-based execution + Resource quotas (Story 4.1)"
+    phase: 4
+
+  - risk: "Breaking changes to story dev cycle"
+    mitigation: "Coexistence via separate namespaces, E2E regression tests (Story 1.8)"
+    phase: 1
+
+rollback_plan:
+  - "Phase 1-3: Disable squad engine routes, fall back to story dev cycle only"
+  - "Phase 4: Reduce max workers 10 → 5, disable queue if Redis issues"
+  - "External APIs: Use mock images for testing if APIs fail consistently"
+  - "State corruption: Delete corrupted state.yaml, replay from events.jsonl"
+
+next_steps:
+  - step: 1
+    agent: "@po (Pax)"
+    action: "Validate epic structure and story breakdown against PRD"
+    timeline: "Before Story Manager handoff"
+
+  - step: 2
+    agent: "@architect (Aria)"
+    action: "Review technical approach and integration strategy"
+    timeline: "Before Story Manager handoff"
+
+  - step: 3
+    agent: "@sm (River)"
+    action: "Create 21 detailed story files in docs/stories/squad-orchestration-engine/"
+    timeline: "After PO/Architect validation"
+
+  - step: 4
+    agent: "@dev (Dex)"
+    action: "Begin Phase 1 Story 1.1 (Squad Orchestrator Core)"
+    timeline: "After story files created and validated"
+
+notes:
+  - "This epic follows brownfield enhancement pattern — adds new module without modifying existing story dev cycle"
+  - "Total 21 stories across 4 sequential phases (MVP → Robustez → Automação → Scale)"
+  - "First use case: squad-copy (Persuasion Engine) running 100% autonomous"
+  - "Foundation for future: squad-trafego, multi-squad orchestration, Jarvis meta-orchestrator"
+  - "Integration Architecture (Section 3.6 PRD): Motor handles critical path APIs (DALL-E, Whisper, Spy), n8n handles peripheral (Notion, Drive, Notifications)"
+  - "Executor assignments use dynamic assignment module (.aios-core/core/orchestration/executor-assignment.js)"
+  - "Quality gates aligned with risk: LOW (Pre-Commit only), MEDIUM (Pre-Commit + Pre-PR), HIGH (Pre-Commit + Pre-PR + Pre-Deployment)"

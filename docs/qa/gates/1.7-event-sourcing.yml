@@ -1,0 +1,78 @@
+storyId: "1.7"
+storyTitle: "Event Sourcing — Audit Trail com events.jsonl"
+reviewer: "Quinn (@qa)"
+reviewDate: "2026-02-21"
+verdict: PASS
+
+validation_results:
+  tests: "375/375 passed (15 suites)"
+  lint: "0 errors, 9 pre-existing warnings"
+  build: "Successful — /api/runs/[runId]/events route registered"
+  typecheck: "N/A (root project is CommonJS JS)"
+
+acceptance_criteria:
+  AC1_EventStore_Class:
+    status: PASS
+    evidence: "EventStore class in event-store.js with append(), getEvents(), replay() methods"
+  AC2_Append_Only_Log:
+    status: PASS
+    evidence: "fs.appendFileSync used for atomic writes. 100-event durability test passes."
+  AC3_Event_Types:
+    status: PASS
+    evidence: "12 EVENT_TYPES (11 from AC3 + state.recovered). All emitted from SquadOrchestrator and TaskExecutor."
+  AC4_Event_Schema:
+    status: PASS
+    evidence: "Schema { event, timestamp, runId, data } validated. Auto-generated ISO 8601 timestamp."
+  AC5_Replay_Capability:
+    status: PASS
+    evidence: "replay() reducer processes all 11 event types. Full run reconstruction test passes (12-event sequence)."
+  AC6_State_Recovery:
+    status: PASS
+    evidence: "StateManager falls back to EventStore.replay() on missing file, invalid YAML, checksum mismatch. 6 recovery tests."
+  AC7_Dashboard_Timeline_API:
+    status: PASS
+    evidence: "GET /api/runs/[runId]/events with pagination (limit=50 default, max=200), cursor, type filter. Build confirms route."
+  AC8_Integration_With_Orchestrator:
+    status: PASS
+    evidence: "SquadOrchestrator emits run.started/paused/resumed. TaskExecutor emits step.started/completed. All fire-and-forget."
+  AC9_Performance:
+    status: PASS
+    evidence: "append uses single fs.appendFileSync call (<5ms). 100-event durability test confirms no corruption."
+
+issues:
+  - severity: low
+    category: code
+    description: "EventStore.append() does not validate eventType against EVENT_TYPES constant. Unknown event types are accepted silently."
+    recommendation: "Consider adding optional strict validation mode. Current behavior is acceptable for extensibility."
+
+  - severity: low
+    category: code
+    description: "Dashboard API route instantiates new EventStore() on every request. No connection pooling or singleton."
+    recommendation: "Acceptable for MVP. Consider singleton pattern when traffic increases."
+
+  - severity: low
+    category: code
+    description: "step.completed event in replay() overwrites context if same stepId appears twice (dedup prevents duplicate in steps_completed but context gets overwritten)."
+    recommendation: "Current behavior is reasonable (latest wins). Document as known behavior."
+
+  - severity: low
+    category: tests
+    description: "No dedicated API route unit tests (e.g., with supertest/vitest). Build confirms route registration."
+    recommendation: "Story 1.8 (E2E Testing) should cover API endpoint testing. Not blocking for this story."
+
+quality_checks:
+  code_review: PASS
+  unit_tests: PASS
+  acceptance_criteria: PASS
+  no_regressions: PASS
+  performance: PASS
+  security: PASS
+  documentation: PASS
+
+notes: |
+  Solid implementation. EventStore follows append-only log pattern correctly.
+  Replay reducer handles all 11 event types with proper state reconstruction.
+  State recovery integration is backward-compatible (EventStore optional).
+  Fire-and-forget pattern correctly wraps all emissions in try/catch.
+  137 squad engine tests pass including updated integration test IT3.
+  All LOW-severity issues are acceptable for MVP scope.

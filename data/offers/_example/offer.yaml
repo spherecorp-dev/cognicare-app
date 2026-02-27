@@ -1,0 +1,197 @@
+# Offer Example — Reference Template
+# Use este arquivo como referência para criar novas offers
+# Copie para data/offers/{NEW_OFFER_ID}/ e preencha todos os campos
+
+id: "EXAMPLE01"
+name: "Nome da Oferta"
+type: "info-product"                               # info-product | physical-product | service | saas
+vertical: "health"                                 # health | wealth | relationships | other
+status: "active"                                   # draft | active | paused | archived
+
+# === ICP (Ideal Customer Profile) ===
+icp:
+  demographics:
+    age_range: "45-65"
+    gender: "ambos"                                # homem | mulher | ambos
+    income_level: "medio-alto"                     # baixo | medio | medio-alto | alto
+    education: "medio"                             # baixo | medio | superior
+
+  psychographics:
+    pain_points:
+      - "Dor crônica nas articulações"
+      - "Frustr modelo com tratamentos tradicionais ineficazes"
+      - "Medo de cirurgia ou medicamentos com efeitos colaterais"
+
+    desires:
+      - "Solução natural e segura"
+      - "Alívio rápido e duradouro"
+      - "Recuperar mobilidade e qualidade de vida"
+
+    awareness_level: "problem-aware"               # unaware | problem-aware | solution-aware | product-aware
+
+# === MECANISMO (Big Idea / Unique Mechanism) ===
+mechanism:
+  name: "Método do Mel Ancestral"
+  big_idea: "Composto bioativo do mel de abelhas silvestres que regenera cartilagem naturalmente"
+
+  how_it_works:
+    - "Compostos anti-inflamatórios naturais reduzem inflamação"
+    - "Enzimas específicas estimulam regeneração de tecidos"
+    - "Fortalece cartilagem ao longo do tempo"
+
+  unique_advantage: "Funciona onde outros falharam porque ataca a CAUSA (cartilagem degenerada), não apenas sintomas"
+
+  proof_elements:
+    - type: "scientific"
+      claim: "Estudo X demonstrou Y% de melhora em Z semanas"
+    - type: "testimonial"
+      claim: "12.000+ clientes satisfeitos em 3 países"
+    - type: "authority"
+      claim: "Recomendado por Dr. João Silva (Especialista em Medicina Integrativa)"
+
+# === OFERTA (O que o cliente recebe) ===
+offer_stack:
+  main_product:
+    name: "Guia Método do Mel"
+    type: "digital"                                # digital | physical | hybrid
+    deliverables:
+      - "Ebook PDF de 120 páginas"
+      - "Vídeos passo-a-passo (12 módulos)"
+      - "Planilha de acompanhamento"
+
+  bonuses:
+    - name: "Bônus 1: Receitas Anti-Inflamatórias"
+      value: "€47"
+      included: true
+    - name: "Bônus 2: Sessão de Consultoria (30min)"
+      value: "€97"
+      included: "conditional"                      # true | false | conditional
+
+  pricing:
+    currency: "EUR"
+    regular_price: 147
+    current_price: 47
+    payment_options:
+      - type: "one-time"
+        price: 47
+      - type: "installments"
+        installments: 3
+        price_per_installment: 17
+
+  guarantee:
+    type: "money-back"
+    period_days: 60
+    conditions: "100% reembolso, sem perguntas"
+
+# === GEOS (Mercados Target) ===
+geos:
+  - code: "fr"
+    name: "France"
+    primary: true
+    language: "fr-FR"
+    currency: "EUR"
+    cultural_notes: "Tom formal, autoridade científica valorizada, testemunhos moderados"
+
+  - code: "es"
+    name: "Spain"
+    primary: false
+    language: "es-ES"
+    currency: "EUR"
+    cultural_notes: "Tom emocional, família importante, testemunhos fortes funcionam bem"
+
+# === CREATIVE PROFILE ===
+creative_profile: "blackhat-dr"                    # blackhat-dr | whitehat | hybrid
+
+# Reference: squads/squad-copy/config/creative-direction.md
+# blackhat-dr = Criativos NUNCA parecem venda. Só curiosidade. Venda na VSL.
+
+# === COMPLIANCE (Source of Truth) ===
+compliance_source: "./compliance/rules.md"         # FONTE DE VERDADE (por geo + plataforma)
+
+# === FUNNEL ===
+funnel:
+  type: "vsl-long"                                 # vsl-long | vsl-short | advertorial | webinar | quiz
+  steps:
+    - step: 1
+      type: "ad"
+      goal: "Click (curiosidade)"
+    - step: 2
+      type: "pre-lander"
+      goal: "Engagement (quiz ou micro-commitment)"
+      optional: true
+    - step: 3
+      type: "vsl"
+      duration_minutes: 25
+      goal: "Converter (add-to-cart)"
+    - step: 4
+      type: "checkout"
+      goal: "Purchase"
+    - step: 5
+      type: "upsell"
+      goal: "AOV increase"
+      optional: true
+
+# === PLATFORMS ===
+platforms:
+  - id: "meta"
+    status: "active"
+    placements: ["feed", "stories", "reels"]
+    budgets:
+      daily: 500
+      total: null
+
+  - id: "tiktok"
+    status: "testing"
+    placements: ["in-feed"]
+    budgets:
+      daily: 200
+      total: 2000
+
+  - id: "youtube"
+    status: "planned"
+    placements: ["pre-roll", "discovery"]
+    budgets:
+      daily: null
+      total: null
+
+# === PERFORMANCE TRACKING ===
+performance_file: "./performance.yaml"             # KPIs históricos + winners
+
+# === ASSETS ===
+assets_directory: "./assets/"
+assets_structure:
+  criativos: "./assets/criativos/batches/"         # Output do squad-copy
+  vsl: "./assets/vsl/"                             # Scripts + vídeos finais (futuro)
+  lp: "./assets/lp/"                               # Landing pages (futuro)
+  email: "./assets/email/"                         # Sequences (futuro)
+
+# === METADATA ===
+metadata:
+  created_at: "2026-02-01"
+  created_by: "@pm"
+  updated_at: "2026-02-20"
+  updated_by: "@squad-creator (Craft)"
+  version: "1.0.0"
+  squad_consumers:
+    - "squad-copy (ad copy, VSL, LP, email)"
+    - "squad-criativos (visual production)"
+    - "squad-ofertas (funnel deployment)"
+
+# === NOTES ===
+notes: |
+  Este é um offer de EXEMPLO para referência.
+  Ao criar uma nova offer:
+  1. Copie esta estrutura completa
+  2. Preencha TODOS os campos (não deixe placeholders)
+  3. Crie compliance/rules.md com regras específicas
+  4. Crie performance.yaml para tracking
+  5. Teste validação via squad-copy
+
+  Campos obrigatórios:
+  - id, name, type, vertical, status
+  - icp (demographics + psychographics)
+  - mechanism (big_idea, how_it_works)
+  - offer_stack (main_product, pricing)
+  - geos (pelo menos 1)
+  - creative_profile
+  - compliance_source (CRÍTICO)

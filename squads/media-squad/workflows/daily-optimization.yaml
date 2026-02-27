@@ -1,0 +1,181 @@
+# Daily Optimization Workflow
+#
+# Ciclo diario de otimizacao: coleta de metricas → analise → acoes automaticas
+# Orquestra media-analyst (analise) e media-buyer (execucao)
+#
+# Created: 2026-02-21
+# Squad: media-squad
+
+name: daily-optimization
+version: 1.0.0
+description: "Ciclo diario de otimizacao de campanhas — analise de KPIs e acoes automaticas de bid/budget/scale/pause"
+squad: media-squad
+
+metadata:
+  created: "2026-02-21"
+  author: squad-creator
+  tags:
+    - workflow
+    - media-squad
+    - optimization
+    - daily
+    - automated
+
+triggers:
+  - type: manual
+    command: "*optimize-daily"
+  - type: schedule
+    cron: "0 10 * * *"
+    description: "Executa diariamente as 10h"
+
+inputs:
+  - name: campaign_ids
+    type: array
+    required: false
+    description: "IDs de campanhas a otimizar (vazio = todas ativas)"
+  - name: auto_execute
+    type: boolean
+    required: false
+    default: false
+    description: "Executar acoes automaticamente sem confirmacao"
+
+# Phase 1: Analysis (media-analyst)
+steps:
+  - id: collect-metrics
+    name: "Phase 1.1: Coletar Metricas"
+    description: "Coleta metricas da Meta Ads API e RedTrack"
+    action: task
+    agent: media-analyst
+    task: collect-platform-metrics
+    inputs:
+      campaign_ids: "{{inputs.campaign_ids}}"
+    on_error: retry
+    retry:
+      max_attempts: 3
+      delay: 5000
+
+  - id: analyze-kpis
+    name: "Phase 1.2: Analisar KPIs"
+    description: "Analisa CPA, ROAS, CTR, CPM do dia"
+    action: task
+    agent: media-analyst
+    task: analyze-daily-kpis
+    depends_on:
+      - collect-metrics
+    inputs:
+      metrics: "{{steps.collect-metrics.output}}"
+    on_error: abort
+
+  - id: classify-performance
+    name: "Phase 1.3: Classificar Ads"
+    description: "Classifica cada ad como WINNER ou LOSER"
+    action: task
+    agent: media-analyst
+    task: classify-ad-performance
+    depends_on:
+      - analyze-kpis
+    on_error: abort
+
+  - id: recommend-actions
+    name: "Phase 1.4: Recomendar Acoes"
+    description: "Gera lista de acoes recomendadas"
+    action: task
+    agent: media-analyst
+    task: recommend-optimization-actions
+    depends_on:
+      - classify-performance
+    on_error: abort
+
+  # Phase 2: Execution (media-buyer)
+  - id: adjust-bids
+    name: "Phase 2.1: Ajustar Bids"
+    description: "Ajusta lances baseado na analise"
+    action: task
+    agent: media-buyer
+    task: adjust-campaign-bids
+    depends_on:
+      - recommend-actions
+    condition: "{{steps.recommend-actions.output.has_bid_changes}}"
+    inputs:
+      recommendations: "{{steps.recommend-actions.output.bid_changes}}"
+      auto_execute: "{{inputs.auto_execute}}"
+    on_error: retry
+    retry:
+      max_attempts: 2
+      delay: 2000
+
+  - id: reallocate-budget
+    name: "Phase 2.2: Realocar Budget"
+    description: "Move budget entre adsets"
+    action: task
+    agent: media-buyer
+    task: reallocate-campaign-budget
+    depends_on:
+      - recommend-actions
+    condition: "{{steps.recommend-actions.output.has_budget_changes}}"
+    inputs:
+      recommendations: "{{steps.recommend-actions.output.budget_changes}}"
+      auto_execute: "{{inputs.auto_execute}}"
+    on_error: retry
+    retry:
+      max_attempts: 2
+      delay: 2000
+
+  - id: scale-winners
+    name: "Phase 2.3: Escalar Winners"
+    description: "Aumenta budget dos ads vencedores"
+    action: task
+    agent: media-buyer
+    task: scale-winning-ads
+    depends_on:
+      - classify-performance
+    condition: "{{steps.classify-performance.output.has_winners}}"
+    inputs:
+      winners: "{{steps.classify-performance.output.winners}}"
+      auto_execute: "{{inputs.auto_execute}}"
+    on_error: retry
+    retry:
+      max_attempts: 2
+      delay: 2000
+
+  - id: pause-losers
+    name: "Phase 2.4: Pausar Losers"
+    description: "Pausa ads com performance ruim"
+    action: task
+    agent: media-buyer
+    task: pause-losing-ads
+    depends_on:
+      - classify-performance
+    condition: "{{steps.classify-performance.output.has_losers}}"
+    inputs:
+      losers: "{{steps.classify-performance.output.losers}}"
+      auto_execute: "{{inputs.auto_execute}}"
+    on_error: abort
+
+outputs:
+  - name: kpi_summary
+    from: "{{steps.analyze-kpis.output}}"
+    description: "Resumo dos KPIs do dia"
+  - name: actions_taken
+    from: "{{steps.recommend-actions.output}}"
+    description: "Acoes executadas ou recomendadas"
+  - name: classification
+    from: "{{steps.classify-performance.output}}"
+    description: "Classificacao WINNER/LOSER"
+
+completion:
+  on_success:
+    message: "Otimizacao diaria concluida. {{outputs.actions_taken.total}} acoes processadas."
+    notify: true
+  on_failure:
+    message: "Otimizacao diaria falhou. Verificar metricas manualmente."
+    notify: true
+    rollback: false
+
+validation:
+  pre_run:
+    - "Verificar acesso a Meta Ads API"
+    - "Verificar que existem campanhas ativas"
+  post_run:
+    - "Todas as acoes foram processadas ou documentadas"
+    - "Nenhum ad critico sem acao"

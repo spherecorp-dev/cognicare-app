@@ -1,0 +1,273 @@
+name: squad-copy
+version: 4.3.0
+description: "Persuasion Engine — Motor central de escrita persuasiva para Direct Response. Responsável por TODA copy (ads, VSL, LP, emails). v4.0 escopo: Ad Copy + Image Concepts. VSL/LP/Emails em roadmap futuro."
+author: B2G Capital
+license: MIT
+slashPrefix: copy
+
+aios:
+  minVersion: "2.1.0"
+  type: squad
+
+principle: "Task-first: tasks definem O QUE, agentes executam ONDE precisa de julgamento. Pipeline 100% autonomo, humanos opcionais."
+
+mission: "Ser o Motor de Persuasão central da empresa — único responsável por TODA escrita persuasiva de Direct Response, garantindo consistência de mensagem e máxima conversão cross-format."
+
+scope:
+  current_v4_0:
+    - "Ad Copy (Meta, TikTok, YouTube, Native)"
+    - "Image Concepts (visual + texto overlay)"
+    - "Spy automatizado (scraping, transcrição, reconstrução)"
+    - "Pipeline 100% autônomo (0 pontos humanos obrigatórios)"
+
+  roadmap_future:
+    v4_1_vsl:
+      priority: high
+      description: "VSL Scripts — Long-form persuasion para funnels"
+      new_agents: ["@vsl-writer"]
+      new_tasks: ["generate-vsl-outline", "generate-vsl-script", "adapt-vsl-to-geo"]
+      handoff: "squad-ofertas (funnel deployment)"
+
+    v4_2_lp:
+      priority: medium
+      description: "Landing Page Copy — High-conversion copy para páginas de captura e vendas"
+      new_agents: ["@lp-copywriter ou expand @stefan-georgi"]
+      new_tasks: ["generate-lp-headline", "generate-lp-body", "generate-lp-bullets"]
+      handoff: "squad-ofertas (funnel deployment)"
+
+    v4_3_email:
+      priority: medium
+      description: "Email Sequences — Nurture e conversion sequences"
+      new_agents: ["@email-copywriter ou expand @stefan-georgi"]
+      new_tasks: ["generate-email-sequence", "generate-email-subject-lines"]
+      handoff: "squad-ofertas (automation)"
+
+    v5_0_full_persuasion:
+      priority: future
+      description: "Persuasion Engine completo — Upsells, Webinars, Advertorials"
+      note: "Consolidação final como único squad de copy persuasiva"
+
+strategic_rationale: "Agrupar tasks por tipo de julgamento (escrita persuasiva), não por entregável. Garante consistência cross-format, reutilização de inteligência (spy, angles), e orquestração centralizada via @copy-chief."
+
+components:
+  agents:
+    - stefan-georgi.md
+    - copy-chief.md
+    - russell-brunson.md
+    - gary-halbert.md
+    - ben-settle.md
+  tasks:
+    # @stefan-georgi (julgamento criativo)
+    - suggest-angles.md
+    - generate-scripts.md
+    - generate-ad-copy.md
+    - generate-image-concepts.md        # NOVO v3.0 — conceitos visuais + ad copy
+    # @copy-chief (julgamento estrategico e qualidade)
+    - interpret-offer-data.md
+    - review-creative.md
+    - request-revision.md
+    - direct-spy.md                     # NOVO v3.0 — estrategia de spy
+    - spy-reconstruct-copy.md           # NOVO v3.0 — reconstrucao de copy
+    - select-method.md                  # NOVO v3.0 — decisao autonoma de metodo
+    - decide-format.md                  # NOVO v3.0 — decisao imagem vs video
+    - review-image-concept.md           # NOVO v3.0 — review conceito visual
+    - review-generated-image.md         # NOVO v3.0 — review imagem gerada
+    # Tasks puras (execucao mecanica, sem agente)
+    - fetch-offer-data.md
+    - catalog-references.md
+    - deconstruct-references.md
+    - spy-scrape.md                     # NOVO v3.0 — download automatizado
+    - spy-transcribe.md                 # NOVO v3.0 — transcricao Whisper
+    - generate-image-prompts.md         # NOVO v3.0 — prompts para API (substitui generate-images.md)
+    - generate-images-api.md            # NOVO v3.0 — chamada API geracao
+    - package-image-creative.md         # NOVO v3.0 — empacotamento imagem
+    - build-video-brief.md
+    - build-variation-brief.md
+    # @russell-brunson (arquitetura de funis e quiz/onboarding copy)
+    - design-quiz-funnel.md                # NOVO v4.1 — arquitetura quiz funnel completo
+    - design-onboarding.md                 # NOVO v4.1 — onboarding com small win engineering
+    - design-funnel.md                     # NOVO v4.1 — arquitetura de qualquer funil
+    - generate-quiz-copy.md                # NOVO v4.1 — copy para todas etapas do quiz
+    - map-value-ladder.md                  # NOVO v4.1 — mapeamento da value ladder
+    - segment-profiles.md                  # NOVO v4.1 — perfis de segmentacao
+    - build-stack.md                       # NOVO v4.1 — The Stack (empilhamento de valor)
+    - funnel-hack.md                       # NOVO v4.1 — analise de funnels concorrentes
+    # @gary-halbert (VSL Writer — long-form persuasion)
+    - generate-vsl-outline.md                 # NOVO v4.2 — outline + Fact Sheet + Benefit List
+    - generate-vsl-script.md                  # NOVO v4.2 — script completo word-by-word com timing
+    - review-vsl.md                           # NOVO v4.2 — revisao com 10 perguntas Halbert
+    - adapt-vsl-to-geo.md                     # NOVO v4.2 — adaptacao cross-geo (reconstruir)
+    - adapt-vsl-cross-niche.md                # NOVO v4.2 — adaptacao cross-niche com tabela
+    - work-vsl-block.md                       # NOVO v4.2 — trabalho isolado em blocos
+    # @ben-settle (Email Player — email marketing completo)
+    - design-email-strategy.md                   # NOVO v4.3 — estrategia de email completa
+    - generate-daily-emails.md                   # NOVO v4.3 — daily emails infotainment (7 tipos)
+    - generate-email-sequence.md                 # NOVO v4.3 — sequences automatizadas (SOS, launch, onboarding)
+    - generate-subject-lines.md                  # NOVO v4.3 — subject lines de alta abertura
+    - review-email-copy.md                       # NOVO v4.3 — revisao com 10 checks Email Player
+    - adapt-email-to-vertical.md                 # NOVO v4.3 — adaptacao entre verticais
+  workflows:
+    - creative-pipeline.yaml
+  checklists:
+    - ad-copy-review.md
+    - image-concept-review.md
+    - compliance-check.md
+    - batch-delivery-qa.md
+  templates:
+    - META-AD-COPY-template.md
+    - TIKTOK-AD-COPY-template.md
+    - BATCH-README-template.md
+    - batch-specs-template.yaml
+  tools: []
+  scripts: []
+  data:
+    # Dados de referencia
+    - geo-cultural-guide.md
+    - winners-library.md
+    - fascination-library.md
+    # Swipe files por expert (modelagem)
+    - swipe-files/_index.md
+    - swipe-files/stefan-georgi.md
+
+config:
+  extends: extend
+  files:
+    - creative-direction.md
+
+offers:
+  source: "data/offers/"
+  note: "Recurso compartilhado — vive na raiz do projeto, nao dentro da squad"
+
+geos:
+  note: "Geo vem da oferta (offer.yaml → geos). Tom por geo definido em creative-direction.md."
+  supported: [fr, es, en]
+
+platforms:
+  note: "Plataformas e suas restricoes de compliance sao definidas POR OFERTA em data/offers/{ID}/compliance/rules.md"
+  supported:
+    - id: meta
+      label: "Meta (Facebook / Instagram)"
+      formats: [feed_1080x1080, feed_1080x1350, stories_1080x1920]
+    - id: tiktok
+      label: "TikTok"
+      formats: [in_feed_1080x1920, spark_ads_1080x1350]
+    - id: youtube
+      label: "YouTube"
+      formats: [pre_roll_1920x1080, shorts_1080x1920]
+      status: placeholder
+    - id: native
+      label: "Native (Taboola / Outbrain)"
+      formats: [widget_400x300, advertorial]
+      status: placeholder
+
+geo_rule: "Adaptacao cultural = NUNCA traducao literal"
+compliance_rule: "Compliance vem da OFERTA (data/offers/{ID}/compliance/rules.md). Contem regras por geo e por plataforma."
+
+volume:
+  current: "10-15 criativos/dia"
+  target: "20-30+ criativos/dia"
+  test_minimum: "50 criativos por oferta na validacao"
+
+pipeline:
+  model: "100% autonomo. Humanos opcionais em 4 pontos."
+  trigger: "Manual ou autonomo. Input: offer + platforms (opcional). Geo e compliance vem da oferta."
+  phases:
+    - "1-intelligence: fetch → interpret → spy (direct→scrape→transcribe→reconstruct) → catalog → deconstruct"
+    - "2-strategy: suggest-angles → select-method → decide-format (imagem ou video)"
+    - "3-production: [IMAGEM] generate-image-concepts | [VIDEO] generate-scripts + ad-copy"
+    - "4-review: [IMAGEM] review-concept → prompts → API → review-generated | [VIDEO] review-creative (loop max 2x)"
+    - "5-delivery: [IMAGEM] package-image → handoff | [VIDEO] build-brief → handoff"
+  human_intervention_points_required: 0
+  human_intervention_points_optional:
+    - "Adicionar referencias manuais ao spy"
+    - "Overridar decisao de metodo"
+    - "Double-check review do agente"
+    - "Revisar pacote final antes do handoff"
+
+shared_agents:
+  copy-chief:
+    current_squad: squad-copy
+    future_squads:
+      - squad-ofertas
+      - squad-cro
+    note: "Lead Agent do Persuasion Engine — orquestra copy em todos os formatos (ads, VSL, LP, emails)"
+
+dependencies:
+  node: []
+  python: []
+  squads: []
+  integration_pending:
+    - component: spy-scrape
+      needs: "APIs Meta Ad Library, TikTok Creative Center"
+      owner: "@dev"
+    - component: spy-transcribe
+      needs: "Whisper API ou local"
+      owner: "@dev"
+    - component: generate-images-api
+      needs: "NanoBanana, Midjourney, DALL-E, Flux APIs"
+      owner: "@dev"
+
+tags:
+  - direct-response
+  - persuasion-engine
+  - copywriting
+  - ad-copy
+  - automacao
+  - task-first
+  - autonomous
+  - image-pipeline
+  - spy-automated
+  - future-vsl
+  - future-lp
+  - future-email
+
+metadata:
+  created_at: "2026-02-15"
+  updated_at: "2026-02-25"
+  updated_by: "@squad-creator (Craft) - v4.3.0 added @ben-settle agent"
+  created_by: "@squad-creator (Craft)"
+  source_design: "./squads/.designs/dr-criativos-squad-design.yaml"
+  source_docs: "./docs/departments/criativos.md"
+  former_name: "dr-criativos (v1-v3.3)"
+  rebrand_date: "2026-02-20"
+  rebrand_rationale: "Expandir escopo para TODA copy persuasiva (ads, VSL, LP, emails). v4.0 mantém escopo atual (ad copy), roadmap documenta expansão futura."
+  version_history:
+    - version: "1.0.0"
+      date: "2026-02-15"
+      changes: "v1 — 5 agentes (arquitetura original)"
+    - version: "2.0.0"
+      date: "2026-02-17"
+      changes: "v2 — redesign task-first: 5→2 agentes, +6 tasks puras, +copy-chief compartilhado"
+    - version: "2.1.0"
+      date: "2026-02-20"
+      changes: "v2.1 — estrutura de ofertas: 1 pasta por oferta com offer.yaml + performance.yaml + assets"
+    - version: "2.2.0"
+      date: "2026-02-20"
+      changes: "v2.2 — offers compartilhado (data/offers/ raiz), creative-direction.md, estrutura 5 dimensoes por oferta"
+    - version: "3.0.0"
+      date: "2026-02-20"
+      changes: "v3.0 — Pipeline autonomo: spy automatizado (4 tasks), branching imagem/video, pipeline de imagem completo (7 tasks), compliance por plataforma (4 arquivos), select-method autonomo, 22 tasks total, 0 human points obrigatorios"
+    - version: "3.1.0"
+      date: "2026-02-20"
+      changes: "v3.1 — Geo e compliance centralizados na oferta. Removido geo como input separado do pipeline. Compliance vem de data/offers/{ID}/compliance/rules.md (fonte de verdade). Arquivos de compliance do squad deprecated."
+    - version: "3.2.0"
+      date: "2026-02-20"
+      changes: "v3.2 — Limpeza de artifacts deprecated: removido generate-images.md (task) e 8 arquivos de compliance deprecated. Squad sanitizado conforme análise do squad-creator."
+    - version: "3.3.0"
+      date: "2026-02-20"
+      changes: "v3.3 — Estrutura de output simplificada: flat structure por plataforma, um doc consolidado com todas as copys (META-AD-COPY.md), naming pattern claro, zero navegação de pastas. Adicionados templates para Meta e TikTok. Task package-image-creative.md refatorada."
+    - version: "4.0.0"
+      date: "2026-02-20"
+      changes: "v4.0 — REBRAND: dr-criativos → squad-copy (Persuasion Engine). Nova missão: responsável por TODA copy persuasiva (ads, VSL, LP, emails). v4.0 mantém escopo atual (ad copy + image concepts), roadmap documenta expansão futura (VSL v4.1, LP v4.2, Email v4.3). Razão estratégica: agrupar tasks por tipo de julgamento (escrita persuasiva), garantir consistência cross-format, orquestração centralizada via @copy-chief."
+    - version: "4.0.1"
+      date: "2026-02-20"
+      changes: "v4.0.1 — Pre-implementation improvements: (1) Pre/post-conditions adicionadas a 8 tasks críticas (suggest-angles, generate-image-concepts, review-image-concept, generate-images-api, package-image-creative, interpret-offer-data, select-method, generate-ad-copy) para orquestração dinâmica; (2) 4 checklists criadas (ad-copy-review, image-concept-review, compliance-check, batch-delivery-qa); (3) 2 templates de output (BATCH-README-template.md, batch-specs-template.yaml); (4) Offer _example completo (offer.yaml + compliance/rules.md + performance.yaml) como referência para @dev; (5) Error handling strategy documentada (docs/error-handling-strategy.md). Pronto para implementação técnica."
+    - version: "4.1.0"
+      date: "2026-02-25"
+      changes: "v4.1.0 — Novo agente @russell-brunson (Funnel Architect): clone mental de Russell Brunson com funcao dupla — (1) Arquiteto de Funis (estrategia macro: decision framework, funnel types, funnel stacking, linchpin framework, funnel hacking) e (2) Copywriter de Quiz/Onboarding (execucao). 5 pilares: Hook-Story-Offer, Epiphany Bridge, New Opportunity, Attractive Character, Value Ladder. Frameworks: The Stack, Soap Opera Sequence, Small Win Engineering, micro-commitments. 9 comandos. Colaboracao definida com @stefan-georgi e @copy-chief. Adaptacao geo (FR/ES/EN). Self-review 15 items."
+    - version: "4.2.0"
+      date: "2026-02-25"
+      changes: "v4.2.0 — Novo agente @gary-halbert (VSL Writer): clone mental de Gary Halbert com toque moderno de Stefan Georgi. 4 pilares: Starving Crowd, 40/40/20 Rule, Research Obsession (Fact Sheet + Benefit List), Radical Simplicity (Greased Slide). Fusao Halbert+Georgi: estrutura/emocao (Halbert) + mecanismo/ritmo/compliance (Georgi). 4 funcoes: (1) Criar VSL (longa+mini), (2) Revisar/Otimizar (10 perguntas), (3) Adaptar Cross-Niche/Geo, (4) Trabalhar em Blocos. 5 formatos VSL (standard, mini, hybrid, webinar, advertorial). Tabela traducao cross-niche (nutra↔infoproduto↔SaaS). Adaptacao geo (FR/ES/EN). Self-review 13 items. 6 tasks. Colaboracao com @stefan-georgi, @russell-brunson e @copy-chief."
+    - version: "4.3.0"
+      date: "2026-02-25"
+      changes: "v4.3.0 — Novo agente @ben-settle (Email Player): clone mental de Ben Settle — The Email Player, #1 em email marketing. 5 pilares: Daily Email, Infotainment, Anti-Selling/Repulsion Marketing, Personality Above All, Radical Simplicity (plain text). 7 tipos de email (Against Opinion, Storytelling, Blatant Pitch, Open Loop, Teaching, Social Proof, Repulsion). Terminator Approach: Rifle (Chaperon sequences) + Shotgun (Settle daily). Adaptacao por vertical (nutra, infoproduto, SaaS). Subject line framework (2.684 emails analisados). Soft Teaching > Hard Teaching. Self-review 10 checks. 6 tasks. Colaboracao com @stefan-georgi, @gary-halbert, @russell-brunson e @copy-chief."

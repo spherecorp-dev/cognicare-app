@@ -1,0 +1,32 @@
+# Historico de Testes A/B e Otimizacoes — WAGGO
+# Registro de todos os testes realizados nesta oferta
+# Atualizado por: @analyst, agentes de trafego, CRO
+
+offer_id: WAGGO
+updated_at: ""
+
+testes:
+  # - id: ""
+  #   tipo: criativo
+  #   descricao: ""
+  #   variante_a: ""
+  #   variante_b: ""
+  #   metrica_primaria: ""
+  #   inicio: ""
+  #   fim: ""
+  #   resultado: ""
+  #   dados:
+  #     variante_a_valor: null
+  #     variante_b_valor: null
+  #     lift: null
+  #     confianca: null
+  #   aprendizado: ""
+  #   acao_tomada: ""
+  #   status: concluido
+
+otimizacoes:
+  # - data: ""
+  #   tipo: ""
+  #   descricao: ""
+  #   impacto: ""
+  #   detalhes: ""

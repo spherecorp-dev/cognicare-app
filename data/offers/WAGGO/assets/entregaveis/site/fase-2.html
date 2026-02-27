@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WAGGO — Fase 2: Segmenta&ccedil;&atilde;o &amp; Perfis</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="../Design sem nome (8).png" type="image/png">
+  <style>
+    .detail-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(8, 5, 16, 0.9);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .detail-header img { width: 32px; height: 32px; border-radius: 8px; }
+    .detail-header h1 { font-size: 16px; font-weight: 800; background: var(--gradient-brand); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin: 0; }
+    .back-link { color: var(--text-secondary); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+    .back-link:hover { color: var(--text-primary); }
+    .detail-body { max-width: 900px; margin: 0 auto; padding: 48px 24px; }
+    .detail-body .section { margin-left: 0; }
+    .epiphany-section { margin-top: var(--space-lg); padding: var(--space-lg); background: rgba(139, 92, 246, 0.04); border-radius: var(--radius-md); border: 1px solid var(--border); }
+    .epiphany-section h4 { color: var(--text-accent); font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: var(--space-sm); }
+    .objection-item { padding: var(--space-md) 0; border-bottom: 1px solid var(--border); }
+    .objection-item:last-child { border-bottom: none; }
+    .objection-item .objection-label { font-size: 13px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+    .objection-item .objection-reframe { font-size: 13px; color: var(--text-secondary); }
+  </style>
+</head>
+<body>
+  <div class="scroll-progress"><div class="scroll-progress-bar"></div></div>
+  <div class="detail-header">
+    <a href="index.html" class="back-link">&larr; Executive Deck</a>
+    <img src="../Design sem nome (8).png" alt="WAGGO">
+    <h1>WAGGO</h1>
+  </div>
+  <div class="detail-body">
+
+    <!-- HEADER -->
+    <div class="section">
+      <div class="section-header">
+        <h1 class="section-title">Fase 2: Segmenta&ccedil;&atilde;o &amp; Perfis</h1>
+        <div class="section-subtitle">
+          <strong>Autor:</strong> Russell Brunson (Funnel Architect) |
+          <strong>Task:</strong> <code>*segment-profiles</code><br>
+          <strong>Offer:</strong> WAGGO &mdash; Nutri&ccedil;&atilde;o Inteligente para Pets |
+          <strong>Data:</strong> 2026-02-26 |
+          <strong>Status:</strong> Completo
+        </div>
+      </div>
+    </div>
+
+    <!-- INTRO -->
+    <div class="section">
+      <div class="card">
+        <p>Okay... aqui &eacute; onde a coisa fica PESSOAL.</p>
+        <p>Deixa eu te contar uma coisa que levei ANOS pra entender...</p>
+        <p><strong>Pessoas n&atilde;o compram produtos. Pessoas compram IDENTIDADES.</strong></p>
+        <p>Ningu&eacute;m quer "um app de nutri&ccedil;&atilde;o pet". O que eles querem &eacute; <strong>ser o tipo de pessoa</strong> que cuida perfeitamente do seu pet.</p>
+        <p>&Eacute; por isso que os resultados do quiz n&atilde;o podem ser scores. N&atilde;o podem ser "Perfil A", "Perfil B", "Perfil C".</p>
+        <p>Precisam ser <strong>IDENTIDADES</strong>. Algo que o tutor v&ecirc; e pensa...</p>
+        <blockquote><em>"ISSO &eacute; quem eu sou. Isso &eacute; quem eu QUERO ser."</em></blockquote>
+        <p>E depois <strong>compartilha</strong>. No Instagram. No grupo do Facebook. Pro parceiro.</p>
+        <blockquote><em>"Fiz um quiz e descobri que sou The Wellness Guardian. E voc&ecirc;?"</em></blockquote>
+        <p><strong>Esse &eacute; o poder de um perfil aspiracional.</strong></p>
+        <p>Vamos construir os nossos.</p>
+      </div>
+    </div>
+
+    <!-- AN&Aacute;LISE DO DREAM CUSTOMER -->
+    <div class="section">
+      <div class="section-header">
+        <h2 class="section-title">An&aacute;lise do Dream Customer</h2>
+        <div class="section-subtitle">Nosso dream customer compartilha uma coisa: <strong>quer oferecer alimenta&ccedil;&atilde;o natural para o pet com seguran&ccedil;a e praticidade.</strong> Mas dentro desse grupo... existem caminhos bem diferentes.</div>
+      </div>
+
+      <div class="card" style="margin-bottom: var(--space-lg);">
+        <h3>Por Situa&ccedil;&atilde;o Atual</h3>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>Situa&ccedil;&atilde;o</th><th>Descri&ccedil;&atilde;o</th><th>% Estimado</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>J&aacute; faz AN/BARF</td><td>Experiente, quer otimizar e automatizar c&aacute;lculos</td><td><strong>~15%</strong></td></tr>
+              <tr><td>Em transi&ccedil;&atilde;o</td><td>Decidiu migrar de ra&ccedil;&atilde;o para AN, no processo</td><td><strong>~30%</strong></td></tr>
+              <tr><td>Pesquisando</td><td>Sabe que AN existe, investigando se &eacute; pra ele</td><td><strong>~35%</strong></td></tr>
+              <tr><td>For&ccedil;ado pela sa&uacute;de</td><td>Pet com condi&ccedil;&atilde;o que exige dieta especial</td><td><strong>~20%</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card" style="margin-bottom: var(--space-lg);">
+        <h3>Por Tentativas Passadas</h3>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>Tentativa</th><th>Resultado</th><th>Frustra&ccedil;&atilde;o</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Nada ainda</td><td>Curiosidade, medo de errar</td><td><em>"Por onde eu come&ccedil;o?"</em></td></tr>
+              <tr><td>Grupos de Facebook</td><td>Info contradit&oacute;ria, confus&atilde;o</td><td><em>"Cada pessoa diz uma coisa diferente"</em></td></tr>
+              <tr><td>Planilhas manuais</td><td>Tedioso, inseguran&ccedil;a nos c&aacute;lculos</td><td><em>"Nunca tenho certeza se t&aacute; certo"</em></td></tr>
+              <tr><td>Nutricionista vet</td><td>Caro, pontual, sem ajuste</td><td><em>"Paguei $500 e 3 meses depois tudo mudou"</em></td></tr>
+              <tr><td>Apps/calculadoras</td><td>UX ruim, complexo</td><td><em>"Parece software de engenharia"</em></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Por Objetivo Principal</h3>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>Objetivo</th><th>Motiva&ccedil;&atilde;o</th><th>Perfil Prov&aacute;vel</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Sa&uacute;de geral / longevidade</td><td>Proativo, preventivo</td><td><span class="tag purple">Wellness Guardian</span></td></tr>
+              <tr><td>Come&ccedil;ar AN com seguran&ccedil;a</td><td>Primeiro passo, inseguro</td><td><span class="tag green">Fresh Start Explorer</span></td></tr>
+              <tr><td>Otimizar dieta existente</td><td>Efici&ecirc;ncia, precis&atilde;o</td><td><span class="tag blue">Precision Optimizer</span></td></tr>
+              <tr><td>Resolver problema de sa&uacute;de</td><td>Urgente, necessidade m&eacute;dica</td><td><span class="tag amber">Healing Protector</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- OS 4 PERFIS -->
+    <div class="section">
+      <div class="section-header">
+        <h2 class="section-title">Os 4 Perfis do WAGGO</h2>
+        <div class="section-subtitle">F&oacute;rmula: <strong>"The [Adjetivo Empoderador] [Substantivo Aspiracional]"</strong> &mdash; Todos positivos. Todos aspiracionais. Todos com diferentes caminhos para o MESMO destino: <strong>o pet mais saud&aacute;vel e feliz poss&iacute;vel.</strong></div>
+      </div>
+    </div>
+
+    <!-- PERFIL 1: WELLNESS GUARDIAN -->
+    <div class="section">
+      <div class="profile-card" style="margin-bottom: var(--space-lg);">
+        <div class="profile-percent">~35%</div>
+        <div class="profile-name">The Wellness Guardian</div>
+        <div class="profile-tagline">"You don't just feed your pet &mdash; you protect their future."</div>
+
+        <div class="profile-detail">
+          You're the kind of pet parent who reads ingredient labels. Who notices when something is "off" before anyone else. You didn't adopt a pet to just get by... you're here to give them the BEST life possible. And deep down, you know there's a better way to feed them than kibble from a bag.
+        </div>
+
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>Caracter&iacute;stica</th><th>Detalhe</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Situa&ccedil;&atilde;o</strong></td><td>Currently feeds kibble or mixed, exploring natural options</td></tr>
+              <tr><td><strong>Tentativas passadas</strong></td><td>Researched online, maybe tried adding fresh toppers, overwhelmed by conflicting info</td></tr>
+              <tr><td><strong>Dor principal</strong></td><td>Knows something better exists but paralyzed by fear of getting it wrong</td></tr>
+              <tr><td><strong>Desejo</strong></td><td>Complete confidence that they're feeding their pet the BEST possible nutrition</td></tr>
+              <tr><td><strong>Urg&ecirc;ncia</strong></td><td>Moderate &mdash; proactive, not reactive. Prevention mindset</td></tr>
+              <tr><td><strong>Demographics</strong></td><td>Millennials, 28-42, household income >$75K, treats pet as family member</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="epiphany-section">
+          <h4>Epiphany Bridge</h4>
+          <p><strong>False Belief:</strong> "I need to become a pet nutrition expert to feed my pet properly. I need to learn all the ratios, study all the nutrients, calculate everything by hand... and one mistake could hurt my pet."</p>
+          <p><strong>Real Cause:</strong> The REAL reason you feel overwhelmed isn't because pet nutrition is too complex for you. It's because the TOOLS available are designed for veterinary nutritionists, not for loving pet parents. You don't need a PhD in animal nutrition... you need a SMART TOOL that does the complex part FOR you.</p>
+          <p><strong>Aha Moment:</strong> <em>"Wait... I don't need to become an expert. I need an expert that works for ME. An AI nutritionist that knows my pet, adapts automatically, and gives me exactly what I need &mdash; recipes, portions, shopping lists &mdash; without the complexity."</em></p>
+        </div>
+
+        <div class="epiphany-section">
+          <h4>New Opportunity</h4>
+          <p><strong>Vehicle:</strong> AI-powered pet nutrition planning &mdash; your pet's virtual nutritionist</p>
+          <p><strong>Why Different:</strong> This isn't another calculator you struggle to use. This isn't another Facebook group with conflicting advice. This is a NEW approach: AI that KNOWS your pet, generates personalized meal plans in seconds, and adjusts automatically as needs change. You provide the love. WAGGO provides the science.</p>
+          <p><strong>First Step:</strong> Take the quiz &rarr; see your pet's personalized mini-plan (free)</p>
+        </div>
+
+        <div class="epiphany-section">
+          <h4>Oferta</h4>
+          <p><strong>Main:</strong> WAGGO Essential &mdash; 7-day free trial with full access</p>
+          <p><strong>B&ocirc;nus exclusivo:</strong> "7-Day Transition Guide" &mdash; Your step-by-step roadmap for safely moving from kibble to natural food. Day by day. Meal by meal. No guessing. No fear. <span class="tag green">$47</span></p>
+          <p><strong>CTA:</strong> "Start Your Pet's Wellness Journey &mdash; Free for 7 Days"</p>
+          <p><strong>Urg&ecirc;ncia:</strong> "Your pet eats 2-3 times a day. Every meal without proper nutrition is a missed opportunity."</p>
+        </div>
+
+        <div style="margin-top: var(--space-lg);">
+          <h4>Obje&ccedil;&otilde;es &amp; Reframes</h4>
+          <div class="objection-item">
+            <div class="objection-label">"I can find all this info for free online"</div>
+            <div class="objection-reframe">You can find recipes on Google... but can you guarantee the ratios are correct for YOUR pet's specific weight, age, and conditions? Free info is generic. WAGGO is personalized. That's the difference between guessing and knowing.</div>
+          </div>
+          <div class="objection-item">
+            <div class="objection-label">"My vet doesn't support natural feeding"</div>
+            <div class="objection-reframe">Most vets weren't trained in nutrition (it's 1 semester in vet school). WAGGO plans follow AAFCO/FEDIAF guidelines &mdash; the same standards your vet trusts. Plus, you can export a professional report to share with your vet. Let the data speak.</div>
+          </div>
+          <div class="objection-item">
+            <div class="objection-label">"It's just another subscription I'll forget to cancel"</div>
+            <div class="objection-reframe">You use WAGGO every time you prepare your pet's meals. It's not a gym membership you forget about. It's a tool you use DAILY. And at $9.99/month &mdash; less than a single bag of premium kibble &mdash; it pays for itself in the first week.</div>
+          </div>
+        </div>
+
+        <div class="epiphany-section">
+          <h4>Email Customization</h4>
+          <p><strong>Subject variant:</strong> "Your pet's nutrition score revealed something surprising..."</p>
+          <p><strong>Story angle:</strong> The founder's journey from overwhelmed kibble-feeder to confident raw feeder</p>
+          <p><strong>Proof type:</strong> Before/after health transformations (coat, energy, weight)</p>
+          <p><strong>Soap Opera focus:</strong> Confidence building. From 'I'm scared to try' to 'I can't believe I waited this long'</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PERFIL 2: FRESH START EXPLORER -->
+    <div class="section">
+      <div class="profile-card" style="margin-bottom: var(--space-lg);">
+        <div class="profile-percent">~30%</div>
+        <div class="profile-name">The Fresh Start Explorer</div>
+        <div class="profile-tagline">"Every great journey starts with a single step. This is yours."</div>
+
+        <div class="profile-detail">
+          You just got a new pet. Or you just decided that things need to change. Either way, you're standing at the beginning of something exciting... and maybe a little scary. You don't need to know everything. You just need someone to show you the FIRST STEP. And that's exactly what we're here for.
+        </div>
+
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>Caracter&iacute;stica</th><th>Detalhe</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Situa&ccedil;&atilde;o</strong></td><td>New pet owner OR recently decided to switch to natural feeding</td></tr>
+              <tr><td><strong>Tentativas passadas</strong></td><td>Little to none &mdash; starting fresh, open-minded, eager to learn</td></tr>
+              <tr><td><strong>Dor principal</strong></td><td>Overwhelmed by where to start. Too much information, zero structure</td></tr>
+              <tr><td><strong>Desejo</strong></td><td>A clear, simple path from 'I know nothing' to 'I got this'</td></tr>
+              <tr><td><strong>Urg&ecirc;ncia</strong></td><td>High &mdash; just made the decision, wants to START now</td></tr>
+              <tr><td><strong>Demographics</strong></td><td>Gen Z/young Millennials, 22-35, first-time pet owners, digital-native</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="epiphany-section">
+          <h4>Epiphany Bridge</h4>
+          <p><strong>False Belief:</strong> "Natural feeding is for experienced pet parents with years of knowledge. I'm too new to this. I'll probably mess it up. Maybe I should just stick with kibble until I learn more."</p>
+          <p><strong>Real Cause:</strong> The problem isn't that you lack experience. The problem is that every resource out there ASSUMES you're already an expert. They throw ratios and percentages at you without context. They debate bone-in vs boneless without explaining WHY it matters. You don't need MORE information... you need the RIGHT information, in the RIGHT order, at the RIGHT pace.</p>
+          <p><strong>Aha Moment:</strong> <em>"What if I didn't need to learn everything first? What if there was a tool that already KNEW what my pet needs and just... told me? Step by step. Recipe by recipe. Like having a nutrition mentor in my pocket."</em></p>
+        </div>
+
+        <div class="epiphany-section">
+          <h4>New Opportunity</h4>
+          <p><strong>Vehicle:</strong> AI-guided nutrition journey &mdash; from zero to confident in 7 days</p>
+          <p><strong>Why Different:</strong> This isn't a course you need to study before feeding your pet. This isn't a 200-page book on canine nutrition. This is an AI that GENERATES your pet's meal plan the moment you finish the quiz. First recipe ready in under 2 minutes. You learn BY DOING, not by studying.</p>
+          <p><strong>First Step:</strong> Take the quiz &rarr; get your first recipe today (free)</p>
+        </div>
+
+        <div class="epiphany-section">
+          <h4>Oferta</h4>
+          <p><strong>Main:</strong> WAGGO Essential &mdash; 7-day free trial with full access</p>
+          <p><strong>B&ocirc;nus exclusivo:</strong> "Beginner's Confidence Kit" &mdash; 5 ultra-simple recipes any beginner can nail on their first try + a printable checklist of 'do this, not that' for natural feeding. Your training wheels. <span class="tag green">$37</span></p>
+          <p><strong>CTA:</strong> "Start Your Fresh Start &mdash; Get Your First Recipe Free"</p>
+          <p><strong>Urg&ecirc;ncia:</strong> "The sooner you start, the sooner your pet benefits. Don't wait to 'feel ready' &mdash; start and learn as you go."</p>
+        </div>
+
+        <div style="margin-top: var(--space-lg);">
+          <h4>Obje&ccedil;&otilde;es &amp; Reframes</h4>
+          <div class="objection-item">
+            <div class="objection-label">"I have no idea what I'm doing"</div>
+            <div class="objection-reframe">That's EXACTLY why WAGGO exists. You don't need to know anything. The AI knows everything. Answer 7 questions, get a personalized plan. Your first recipe is ready in under 2 minutes. If you can follow a cooking recipe, you can do this.</div>
+          </div>
+          <div class="objection-item">
+            <div class="objection-label">"Natural feeding seems expensive"</div>
+            <div class="objection-reframe">A bag of premium kibble costs $70-$120/month. Homemade natural food costs $60-$100/month for most dogs &mdash; and you KNOW exactly what's in it. WAGGO even generates a shopping list with quantities so you don't overbuy. Most users actually SAVE money.</div>
+          </div>
+          <div class="objection-item">
+            <div class="objection-label">"What if my pet doesn't like it?"</div>
+            <div class="objection-reframe">Ever seen a dog turn down real chicken? Real beef? The transition takes 5-7 days (our guide walks you through it day by day). 97% of pets prefer fresh food over kibble within the first week. Your pet will thank you. Trust us.</div>
+          </div>
+        </div>
+
+        <div class="epiphany-section">
+          <h4>Email Customization</h4>
+          <p><strong>Subject variant:</strong> "Your pet's first personalized meal plan is ready..."</p>
+          <p><strong>Story angle:</strong> A first-time pet parent's journey from panic to 'I've got this' in one week</p>
+          <p><strong>Proof type:</strong> New pet owner testimonials, 'I was scared too' stories</p>
+          <p><strong>Soap Opera focus:</strong> Hand-holding. Removing fear. Celebrating every small win.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PERFIL 3: PRECISION OPTIMIZER -->
+    <div class="section">
+      <div class="profile-card" style="margin-bottom: var(--space-lg);">
+        <div class="profile-percent">~15%</div>
+        <div class="profile-name">The Precision Optimizer</div>
+        <div class="profile-tagline">"Good enough was never in your vocabulary. Neither is it in ours."</div>
+
+        <div class="profile-detail">
+          You already feed your pet natural food. Maybe you've been doing it for months... even years. You know the basics. But there's this nagging feeling... "Am I REALLY getting the ratios right?" "Is my pet getting ALL the nutrients they need?" You don't want to guess anymore. You want PRECISION. And that... is exactly what sets you apart.
+        </div>
+
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>Caracter&iacute;stica</th><th>Detalhe</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Situa&ccedil;&atilde;o</strong></td><td>Already feeds natural/raw, wants to optimize and automate</td></tr>
+              <tr><td><strong>Tentativas passadas</strong></td><td>Spreadsheets, manual calculations, multiple apps, vet consults</td></tr>
+              <tr><td><strong>Dor principal</strong></td><td>Spending hours on calculations that could be automated. Uncertainty about completeness</td></tr>
+              <tr><td><strong>Desejo</strong></td><td>Scientific precision + time saved. Data-driven feeding with zero guesswork</td></tr>
+              <tr><td><strong>Urg&ecirc;ncia</strong></td><td>Moderate &mdash; not in crisis, but frustrated with inefficiency</td></tr>
+              <tr><td><strong>Demographics</strong></td><td>30-50, data-driven, often multi-pet households, higher income bracket</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="epiphany-section">
+          <h4>Epiphany Bridge</h4>
+          <p><strong>False Belief:</strong> "I need to get better at calculating ratios manually. If I study more, if I learn more formulas, if I find the right spreadsheet... eventually I'll get it perfect."</p>
+          <p><strong>Real Cause:</strong> The problem isn't your knowledge. You probably know MORE about pet nutrition than most vets. The problem is that manual calculation is INHERENTLY flawed &mdash; it doesn't adapt in real-time, it doesn't account for ingredient variability, and it consumes HOURS that you could spend actually enjoying your pets. You don't need more knowledge... you need AUTOMATION of the knowledge you already have.</p>
+          <p><strong>Aha Moment:</strong> <em>"What if an AI could do in 30 seconds what takes me 2 hours with a spreadsheet? And do it MORE ACCURATELY? Not replacing my knowledge... but AMPLIFYING it. Like having a calculator on steroids that understands MY pet specifically."</em></p>
+        </div>
+
+        <div class="epiphany-section">
+          <h4>New Opportunity</h4>
+          <p><strong>Vehicle:</strong> AI-powered nutrition optimization &mdash; precision without the manual labor</p>
+          <p><strong>Why Different:</strong> This isn't another basic calculator (you've outgrown those). This isn't another generic app. This is an OPTIMIZATION ENGINE that takes your existing knowledge and makes it effortless. Multi-pet support. Auto-adjusting plans. Exportable vet reports. The precision you demand, without the spreadsheet slavery.</p>
+          <p><strong>First Step:</strong> Take the quiz &rarr; see how your current feeding stacks up (free analysis)</p>
+        </div>
+
+        <div class="epiphany-section">
+          <h4>Oferta</h4>
+          <p><strong>Main:</strong> WAGGO Pro &mdash; 7-day free trial (Pro-level access)</p>
+          <p><strong>B&ocirc;nus exclusivo:</strong> "Advanced Nutrition Dashboard" &mdash; 30 days of Pro-level access including detailed macro/micro tracking, nutritional completeness scores, and exportable veterinary report. See your pet's nutrition like you've never seen it before. <span class="tag green">$67</span></p>
+          <p><strong>CTA:</strong> "Optimize Your Pet's Nutrition &mdash; Start Your Free Pro Trial"</p>
+          <p><strong>Urg&ecirc;ncia:</strong> "Every meal you manually calculate is time you could spend WITH your pet instead of calculating FOR them."</p>
+        </div>
+
+        <div style="margin-top: var(--space-lg);">
+          <h4>Obje&ccedil;&otilde;es &amp; Reframes</h4>
+          <div class="objection-item">
+            <div class="objection-label">"I already have a system that works"</div>
+            <div class="objection-reframe">We don't doubt it. But does your system auto-adjust when your pet's weight changes? Does it generate a shopping list? Does it handle multiple pets simultaneously? Does it give you a professional report for your vet? WAGGO doesn't replace your knowledge &mdash; it ELIMINATES the busywork.</div>
+          </div>
+          <div class="objection-item">
+            <div class="objection-label">"An AI can't know more than me about MY pet"</div>
+            <div class="objection-reframe">You're right &mdash; and WAGGO isn't trying to. YOU tell the AI about your pet. The AI does the MATH. It's like having a nutrition calculator that actually understands context. Your expertise + AI precision = the best of both worlds.</div>
+          </div>
+          <div class="objection-item">
+            <div class="objection-label">"I don't need another subscription"</div>
+            <div class="objection-reframe">How many hours a month do you spend on spreadsheets and calculations? At $19.99/month, if WAGGO saves you even 2 hours a month, it's paying you $10/hour to use it. That's not a cost &mdash; it's an investment in time with your pets.</div>
+          </div>
+        </div>
+
+        <div class="epiphany-section">
+          <h4>Email Customization</h4>
+          <p><strong>Subject variant:</strong> "Your nutrition analysis found 3 optimization opportunities..."</p>
+          <p><strong>Story angle:</strong> An experienced raw feeder who discovered their 'perfect' system had gaps</p>
+          <p><strong>Proof type:</strong> Data-driven results &mdash; before/after nutritional completeness scores</p>
+          <p><strong>Soap Opera focus:</strong> Respect their expertise. Show how AI amplifies, not replaces.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PERFIL 4: HEALING PROTECTOR -->
+    <div class="section">
+      <div class="profile-card" style="margin-bottom: var(--space-lg);">
+        <div class="profile-percent">~20%</div>
+        <div class="profile-name">The Healing Protector</div>
+        <div class="profile-tagline">"When your pet needs you most, you'll be ready."</div>
+
+        <div class="profile-detail">
+          This isn't about curiosity or optimization for you. This is about your pet's HEALTH. Maybe they have allergies. Digestive issues. A condition that needs careful nutritional management. Your vet may have told you to "watch their diet"... but didn't tell you HOW. You're not just a pet parent. You're a protector. And protectors don't guess. They prepare.
+        </div>
+
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>Caracter&iacute;stica</th><th>Detalhe</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Situa&ccedil;&atilde;o</strong></td><td>Pet has health condition requiring specific dietary management</td></tr>
+              <tr><td><strong>Tentativas passadas</strong></td><td>Vet visits (expensive, inconclusive), elimination diets (confusing), special kibble (limited options)</td></tr>
+              <tr><td><strong>Dor principal</strong></td><td>Fear of feeding something that makes the condition worse. Feeling helpless</td></tr>
+              <tr><td><strong>Desejo</strong></td><td>A safe, vet-aligned nutrition plan specifically designed for their pet's condition</td></tr>
+              <tr><td><strong>Urg&ecirc;ncia</strong></td><td>HIGH &mdash; health-driven. This is not optional, this is necessary</td></tr>
+              <tr><td><strong>Demographics</strong></td><td>All ages, skews older (35-55), pets with diagnosed conditions, higher WTP</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="epiphany-section">
+          <h4>Epiphany Bridge</h4>
+          <p><strong>False Belief:</strong> "Only a veterinary nutritionist can create a safe diet for my pet's condition. I can't do this myself &mdash; it's too risky. I need to keep paying for expensive consultations every time something changes."</p>
+          <p><strong>Real Cause:</strong> The real issue isn't that you CAN'T manage your pet's nutrition. It's that the tools available weren't designed for pets with special needs. Generic calculators don't account for allergies. Recipe sites don't flag dangerous ingredients. And vet consultations at $500+ per visit don't adjust when your pet's weight changes next month. You need a tool that's SMART ENOUGH to handle complexity... and SAFE ENOUGH to trust with your pet's health.</p>
+          <p><strong>Aha Moment:</strong> <em>"What if there was a tool that already KNEW which ingredients to avoid for my pet's condition? That generated safe recipes automatically? That I could even show to my vet for approval? Not replacing my vet... but working ALONGSIDE them, every single day?"</em></p>
+        </div>
+
+        <div class="epiphany-section">
+          <h4>New Opportunity</h4>
+          <p><strong>Vehicle:</strong> AI-powered special needs nutrition &mdash; safe, personalized, vet-shareable</p>
+          <p><strong>Why Different:</strong> This isn't a generic app that ignores your pet's conditions. This isn't a Facebook group where someone suggests something that could harm your pet. This is AI that UNDERSTANDS allergies, sensitivities, and health conditions. That flags dangerous ingredients BEFORE you buy them. That generates a professional report you can share with your vet. Safety first. Always.</p>
+          <p><strong>First Step:</strong> Take the quiz &rarr; get a condition-aware nutritional assessment (free)</p>
+        </div>
+
+        <div class="epiphany-section">
+          <h4>Oferta</h4>
+          <p><strong>Main:</strong> WAGGO Pro &mdash; 7-day free trial with specialty modules</p>
+          <p><strong>B&ocirc;nus exclusivo:</strong> "Sensitivity Safety Guide" &mdash; Complete guide to safe ingredients for pets with allergies and sensitivities + elimination diet protocols + printable 'safe/avoid' list customized to your pet's conditions. Peace of mind, printed and on your fridge. <span class="tag green">$57</span></p>
+          <p><strong>CTA:</strong> "Protect Your Pet's Health &mdash; Start Your Free Trial Today"</p>
+          <p><strong>Urg&ecirc;ncia:</strong> "Your pet's condition won't wait. Every day without proper nutrition management is a risk you don't need to take."</p>
+        </div>
+
+        <div style="margin-top: var(--space-lg);">
+          <h4>Obje&ccedil;&otilde;es &amp; Reframes</h4>
+          <div class="objection-item">
+            <div class="objection-label">"I need to check with my vet first"</div>
+            <div class="objection-reframe">Absolutely &mdash; and we encourage that. That's why WAGGO generates a professional veterinary report you can bring to your next appointment. Most vets appreciate when pet parents come prepared with data instead of questions from Google. WAGGO makes you a BETTER partner for your vet, not a replacement.</div>
+          </div>
+          <div class="objection-item">
+            <div class="objection-label">"What if the AI recommends something unsafe?"</div>
+            <div class="objection-reframe">WAGGO's AI is built on AAFCO and FEDIAF guidelines &mdash; the same standards used in veterinary nutrition. When you flag your pet's conditions, the AI automatically EXCLUDES unsafe ingredients and adjusts nutrient ratios. Plus, every plan includes a compliance disclaimer: "Not a substitute for veterinary advice." Safety is our #1 priority.</div>
+          </div>
+          <div class="objection-item">
+            <div class="objection-label">"My pet's condition is too complex for an app"</div>
+            <div class="objection-reframe">For truly complex cases, WAGGO offers VetConnect &mdash; a $199 consultation with a real veterinary nutritionist who reviews your AI-generated plan. Best of both worlds: AI speed + human expertise. But start with the free trial &mdash; you might be surprised how well the AI handles it.</div>
+          </div>
+        </div>
+
+        <div class="epiphany-section">
+          <h4>Email Customization</h4>
+          <p><strong>Subject variant:</strong> "We found something important about [Pet Name]'s nutrition..."</p>
+          <p><strong>Story angle:</strong> A pet parent whose dog's allergies disappeared after switching to a properly formulated diet</p>
+          <p><strong>Proof type:</strong> Health improvement stories &mdash; reduced allergies, better digestion, more energy</p>
+          <p><strong>Soap Opera focus:</strong> Safety and reassurance. 'You're not alone. We're here to help you help them.'</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- L&Oacute;GICA DE MAPEAMENTO -->
+    <div class="section">
+      <div class="section-header">
+        <h2 class="section-title">L&oacute;gica de Mapeamento: Quiz &rarr; Perfil</h2>
+        <div class="section-subtitle">Conectando as perguntas do quiz aos perfis...</div>
+      </div>
+
+      <div class="card" style="margin-bottom: var(--space-lg);">
+        <h3>Perguntas-Chave para Segmenta&ccedil;&atilde;o</h3>
+        <p>As 7 perguntas do quiz servem 3 prop&oacute;sitos simult&acirc;neos (qualificar, segmentar, comprometer). Para SEGMENTA&Ccedil;&Atilde;O, as perguntas mais importantes s&atilde;o:</p>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>Pergunta</th><th>Peso</th><th>Mapeamento</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Q3:</strong> "How do you currently feed [Pet Name]?"</td><td><span class="tag purple">PRIM&Aacute;RIO</span></td><td>Kibble &rarr; Guardian/Explorer. Raw/AN &rarr; Optimizer. Prescription &rarr; Healer</td></tr>
+              <tr><td><strong>Q4:</strong> "What's your biggest concern about [Pet Name]'s nutrition?"</td><td><span class="tag purple">PRIM&Aacute;RIO</span></td><td>General health &rarr; Guardian. Getting started &rarr; Explorer. Precision &rarr; Optimizer. Specific condition &rarr; Healer</td></tr>
+              <tr><td><strong>Q6:</strong> "What would your ideal pet nutrition look like?"</td><td><span class="tag blue">SECUND&Aacute;RIO</span></td><td>Confidence &rarr; Guardian. Simplicity &rarr; Explorer. Precision &rarr; Optimizer. Safety &rarr; Healer</td></tr>
+              <tr><td><strong>Q7:</strong> "How ready are you to make a change?"</td><td><span class="tag amber">TIEBREAKER</span></td><td>Already researching &rarr; Guardian. Just decided &rarr; Explorer. Ready to optimize &rarr; Optimizer. ASAP &rarr; Healer</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card" style="margin-bottom: var(--space-lg);">
+        <h3>&Aacute;rvore de Decis&atilde;o</h3>
+        <div class="code-block">
+Q4 (Biggest concern) = "My pet has a health condition"?
+  &rarr; YES &rarr; <strong>The Healing Protector</strong> (override &mdash; health concern = immediate classification)
+  &rarr; NO &rarr;
+      Q3 (Current feeding)?
+        &rarr; "Already raw/AN/homemade" &rarr; <strong>The Precision Optimizer</strong>
+        &rarr; "Kibble only" OR "Mixed/unsure" &rarr;
+            Q4 (Biggest concern)?
+              &rarr; "Don't know where to start" &rarr; <strong>The Fresh Start Explorer</strong>
+              &rarr; "Want the best for my pet" / "General health" &rarr;
+                  Q6 (Ideal nutrition)?
+                    &rarr; "Simple and guided" &rarr; <strong>The Fresh Start Explorer</strong>
+                    &rarr; "Confident and complete" &rarr; <strong>The Wellness Guardian</strong>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Regras de Mapeamento</h3>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>Condi&ccedil;&atilde;o</th><th>Perfil</th><th>Confian&ccedil;a</th><th>Raz&atilde;o</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>q4 = 'health_condition'</td><td><strong>Healing Protector</strong></td><td>0.95</td><td>Health-driven segmentation takes priority</td></tr>
+              <tr><td>q3 = 'raw_or_homemade' AND q4 != 'health_condition'</td><td><strong>Precision Optimizer</strong></td><td>0.90</td><td>Experienced feeders want optimization, not basics</td></tr>
+              <tr><td>q3 in ['kibble', 'mixed'] AND q4 = 'getting_started'</td><td><strong>Fresh Start Explorer</strong></td><td>0.90</td><td>Clear beginner signal</td></tr>
+              <tr><td>q3 in ['kibble', 'mixed'] AND q4 = 'general_health'</td><td><strong>Wellness Guardian</strong></td><td>0.80</td><td>Proactive health-focused pet parent</td></tr>
+              <tr><td>q3 in ['kibble', 'mixed'] AND q6 = 'simple_guided'</td><td><strong>Fresh Start Explorer</strong></td><td>0.75</td><td>Simplicity preference indicates beginner mindset</td></tr>
+              <tr><td>q3 in ['kibble', 'mixed'] AND q6 = 'confident_complete'</td><td><strong>Wellness Guardian</strong></td><td>0.80</td><td>Confidence-seeking indicates guardian mindset</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p><strong>Tiebreaker:</strong> q7_readiness &mdash; "asap" &rarr; Healing Protector, "already_researching" &rarr; Wellness Guardian, "just_decided" &rarr; Fresh Start Explorer, "ready_to_optimize" &rarr; Precision Optimizer</p>
+        <p><strong>Default:</strong> Wellness Guardian (most common profile, safest default for general audience)</p>
+      </div>
+    </div>
+
+    <!-- DISTRIBUI&Ccedil;&Atilde;O -->
+    <div class="section">
+      <div class="section-header">
+        <h2 class="section-title">Distribui&ccedil;&atilde;o Estimada</h2>
+      </div>
+
+      <div class="card-grid cols-4">
+        <div class="card metric-card">
+          <div class="metric-value">~35%</div>
+          <div class="metric-label">Wellness Guardian</div>
+          <div class="metric-context">Maior grupo &mdash; proativos</div>
+        </div>
+        <div class="card metric-card">
+          <div class="metric-value">~30%</div>
+          <div class="metric-label">Fresh Start Explorer</div>
+          <div class="metric-context">Iniciantes &mdash; hand-holding</div>
+        </div>
+        <div class="card metric-card">
+          <div class="metric-value">~20%</div>
+          <div class="metric-label">Healing Protector</div>
+          <div class="metric-context">Maior urg&ecirc;ncia e WTP</div>
+        </div>
+        <div class="card metric-card">
+          <div class="metric-value">~15%</div>
+          <div class="metric-label">Precision Optimizer</div>
+          <div class="metric-context">Menor grupo, maior LTV</div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top: var(--space-lg);">
+        <p>O <strong>Wellness Guardian</strong> &eacute; o maior grupo porque a maioria dos tutores est&aacute; naquele sweet spot de "quero fazer melhor mas n&atilde;o sei como". S&atilde;o proativos, n&atilde;o reativos. E s&atilde;o os mais f&aacute;ceis de converter para trial porque a barreira emocional &eacute; menor.</p>
+        <p>O <strong>Fresh Start Explorer</strong> &eacute; o segundo maior porque MUITOS tutores est&atilde;o no in&iacute;cio da jornada. Novos pets, nova decis&atilde;o. S&atilde;o os que mais precisam de hand-holding.</p>
+        <p>O <strong>Healing Protector</strong> surpreende com 20% porque problemas de sa&uacute;de pet s&atilde;o COMUNS &mdash; alergias, obesidade, digest&atilde;o. Esses t&ecirc;m a maior urg&ecirc;ncia e WTP.</p>
+        <p>O <strong>Precision Optimizer</strong> &eacute; o menor grupo (15%) mas tem o MAIOR LTV. S&atilde;o power users que upgradam para Pro rapidamente.</p>
+      </div>
+    </div>
+
+    <!-- MATRIZ DE PERSONALIZA&Ccedil;&Atilde;O -->
+    <div class="section">
+      <div class="section-header">
+        <h2 class="section-title">Matriz de Personaliza&ccedil;&atilde;o por Perfil</h2>
+      </div>
+
+      <div class="card" style="margin-bottom: var(--space-lg);">
+        <h3>Email: Soap Opera Sequence por Perfil</h3>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>Email</th><th>Wellness Guardian</th><th>Fresh Start Explorer</th><th>Precision Optimizer</th><th>Healing Protector</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Subject E1</strong></td>
+                <td>"Your pet's nutrition score revealed something..."</td>
+                <td>"Your first personalized meal plan is ready..."</td>
+                <td>"We found 3 optimization opportunities..."</td>
+                <td>"Something important about [Name]'s nutrition..."</td>
+              </tr>
+              <tr>
+                <td><strong>Story E2</strong></td>
+                <td>Founder's journey from kibble to confident raw</td>
+                <td>First-timer's panic to "I got this" in 7 days</td>
+                <td>Expert who found gaps in their "perfect" system</td>
+                <td>Pet parent whose dog's allergies disappeared</td>
+              </tr>
+              <tr>
+                <td><strong>Proof E4</strong></td>
+                <td>Before/after coat, energy, weight photos</td>
+                <td>New owner testimonials, "I was scared too"</td>
+                <td>Nutritional completeness data, efficiency gains</td>
+                <td>Health improvement stories, vet endorsements</td>
+              </tr>
+              <tr>
+                <td><strong>Urgency E5</strong></td>
+                <td>"Every meal is an opportunity"</td>
+                <td>"The sooner you start, the sooner they benefit"</td>
+                <td>"Every hour calculating is time away from your pets"</td>
+                <td>"Your pet's condition won't wait"</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>CTA por Perfil</h3>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>Perfil</th><th>CTA Principal</th><th>B&ocirc;nus Exclusivo</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Wellness Guardian</strong></td><td>"Start Your Pet's Wellness Journey &mdash; Free for 7 Days"</td><td>7-Day Transition Guide ($47)</td></tr>
+              <tr><td><strong>Fresh Start Explorer</strong></td><td>"Start Your Fresh Start &mdash; Get Your First Recipe Free"</td><td>Beginner's Confidence Kit ($37)</td></tr>
+              <tr><td><strong>Precision Optimizer</strong></td><td>"Optimize Your Pet's Nutrition &mdash; Start Your Free Pro Trial"</td><td>Advanced Nutrition Dashboard ($67)</td></tr>
+              <tr><td><strong>Healing Protector</strong></td><td>"Protect Your Pet's Health &mdash; Start Your Free Trial Today"</td><td>Sensitivity Safety Guide ($57)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- VALIDA&Ccedil;&Atilde;O -->
+    <div class="section">
+      <div class="section-header">
+        <h2 class="section-title">Valida&ccedil;&atilde;o dos Perfis</h2>
+      </div>
+
+      <div class="card">
+        <h3>Checklist Brunson (Self-Review)</h3>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>Crit&eacute;rio</th><th>WG</th><th>FSE</th><th>PO</th><th>HP</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Nome aspiracional e memor&aacute;vel?</td><td><span class="tag green">YES</span></td><td><span class="tag green">YES</span></td><td><span class="tag green">YES</span></td><td><span class="tag green">YES</span></td></tr>
+              <tr><td>Descri&ccedil;&atilde;o empoderada (n&atilde;o diminutiva)?</td><td><span class="tag green">YES</span></td><td><span class="tag green">YES</span></td><td><span class="tag green">YES</span></td><td><span class="tag green">YES</span></td></tr>
+              <tr><td>Epiphany Bridge espec&iacute;fica?</td><td><span class="tag green">YES</span></td><td><span class="tag green">YES</span></td><td><span class="tag green">YES</span></td><td><span class="tag green">YES</span></td></tr>
+              <tr><td>New Opportunity (n&atilde;o melhoria)?</td><td><span class="tag green">YES</span></td><td><span class="tag green">YES</span></td><td><span class="tag green">YES</span></td><td><span class="tag green">YES</span></td></tr>
+              <tr><td>Oferta personalizada?</td><td><span class="tag green">YES</span></td><td><span class="tag green">YES</span></td><td><span class="tag green">YES</span></td><td><span class="tag green">YES</span></td></tr>
+              <tr><td>CTA espec&iacute;fico pro perfil?</td><td><span class="tag green">YES</span></td><td><span class="tag green">YES</span></td><td><span class="tag green">YES</span></td><td><span class="tag green">YES</span></td></tr>
+              <tr><td>B&ocirc;nus exclusivo relevante?</td><td><span class="tag green">YES</span></td><td><span class="tag green">YES</span></td><td><span class="tag green">YES</span></td><td><span class="tag green">YES</span></td></tr>
+              <tr><td>3 obje&ccedil;&otilde;es com reframes?</td><td><span class="tag green">YES</span></td><td><span class="tag green">YES</span></td><td><span class="tag green">YES</span></td><td><span class="tag green">YES</span></td></tr>
+              <tr><td>Email customization definida?</td><td><span class="tag green">YES</span></td><td><span class="tag green">YES</span></td><td><span class="tag green">YES</span></td><td><span class="tag green">YES</span></td></tr>
+              <tr><td>Zero linguagem negativa?</td><td><span class="tag green">YES</span></td><td><span class="tag green">YES</span></td><td><span class="tag green">YES</span></td><td><span class="tag green">YES</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p><strong>Todos os crit&eacute;rios PASS.</strong> Perfis prontos para integra&ccedil;&atilde;o no quiz funnel.</p>
+      </div>
+    </div>
+
+    <!-- COMPLIANCE -->
+    <div class="section">
+      <div class="section-header">
+        <h2 class="section-title">Compliance Check</h2>
+      </div>
+
+      <div class="card">
+        <ul>
+          <li>Nenhum perfil faz claims de diagn&oacute;stico ou tratamento</li>
+          <li>Healing Protector inclui disclaimers em toda intera&ccedil;&atilde;o</li>
+          <li>Todos os CTAs mencionam "free trial" (sem custo upfront)</li>
+          <li>Nenhuma garantia de resultado espec&iacute;fico de sa&uacute;de</li>
+          <li>"Not a substitute for veterinary advice" em todo material do Healing Protector</li>
+          <li>VetConnect mencionado como op&ccedil;&atilde;o profissional (n&atilde;o substitui vet)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- VEREDICTO -->
+    <div class="section">
+      <div class="section-header">
+        <h2 class="section-title">Veredicto</h2>
+      </div>
+
+      <div class="card highlight">
+        <p>Quatro perfis. Quatro identidades. Quatro jornadas.</p>
+        <p>Mas <strong>UM destino</strong>: o pet mais saud&aacute;vel e feliz poss&iacute;vel.</p>
+
+        <div class="card-grid cols-4" style="margin: var(--space-lg) 0;">
+          <div class="card" style="text-align: center;">
+            <strong>Wellness Guardian</strong>
+            <p style="font-size: 13px; margin-top: 4px;">Quer confian&ccedil;a</p>
+          </div>
+          <div class="card" style="text-align: center;">
+            <strong>Fresh Start Explorer</strong>
+            <p style="font-size: 13px; margin-top: 4px;">Quer dire&ccedil;&atilde;o</p>
+          </div>
+          <div class="card" style="text-align: center;">
+            <strong>Precision Optimizer</strong>
+            <p style="font-size: 13px; margin-top: 4px;">Quer efici&ecirc;ncia</p>
+          </div>
+          <div class="card" style="text-align: center;">
+            <strong>Healing Protector</strong>
+            <p style="font-size: 13px; margin-top: 4px;">Quer seguran&ccedil;a</p>
+          </div>
+        </div>
+
+        <p>WAGGO d&aacute; <strong>todas as quatro coisas</strong>.</p>
+        <p>E quando o tutor v&ecirc; seu perfil no resultado do quiz... quando l&ecirc; a Epiphany Bridge... quando percebe que existe uma <strong>New Opportunity</strong> que ele nunca considerou...</p>
+        <p>Ele n&atilde;o &eacute; mais um lead.</p>
+        <p>Ele &eacute; um <strong>futuro cliente</strong>.</p>
+        <p>Porque agora ele tem uma <strong>identidade</strong>. E identidades... querem ser vividas.</p>
+        <blockquote><em>"I'm a Wellness Guardian. And my pet deserves the best."</em></blockquote>
+        <p>Isso &eacute; poder. Isso &eacute; persuas&atilde;o. Isso &eacute; <strong>Russell Brunson Method</strong>.</p>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="section">
+      <p style="text-align: center; color: var(--text-secondary); font-style: italic;">
+        &mdash; Russell Brunson, definindo identidades que vendem<br>
+        <em>"Results aren't scores. They're IDENTITIES."</em><br>
+        Data: 2026-02-26
+      </p>
+    </div>
+
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

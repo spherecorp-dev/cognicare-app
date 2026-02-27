@@ -1,0 +1,233 @@
+offer_id: MEMFR02
+offer_name: La Méthode Ancestrale au Miel
+account_id: act_180777711311492
+page_id: '989801267547129'
+pixel_id: '685514171170887'
+pixel_name: NEURO FR
+link_url: https://vsl.memoforce.click/6949b2fa0ee5f12c0fb30ef0
+campaigns:
+  - id: cbo-tdc-ww-fr
+    profile: cbo-tdc-worldwide-fr
+    description: CBO Worldwide sem Africa, francês, bid cap R$200
+    daily_budget: 10000
+    bid_amount: 20000
+    naming:
+      type: CBO
+      method: TDC
+      source: AI
+    status: active
+    notes: Campanha principal. Excl Africa + TW/BR/VE/SG/GF.
+  - id: cbo-tdc-eu-fr
+    profile: cbo-tdc-europe-fr
+    description: CBO só Europa francófona, bid cap R$150
+    daily_budget: 5000
+    bid_amount: 15000
+    naming:
+      type: CBO
+      method: TDC
+      source: AI
+    status: planned
+    notes: Teste focado em FR/BE/CH. Usar se WW saturar.
+creatives:
+  batch_dir: assets/criativos/batches/2026-02-23-batch-002
+  meta_copy: assets/criativos/batches/2026-02-23-batch-002/meta/META-AD-COPY.md
+  images_dir: assets/criativos/batches/2026-02-23-batch-002/images
+  count: 5
+  format: png
+history:
+  - campaign_id: '120242465045990310'
+    ad_set_id: '120242465046320310'
+    profile_used: cbo-tdc-worldwide-fr
+    created_at: '2026-02-23'
+    name: CBO - TDC - MEMFR02 - AI - 23.02
+    bid_amount: 20000
+    daily_budget: 10000
+    ads_count: 5
+    status: paused
+  - campaign_id: '120242466212950310'
+    ad_set_id: '120242466213080310'
+    profile_used: cbo-tdc-worldwide-fr
+    created_at: '2026-02-24'
+    name: CBO - TDC - MEMFR02 - AI - 23.02
+    bid_amount: 20000
+    daily_budget: 10000
+    ads_count: 2
+    status: paused
+  - campaign_id: '120242466241660310'
+    ad_set_id: '120242466241810310'
+    profile_used: cbo-tdc-worldwide-fr
+    created_at: '2026-02-24'
+    name: CBO - TDC - MEMFR02 - AI - 23.02
+    bid_amount: 20000
+    daily_budget: 500000
+    ads_count: 5
+    status: paused
+  - campaign_id: '120242466241660310'
+    type: add_to_existing
+    ad_set_ids: []
+    profile_used: cbo-tdc-worldwide-fr
+    created_at: '2026-02-24'
+    name: CBO - TDC - MEMFR02 - AI - 23.02
+    bid_amount: 20000
+    ads_count: 0
+    ad_sets_count: 0
+    batch_id: 2026-02-23-batch-002
+    status: paused
+  - campaign_id: '120242466241660310'
+    type: add_to_existing
+    ad_set_ids:
+      - '120242466651030310'
+      - '120242466652340310'
+    profile_used: cbo-tdc-worldwide-fr
+    created_at: '2026-02-24'
+    name: CBO - TDC - MEMFR02 - AI - 23.02
+    bid_amount: 20000
+    ads_count: 2
+    ad_sets_count: 2
+    batch_id: 2026-02-23-batch-002
+    status: paused
+  - campaign_id: '120242466241660310'
+    type: add_to_existing
+    ad_set_ids:
+      - '120242467331840310'
+    profile_used: cbo-tdc-worldwide-fr
+    created_at: '2026-02-24'
+    name: CBO - TDC - MEMFR02 - AI - 23.02
+    bid_amount: 20000
+    ads_count: 1
+    ad_sets_count: 1
+    batch_id: 2026-02-23-batch-002
+    status: paused
+  - campaign_id: '120242466241660310'
+    type: add_to_existing
+    ad_set_ids:
+      - '120242467345920310'
+    profile_used: cbo-tdc-worldwide-fr
+    created_at: '2026-02-24'
+    name: CBO - TDC - MEMFR02 - AI - 23.02
+    bid_amount: 20000
+    ads_count: 1
+    ad_sets_count: 1
+    batch_id: 2026-02-23-batch-002
+    status: paused
+  - campaign_id: '120242467649720310'
+    ad_set_id: '120242467650100310'
+    profile_used: cbo-tdc-worldwide-fr
+    created_at: '2026-02-24'
+    name: CBO - TDC - MEMFR02 - AI - 23.02
+    bid_amount: 20000
+    daily_budget: 500000
+    ads_count: 5
+    status: paused
+  - campaign_id: '120242468328420310'
+    ad_set_id: '120242468329100310'
+    profile_used: cbo-tdc-worldwide-fr
+    created_at: '2026-02-24'
+    name: CBO - TDC - MEMFR02 - AI - 23.02
+    bid_amount: 20000
+    daily_budget: 500000
+    ads_count: 0
+    status: paused
+  - campaign_id: new
+    type: add_to_existing
+    ad_set_ids: []
+    profile_used: cbo-tdc-worldwide-fr
+    created_at: '2026-02-24'
+    name: CBO - ESCALA MEMFR02 - VIDEOS - 24.02
+    bid_amount: 20000
+    ads_count: 0
+    ad_sets_count: 0
+    batch_id: CRIATIVOS EM VIDEO
+    status: paused
+  - campaign_id: '120242466241660310'
+    type: add_to_existing
+    ad_set_ids: []
+    profile_used: cbo-tdc-worldwide-fr
+    created_at: '2026-02-24'
+    name: CBO - ESCALA MEMFR02 - VIDEOS - 24.02
+    bid_amount: 20000
+    ads_count: 0
+    ad_sets_count: 0
+    batch_id: CRIATIVOS EM VIDEO
+    status: paused
+  - campaign_id: '120242466241660310'
+    type: add_to_existing
+    ad_set_ids: []
+    profile_used: cbo-tdc-worldwide-fr
+    created_at: '2026-02-24'
+    name: CBO - ESCALA MEMFR02 - VIDEOS - 24.02
+    bid_amount: 20000
+    ads_count: 0
+    ad_sets_count: 0
+    batch_id: CRIATIVOS EM VIDEO
+    status: paused
+  - campaign_id: '120242466241660310'
+    type: add_to_existing
+    ad_set_ids: []
+    profile_used: cbo-tdc-worldwide-fr
+    created_at: '2026-02-24'
+    name: CBO - ESCALA MEMFR02 - VIDEOS - 24.02
+    bid_amount: 20000
+    ads_count: 0
+    ad_sets_count: 0
+    batch_id: CRIATIVOS EM VIDEO
+    status: paused
+  - campaign_id: '120242466241660310'
+    type: add_to_existing
+    ad_set_ids: []
+    profile_used: cbo-tdc-worldwide-fr
+    created_at: '2026-02-24'
+    name: CBO - TDC - MEMFR02 - AI - 23.02
+    bid_amount: 20000
+    ads_count: 0
+    ad_sets_count: 0
+    batch_id: CRIATIVOS EM VIDEO
+    status: paused
+  - campaign_id: '120242468911280310'
+    type: add_to_existing
+    ad_set_ids:
+      - '120242468918640310'
+    profile_used: cbo-tdc-worldwide-fr
+    created_at: '2026-02-24'
+    name: CBO - TDC - MEMFR02 - AI - VIDEO TEST - 24.02
+    bid_amount: 20000
+    ads_count: 0
+    ad_sets_count: 1
+    batch_id: CRIATIVOS EM VIDEO
+    status: paused
+  - campaign_id: '120242468911280310'
+    type: add_to_existing
+    ad_set_ids:
+      - '120242469027780310'
+    profile_used: cbo-tdc-worldwide-fr
+    created_at: '2026-02-24'
+    name: CBO - TDC - MEMFR02 - AI - VIDEO TEST - 24.02
+    bid_amount: 20000
+    ads_count: 0
+    ad_sets_count: 1
+    batch_id: CRIATIVOS EM VIDEO
+    status: paused
+  - campaign_id: '120242469291730310'
+    type: add_to_existing
+    ad_set_ids:
+      - '120242469292730310'
+    profile_used: cbo-tdc-worldwide-fr
+    created_at: '2026-02-24'
+    name: CBO - TDC - MEMFR02 - AI - VIDEO TEST - 24.02
+    bid_amount: 20000
+    ads_count: 1
+    ad_sets_count: 1
+    batch_id: CRIATIVOS EM VIDEO
+    status: paused
+  - campaign_id: '120242469291730310'
+    type: add_to_existing
+    ad_set_ids:
+      - '120242469326250310'
+    profile_used: cbo-tdc-worldwide-fr
+    created_at: '2026-02-24'
+    name: CBO - TDC - MEMFR02 - AI - VIDEO TEST - 24.02
+    bid_amount: 20000
+    ads_count: 1
+    ad_sets_count: 1
+    batch_id: CRIATIVOS EM VIDEO
+    status: paused

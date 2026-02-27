@@ -1,0 +1,53 @@
+# Offer Data — Template
+# Copie esta pasta para criar nova oferta:
+#   cp -r _template/ XX01-nome-oferta/
+#
+# Este arquivo é a FONTE DE VERDADE da oferta.
+# Consultado por: criativos, tráfego, análise, CRO, funil — qualquer squad.
+
+id: ""                      # Ex: GP01, CV02
+name: ""                    # Nome da oferta
+slug: ""                    # Slug para paths/refs (ex: glucopure)
+vertical: ""                # Ex: nutraceutico/saude, finance, ecom
+status: em_teste            # em_teste | ativo | scaling | pausado | morto
+geos: []                    # Ex: [en, fr, es]
+launched_at: ""             # Data de lançamento
+creative_profile: ""        # blackhat-dr | low-ticket | saas-demo | whitehat-brand
+
+produto:
+  descricao: ""
+  formato: ""               # capsulas, creme, digital, servico, etc
+  preco:
+    front_end: ""           # Ex: "$49 (1) / $39 (3) / $33 (6)"
+    upsells: ""
+    aov_medio: ""           # Average order value
+
+promessa: ""                # Promessa principal em 1 frase
+mecanismo: ""               # Mecanismo unico de diferenciacao
+diferencial: ""             # O que separa essa oferta dos competidores
+
+publico_alvo:
+  demografico: ""           # Idade, genero, renda
+  psicografico: ""          # Dores, desejos, frustracoes
+  awareness_level: ""       # unaware | problem_aware | solution_aware | product_aware | most_aware
+
+angulos:
+  validados: []             # Angulos que já performaram
+  saturados: []             # Angulos queimados (nao usar)
+  em_teste: []              # Angulos sendo testados
+
+competidores:
+  # - nome: ""
+  #   diferencial: ""
+
+funnel:
+  tipo: ""                  # VSL | webinar | quiz | direct | hybrid
+  url_principal: ""
+  observacoes: ""
+
+notas: ""
+
+# Quem atualiza este arquivo:
+# - @pm / @analyst: dados de mercado, público, competidores
+# - @copy-chief: ângulos validados/saturados
+# - Humano: dados de produto, preço, funnel

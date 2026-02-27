@@ -1,0 +1,80 @@
+# Offer Data — WAGGO
+# FONTE DE VERDADE da oferta.
+# Consultado por: criativos, tráfego, análise, CRO, funil — qualquer squad.
+
+id: WAGGO
+name: "Waggo.ai — Nutrição Inteligente para Pets"
+slug: waggo
+vertical: saas/pet/nutricao
+status: em_teste
+geos: [en, pt-br]
+idioma: [en, pt-br]
+launched_at: ""
+creative_profile: saas-demo
+
+produto:
+  descricao: "Plataforma PWA de nutrição inteligente para cães e gatos. IA cria planos alimentares personalizados baseados no perfil único de cada pet — peso, idade, raça, condições de saúde e objetivos. Inclui receitas naturais, porções calculadas, lista de compras e acompanhamento de peso."
+  formato: saas                  # PWA (Progressive Web App)
+  entregaveis:
+    - "Plano nutricional personalizado por IA"
+    - "Receitas com ingredientes naturais"
+    - "Porções calculadas automaticamente"
+    - "Lista de compras pronta pra usar"
+    - "Acompanhamento de peso com gráficos de evolução"
+    - "Ajuste automático conforme necessidades mudam"
+  modulos:
+    - "Dieta Personalizada — Plano completo com porções e suplementos"
+    - "Mix Feeding — Proporções ideais entre ração e alimentação natural"
+    - "Preparação — Guia de cozimento, armazenamento e porcionamento"
+    - "Primeiros Passos — Como servir, armazenar e adaptar a rotina"
+    - "Controle de Peso — Metas e ajustes baseados nas pesagens"
+    - "Petiscos — Calculadora de petiscos seguros por dia"
+    - "Saúde Digestiva — Ajustes para desconforto digestivo"
+    - "Hipersensibilidade — Planos para pets com alergias"
+    - "Modulação Intestinal — Fortalecimento da microbiota e imunidade"
+  preco:
+    modelo: freemium             # Free, Basic, Premium, Professional
+    trial: "7 dias com acesso total"
+    gateway: stripe
+    front_end: ""
+    upsells: ""
+    aov_medio: ""
+  garantia: ""
+
+promessa: "Oferecer alimentação natural personalizada e segura para cães e gatos, sem precisar fazer cálculos nutricionais manualmente — tudo gerado por IA em segundos."
+
+mecanismo: "IA analisa o perfil único do pet (peso, idade, raça, condições de saúde, objetivos) e gera planos nutricionais personalizados com receitas naturais, porções exatas e lista de compras. O plano se ajusta automaticamente conforme as necessidades mudam."
+
+diferencial: "Não é ração pronta nem tabela genérica — é um nutricionista virtual que adapta o plano ao pet individual. 9 módulos especializados cobrem desde dieta básica até condições específicas (alergias, modulação intestinal). PWA funciona como app nativo sem precisar de App Store."
+
+publico_alvo:
+  demografico: "Tutores de cães e gatos, todas as idades, ambos os gêneros. EUA (inglês, USD) e Brasil (português, BRL)."
+  psicografico: "Tutores que querem oferecer alimentação natural (AN/BARF) ou mista com segurança e praticidade. Frustrados com falta de informação confiável sobre nutrição pet. Preocupados com saúde e longevidade do animal. Não querem depender de cálculos nutricionais manuais."
+  awareness_level: solution_aware  # Sabem que AN existe, buscam ferramenta pra facilitar
+
+angulos:
+  validados: []
+  saturados: []
+  em_teste: []
+
+competidores:
+  - nome: "Nutricionistas veterinários (consultas presenciais)"
+    diferencial: "Disponível 24/7, custo menor, ajuste automático vs consulta pontual cara"
+  - nome: "Planilhas e calculadoras nutricionais manuais"
+    diferencial: "IA automatiza tudo vs processo manual tedioso e propenso a erros"
+  - nome: "Apps de ração (Dog Food Advisor, etc)"
+    diferencial: "Foco em alimentação natural personalizada vs ranking de rações industriais"
+  - nome: "Grupos e comunidades de AN/BARF"
+    diferencial: "Plano científico individualizado vs dicas genéricas e contraditórias"
+
+funnel:
+  tipo: ""
+  url_principal: ""
+  observacoes: "Ainda a definir. PWA com modelo freemium, trial de 7 dias."
+
+notas: "Oferta nova, em fase inicial. Ainda sem criativos, copy ou funnel definido. Dois mercados: EUA (en, USD) e Brasil (pt-br, BRL). Plataforma PWA com pagamento via Stripe."
+
+# Quem atualiza este arquivo:
+# - @pm / @analyst: dados de mercado, público, competidores
+# - @copy-chief: ângulos validados/saturados
+# - Humano: dados de produto, preço, funnel

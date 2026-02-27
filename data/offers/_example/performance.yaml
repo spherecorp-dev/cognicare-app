@@ -1,0 +1,258 @@
+# Performance Tracking — EXAMPLE01
+
+# Este arquivo rastreia métricas de performance da offer e winners históricos
+# Atualizar regularmente com dados das campanhas
+
+offer: "EXAMPLE01"
+offer_name: "Nome da Oferta"
+status: "active"
+
+# === CURRENT PERFORMANCE (Rolling 30 days) ===
+current_performance:
+  period: "2026-01-20 to 2026-02-20"
+  updated_at: "2026-02-20"
+
+  aggregated:
+    spend: 15000                                   # EUR
+    revenue: 37500                                 # EUR
+    profit: 22500                                  # EUR
+    roas: 2.5                                      # Return on Ad Spend
+    cpa: 47                                        # Cost Per Acquisition (EUR)
+    aov: 62                                        # Average Order Value (EUR)
+    conversions: 320
+    clicks: 12800
+    impressions: 512000
+    ctr: 2.5                                       # Click-Through Rate (%)
+    cvr: 2.5                                       # Conversion Rate (%)
+
+  by_geo:
+    fr:
+      spend: 10000
+      revenue: 26000
+      roas: 2.6
+      cpa: 45
+      conversions: 220
+
+    es:
+      spend: 5000
+      revenue: 11500
+      roas: 2.3
+      cpa: 50
+      conversions: 100
+
+  by_platform:
+    meta:
+      spend: 12000
+      revenue: 31200
+      roas: 2.6
+      cpa: 46
+      conversions: 260
+
+    tiktok:
+      spend: 3000
+      revenue: 6300
+      roas: 2.1
+      cpa: 50
+      conversions: 60
+
+# === WINNERS LIBRARY ===
+# Criativos com melhor performance histórica
+# Squad-copy usa isso para "modelagem" (replicar padrões vencedores)
+
+winners:
+  - id: "EXAMPLE01-W1"
+    name: "Winner 1 — Dor nos Joelhos (Testemunhal)"
+    angle: "Dor nos Joelhos"
+    format: "imagem"
+    platform: "meta"
+    geo: "fr"
+    creative_profile: "blackhat-dr"
+
+    performance:
+      spend: 2000
+      revenue: 6400
+      roas: 3.2                                    # Acima da média!
+      cpa: 40
+      ctr: 3.2
+      cvr: 3.1
+      conversions: 50
+      period: "2026-01-15 to 2026-02-15"
+
+    creative_details:
+      visual_concept: "Mulher 55+ sorrindo, caminhando no parque"
+      text_overlay: "Finalmente livre da dor!"
+      headline_winner: "Vous en avez marre de la douleur au genou?"
+      primary_text_style: "story-style (testemunhal emocional)"
+      hook_type: "Pain agitation + Curiosidade"
+
+    why_it_worked:
+      - "Tom testemunhal autêntico (não parece ad)"
+      - "Visual de alívio (não de dor) — positive framing"
+      - "Hook direto na dor específica (joelhos, não genérico)"
+      - "Story-style copy conecta emocionalmente"
+
+    file_location: "./assets/criativos/winners/EXAMPLE01-W1/"
+
+  - id: "EXAMPLE01-W2"
+    name: "Winner 2 — Ingrediente Natural (Curiosidade)"
+    angle: "Ingrediente Secreto do Mel"
+    format: "imagem"
+    platform: "meta"
+    geo: "fr"
+    creative_profile: "blackhat-dr"
+
+    performance:
+      spend: 1500
+      revenue: 4200
+      roas: 2.8
+      cpa: 43
+      ctr: 2.9
+      cvr: 2.7
+      conversions: 35
+      period: "2026-01-20 to 2026-02-20"
+
+    creative_details:
+      visual_concept: "Close-up de favo de mel, luz natural"
+      text_overlay: "O segredo que médicos não contam..."
+      headline_winner: "Découverte: Le composé du miel qui change tout"
+      primary_text_style: "news-style (descoberta científica)"
+      hook_type: "Curiosity + Authority"
+
+    why_it_worked:
+      - "Curiosidade forte (segredo, descoberta)"
+      - "Visual orgânico (parece conteúdo educacional)"
+      - "News-style = autoridade sem hard sell"
+      - "Hook sobre INGREDIENTE (não sobre dor) — indireto funciona"
+
+    file_location: "./assets/criativos/winners/EXAMPLE01-W2/"
+
+  - id: "EXAMPLE01-W3"
+    name: "Winner 3 — Social Proof (Testemunhos)"
+    angle: "12.000 Pessoas Já Usaram"
+    format: "video"
+    platform: "tiktok"
+    geo: "es"
+    creative_profile: "blackhat-dr"
+
+    performance:
+      spend: 1000
+      revenue: 2400
+      roas: 2.4
+      cpa: 48
+      ctr: 4.1                                     # TikTok CTR mais alto
+      cvr: 1.8                                     # CVR mais baixo (normal TikTok)
+      conversions: 21
+      period: "2026-02-01 to 2026-02-20"
+
+    creative_details:
+      video_style: "UGC (user-generated content)"
+      persona: "Homem 60+ testemunhal"
+      hook: "Después de 15 años con dolor..."
+      script_style: "Emotional storytelling"
+      duration_seconds: 35
+
+    why_it_worked:
+      - "UGC autêntico (não parece ad)"
+      - "Social proof forte (12.000 pessoas)"
+      - "Tom emocional funciona bem em ES"
+      - "TikTok: orgânico > polido"
+
+    file_location: "./assets/criativos/winners/EXAMPLE01-W3/"
+
+# === FATIGUE ANALYSIS ===
+# Rastrear quando winners começam a "fatigar" (performance cai)
+
+fatigue_tracking:
+  EXAMPLE01-W1:
+    status: "active"                               # active | fatiguing | fatigued
+    weeks_active: 5
+    roas_trend: "stable"                           # increasing | stable | declining
+    action: "continue"                             # continue | refresh | retire
+
+  EXAMPLE01-W2:
+    status: "fatiguing"
+    weeks_active: 4
+    roas_trend: "declining"
+    roas_week1: 3.1
+    roas_week4: 2.6
+    action: "create_variation"                     # Criar variação para testar
+
+  EXAMPLE01-W3:
+    status: "active"
+    weeks_active: 3
+    roas_trend: "stable"
+    action: "continue"
+
+# === ANGLES PERFORMANCE ===
+# Performance agregada por ângulo (cross-format, cross-platform)
+
+angles_analysis:
+  - angle: "Dor nos Joelhos"
+    total_spend: 5000
+    total_revenue: 14000
+    roas: 2.8
+    best_format: "imagem"
+    best_platform: "meta"
+    best_geo: "fr"
+    confidence: "alta"
+    recommendation: "Continue investing. Consider variations."
+
+  - angle: "Ingrediente Natural"
+    total_spend: 3000
+    total_revenue: 7200
+    roas: 2.4
+    best_format: "imagem"
+    best_platform: "meta"
+    best_geo: "fr"
+    confidence: "media"
+    recommendation: "Stable performer. Test in ES."
+
+  - angle: "Social Proof"
+    total_spend: 2000
+    total_revenue: 4500
+    roas: 2.25
+    best_format: "video"
+    best_platform: "tiktok"
+    best_geo: "es"
+    confidence: "media"
+    recommendation: "Works on TikTok. Test Meta Reels."
+
+# === RECOMMENDATIONS FOR squad-copy ===
+# Insights acionáveis para próximo batch de criativos
+
+recommendations:
+  method_distribution:
+    modelagem: "60%"                               # Basear em winners (W1, W2)
+    variacao: "25%"                                # Variar W2 (fatigando)
+    do_zero: "15%"                                 # Testar novos ângulos
+
+  priority_angles:
+    - "Dor nos Joelhos (continuar investindo)"
+    - "Ingrediente Natural (criar variações)"
+    - "Novo: Mobilidade e Qualidade de Vida (testar)"
+
+  formats:
+    - "Imagem: 70% (performing bem)"
+    - "Vídeo: 30% (testar mais em TikTok)"
+
+  geos:
+    - "FR: 65% budget (melhor ROAS)"
+    - "ES: 35% budget (escalar gradualmente)"
+
+  platforms:
+    - "Meta: 75% budget (comprovado)"
+    - "TikTok: 25% budget (growth phase)"
+
+# === METADATA ===
+metadata:
+  created_at: "2026-02-01"
+  updated_at: "2026-02-20"
+  updated_by: "analytics-team"
+  update_frequency: "weekly"
+  data_source: "Meta Ads Manager + TikTok Ads + Internal CRM"
+
+notes: |
+  Este arquivo é atualizado semanalmente com dados reais.
+  Squad-copy usa winners library para "modelagem" — replicar padrões que funcionam.
+  Fatigue tracking ajuda a saber quando criar variações.
+  Angles analysis orienta decisões de strategy (@copy-chief).

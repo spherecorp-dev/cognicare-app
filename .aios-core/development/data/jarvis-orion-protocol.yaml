@@ -1,0 +1,217 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+#  Jarvis ↔ Orion Protocol — Inter-Orchestrator Communication
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# Define como Jarvis (Business Layer) e Orion (Technical Layer) coexistem
+# sem conflito de autoridade. Cada um opera em sua camada com fronteiras claras.
+#
+# Jarvis = CEO Chief of Staff (estratégia, delegação, briefings, decisões)
+# Orion  = AIOS Master Orchestrator (framework, componentes, workflows, qualidade)
+#
+# @version 1.0.0
+# @created 2026-02-21
+# ═══════════════════════════════════════════════════════════════════════════════
+
+protocol:
+  name: jarvis-orion-bridge
+  version: "1.0.0"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  #  Authority Boundaries — Quem decide o quê
+  # ─────────────────────────────────────────────────────────────────────────────
+  authority_boundaries:
+    jarvis:
+      layer: business
+      scope:
+        - business_decisions         # Decisões estratégicas de negócio
+        - agent_delegation           # Delegação com contexto de negócio
+        - priority_setting           # Definição de prioridades do CEO
+        - executive_reporting        # Briefings, status reports
+        - debate_facilitation        # Facilitação de debates entre agentes
+        - delegation_monitoring      # Monitoramento de delegações ativas
+        - pattern_recognition        # Reconhecimento de padrões de negócio
+        - decision_recording         # Registro de decisões do CEO
+      cannot:
+        - modify_framework           # Não altera componentes do AIOS
+        - create_agents              # Não cria novos agentes
+        - enforce_ids                # Não governa IDS
+        - modify_workflows           # Não altera workflows técnicos
+
+    orion:
+      layer: technical
+      scope:
+        - framework_governance       # Governança do AIOS framework
+        - component_creation         # Criação/modificação de agentes, tasks, workflows
+        - ids_enforcement            # Aplicação do IDS (REUSE > ADAPT > CREATE)
+        - workflow_validation        # Validação de workflows YAML
+        - technical_quality          # Padrões de qualidade técnica
+        - registry_management        # Gerenciamento do Entity Registry
+      cannot:
+        - business_decisions         # Não toma decisões de negócio
+        - set_priorities             # Não define prioridades do CEO
+        - delegate_business_tasks    # Não delega no contexto de negócio
+        - generate_briefings         # Não gera briefings executivos
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  #  Escalation Rules — Quando um escala para o outro
+  # ─────────────────────────────────────────────────────────────────────────────
+  escalation_rules:
+    jarvis_to_orion:
+      - trigger: framework_modification_needed
+        description: >
+          Jarvis identifica necessidade de modificação no framework
+          (novo componente, alteração de workflow, etc.)
+        action: "Jarvis comunica ao CEO que a demanda requer @aios-master"
+        example: "Senhor, esta demanda requer modificação do framework. Recomendo acionar @aios-master."
+
+      - trigger: new_component_creation
+        description: >
+          CEO solicita criação de novo agente, task ou workflow
+        action: "Redirecionar para Orion com contexto de negócio"
+        example: "Senhor, criação de componentes é responsabilidade do @aios-master. Posso preparar o contexto."
+
+      - trigger: technical_quality_concern
+        description: >
+          Jarvis detecta problema de qualidade técnica em delegação
+        action: "Escalar para Orion com evidências"
+
+      - trigger: ids_consultation_needed
+        description: >
+          Antes de sugerir criação de algo novo, verificar se já existe no registry
+        action: "Consultar Orion via *ids check antes de recomendar CREATE"
+
+    orion_to_jarvis:
+      - trigger: business_context_needed
+        description: >
+          Orion precisa de contexto de negócio para tomar decisão técnica
+        action: "Solicitar contexto via JarvisBusinessMemory ou escalar ao CEO via Jarvis"
+        example: "Preciso do contexto de negócio para esta decisão. @jarvis, qual a prioridade?"
+
+      - trigger: priority_conflict
+        description: >
+          Conflito de prioridade entre stories ou epics
+        action: "Escalar para Jarvis que consulta CEO"
+
+      - trigger: resource_allocation_question
+        description: >
+          Questão sobre alocação de recursos entre projetos
+        action: "Escalar para Jarvis para decisão executiva"
+
+      - trigger: delegation_history_query
+        description: >
+          Orion precisa saber histórico de delegações para contexto
+        action: "Consultar JarvisDelegationStore via API"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  #  Shared Resources — Recursos compartilhados com isolamento
+  # ─────────────────────────────────────────────────────────────────────────────
+  shared_resources:
+    session_state:
+      file: .aios-core/core/orchestration/session-state.js
+      isolation: namespace
+      namespaces:
+        jarvis: "jarvis:"      # Contexto entre sessões do Jarvis
+        orion: "bob:"          # Contexto do BobOrchestrator (Orion)
+      rule: "Cada orchestrator usa APENAS seu namespace. Leitura cruzada permitida, escrita cruzada PROIBIDA."
+
+    event_store:
+      file: .aios-core/core/orchestration/squad-engine/event-store.js
+      isolation: separate_streams
+      streams:
+        jarvis: ".aios/jarvis/delegations/"    # JarvisDelegationStore
+        orion: "data/runs/"                     # Squad Engine runs
+      rule: "Cada orchestrator opera em diretório próprio. Streams nunca se misturam."
+
+    agents_csv:
+      file: .aios-core/development/data/agents.csv
+      access: read_only_both
+      rule: "Ambos podem ler para consulta. Modificação exclusiva do Orion via *update-manifest."
+
+    business_memory:
+      file: .aios-core/core/memory/jarvis-business-memory.js
+      owner: jarvis
+      access:
+        jarvis: read_write
+        orion: read_only
+      rule: "Orion pode consultar memória de negócio para contexto, mas não modifica."
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  #  Communication Patterns — Como se comunicam
+  # ─────────────────────────────────────────────────────────────────────────────
+  communication:
+    pattern: indirect_via_ceo
+    description: >
+      Jarvis e Orion NÃO se comunicam diretamente. Toda comunicação passa pelo CEO:
+      1. Jarvis detecta necessidade técnica → informa CEO → CEO aciona Orion
+      2. Orion precisa de contexto de negócio → informa CEO → CEO consulta Jarvis
+      Este padrão mantém o CEO sempre informado e no controle.
+
+    data_sharing:
+      - name: business_memory_read
+        from: jarvis
+        to: orion
+        mechanism: "Orion importa JarvisBusinessMemory e chama .getRelevant(context)"
+        when: "Quando Orion precisa de contexto de negócio para decisão técnica"
+
+      - name: delegation_history_read
+        from: jarvis
+        to: orion
+        mechanism: "Orion importa JarvisDelegationStore e chama .getDelegationHistory()"
+        when: "Quando Orion precisa saber o que foi delegado recentemente"
+
+      - name: registry_check
+        from: orion
+        to: jarvis
+        mechanism: "Jarvis consulta *ids check via Orion antes de recomendar criação"
+        when: "Antes de sugerir ao CEO a criação de novo componente"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  #  Conflict Resolution — Quando há conflito de autoridade
+  # ─────────────────────────────────────────────────────────────────────────────
+  conflict_resolution:
+    principle: "O CEO é a autoridade final. Nem Jarvis nem Orion podem sobrepor uma decisão do CEO."
+    rules:
+      - id: CR-001
+        scenario: "Jarvis e Orion discordam sobre prioridade"
+        resolution: "Jarvis apresenta perspectiva de negócio, Orion apresenta perspectiva técnica, CEO decide"
+
+      - id: CR-002
+        scenario: "Jarvis quer criar componente, Orion recomenda REUSE"
+        resolution: "IDS prevalece. Jarvis aceita recomendação de REUSE/ADAPT do Orion"
+
+      - id: CR-003
+        scenario: "Orion bloqueia ação que Jarvis delegou"
+        resolution: "Orion explica bloqueio técnico, Jarvis informa CEO com alternativas"
+
+      - id: CR-004
+        scenario: "Ambos tentam usar mesmo namespace de SessionState"
+        resolution: "PROIBIDO. Cada um usa seu namespace. Violação é bug crítico."
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  #  Activation Context — Quando cada um é ativado
+  # ─────────────────────────────────────────────────────────────────────────────
+  activation:
+    jarvis:
+      trigger: "@jarvis"
+      typical_use:
+        - "Preciso de um briefing"
+        - "Delegue isso para alguém"
+        - "Qual o status do projeto?"
+        - "Priorize essas tarefas"
+        - "O que precisa da minha atenção?"
+      stays_active_when: "CEO está em modo estratégico/executivo"
+
+    orion:
+      trigger: "@aios-master"
+      typical_use:
+        - "Crie um novo agente"
+        - "Modifique este workflow"
+        - "Valide a estrutura do framework"
+        - "Execute esta task técnica"
+        - "*create, *modify, *ids commands"
+      stays_active_when: "CEO está em modo técnico/framework"
+
+    coexistence_rule: >
+      Apenas um orchestrator ativo por vez.
+      Troca via @jarvis / @aios-master.
+      Contexto é preservado via SessionState (cada um em seu namespace).

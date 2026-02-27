@@ -1,0 +1,32 @@
+# Historico de Testes A/B e Otimizacoes — Template
+# Registro de todos os testes realizados nesta oferta
+# Atualizado por: @analyst, agentes de trafego, CRO
+
+offer_id: ""
+updated_at: ""
+
+testes:
+  # - id: ""                 # Ex: TEST-GP01-001
+  #   tipo: criativo         # criativo | landing | preco | funil | headline | hook
+  #   descricao: ""
+  #   variante_a: ""
+  #   variante_b: ""
+  #   metrica_primaria: ""   # Ex: CTR, CVR, ROAS
+  #   inicio: ""
+  #   fim: ""
+  #   resultado: ""          # a_venceu | b_venceu | inconclusivo
+  #   dados:
+  #     variante_a_valor: null
+  #     variante_b_valor: null
+  #     lift: null            # % de melhoria
+  #     confianca: null       # % de confianca estatistica
+  #   aprendizado: ""         # O que aprendemos
+  #   acao_tomada: ""         # O que fizemos com o resultado
+  #   status: concluido       # em_andamento | concluido | cancelado
+
+otimizacoes:
+  # - data: ""
+  #   tipo: ""               # copy | visual | targeting | bid | placement
+  #   descricao: ""
+  #   impacto: ""            # positivo | negativo | neutro
+  #   detalhes: ""

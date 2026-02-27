@@ -1,0 +1,24 @@
+# Winners — Template
+# Criativos que performaram acima do target
+# Atualizado por: @analyst, agentes de trafego
+
+offer_id: ""
+updated_at: ""
+
+winners:
+  # - id: ""                # ID unico do criativo
+  #   nome: ""              # Nome descritivo
+  #   angulo: ""            # Angulo usado
+  #   hook: ""              # Hook principal
+  #   formato: ""           # VSL | UGC | imagem | carrossel | etc
+  #   plataforma: ""        # Meta | TikTok | YouTube
+  #   geo: ""
+  #   roas: null
+  #   ctr: null
+  #   cpa: null
+  #   spend: null
+  #   status: ativo         # ativo | fatigado | pausado | morto
+  #   lancado_em: ""
+  #   fatigou_em: ""        # Quando começou a cair (se aplicavel)
+  #   arquivo: ""           # Path relativo ao asset (ex: ../assets/criativos/nome.md)
+  #   notas: ""
